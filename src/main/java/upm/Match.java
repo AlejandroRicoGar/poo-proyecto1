@@ -3,8 +3,9 @@ package upm;
 public class Match {
     private Player player1;
     private Player player2;
-    public Match match(Player player1, Player player2){
-
+    public void match(Player player1, Player player2){
+        this.player1=player1;
+        this.player2=player2;
     }
 
     public Player getPlayer1() {
@@ -24,6 +25,6 @@ public class Match {
     }
     @Override
     public String toString() {
-
+        return "Match between "+player1.getName()+" and "+player2.getName();
     }
 }
