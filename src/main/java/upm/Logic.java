@@ -10,16 +10,19 @@ public class Logic {
 
     /**
      * Metodo que inicializa el programa
+     * Primero crea una instancia de CLI
+     * Luego inicializa y añade en las Arraylist los ejemplos requeridos
+     * Para finalizar comienza el menu de ejecuacion
      */
     public void start(){
         this.cli = new CLI();
-        boolean seguir =true;
+
 
         Player Luisa = new Player("Luisa",4.5);
         Player Manuel = new Player("Manuel",2.7);
-        Player Kurt = new Player("Luisa",4.5);
-        Player Sofia = new Player("Sofia",4.5);
-        Player Robert = new Player("Robert",4.5);
+        Player Kurt = new Player("Kurt",4.0);
+        Player Sofia = new Player("Sofia",3.8);
+        Player Robert = new Player("Robert",3.8);
 
         matchList = new ArrayList<>();
         playerList = new ArrayList<>();
@@ -29,87 +32,58 @@ public class Logic {
         playerList.add(Kurt);
         playerList.add(Sofia);
         playerList.add(Robert);
-        while(seguir) {
-            cli.print("""
-                    1> create [player]
-                    2> remove [player]
-                    3> show
-                    4> rank
-                    5> score [player];[score]
-                    6> show_matchmake
-                    7> clear_matchmake
-                    8> matchmake [player1];[player2]"
-                    9> random_matchmake
-                    10> end
-                    """);
-            int indice = cli.scanner().nextInt();
-            switch (indice) {
-                case (1):
-                    createPlayer();
-                    break;
-                case (2):
-                    cli.print("Introduce el nombre del jugador");
-                    removePlayer(cli.scanner().nextLine());
-                    break;
-                case (3):
-                    showPlayers();
-                    break;
-                case (4):
-                    rankPlayer();
-                    break;
-                case (5):
-                    cli.print("Introduce el nombre del jugador");
-                    String name = cli.scanner().nextLine();
-                    cli.print("Introduce la puntuacion");
-                    setScore(name,cli.scanner().nextInt());
-                    break;
-                case (6):
-                    showMatchups();
-                    break;
-                case (7):
-                    clearMatchups();
-                    break;
-                case (8):
-                    cli.print("Introduce el nombre de el jugador1");
-                    String name1 = cli.scanner().nextLine();
-                    cli.print("Introduce el nombre de el jugador2");
-                    matchPlayers(name1,cli.scanner().nextLine());
-                    break;
-                case (9):
-                    randomMatchup();
-                    break;
-                case (10):
-                    seguir = false;
-                    break;
-                default:
-                    cli.print("El indice introducido no es correcto");
+
+        menu();
+    }
+
+    /**
+     * Metodo que crea un jugador
+     * Comprueba si el nombre existe y es unico y crea el jugador
+     */
+    public void createPlayer(){
+        boolean esNombre = false;
+        while(!esNombre) {
+            cli.print("Introduce el nombre del nuevo jugador: ");
+            String name = cli.scanner().nextLine();
+            if(cli.esNombre(name)) {
+                esNombre = true;
+                if (!exists(name)) {
+                    Player player = new Player(name);
+                    playerList.add(player);
+                    cli.print("Jugador " + player.getName() + " creado correctamente\n");
+                } else {
+                    cli.print("El jugador ya existe \n");
+                }
+            }else {
+                cli.print("¿Quiere volver a intentar Y/N");
+                if(cli.scanner().nextLine().equals("N")){
+                    esNombre = true;
+                }
             }
         }
     }
-    public void createPlayer(){
-        cli.print("Introduce el nombre del nuevo jugador: ");
-        String name = cli.scanner().nextLine();
-        if(!exists(name) && cli.esNombre(name)) {
-            Player player = new Player(name);
-            playerList.add(player);
-            cli.print("Jugador "+player.getName()+" creado correctamente\n");
-        }else{
-            cli.print("El jugador ya existe \n");
-        }
-    }
+
+    /**
+     * @param name Nombre del jugador a eliminar
+     * Metodo que crea un jugador siempre que este no exista anteriormente
+     */
     public void removePlayer(String name){
+        cli.print(playerList.toString());
         if(exists(name)){
             Player player = searchPlayer(name);
             if(player != null) {
-                playerList.remove(player);
-                cli.print("Jugador " + name + " eliminado correctamente\n");
+                if(playerList.remove(player)) {
+                    cli.print("Jugador " + name + " eliminado correctamente\n");
+                    cli.print(playerList.toString());
+                }else{
+                    cli.print("Hubo un problema eliminando el jugador");
+                }
             }else{
                 cli.print("Hubo un problema eliminando el jugador");
             }
         }else{
             cli.print("El jugador "+name+" no existe\n");
         }
-
     }
     public void showPlayers(){
 
@@ -155,6 +129,66 @@ public class Logic {
             }
         }
         return player;
+    }
+    private void menu(){
+        boolean resume = true;
+        while(resume) {
+            cli.print("""
+                    1> create [player]
+                    2> remove [player]
+                    3> show
+                    4> rank
+                    5> score [player];[score]
+                    6> show_matchmake
+                    7> clear_matchmake
+                    8> matchmake [player1];[player2]"
+                    9> random_matchmake
+                    10> end
+                    """);
+            int index = cli.scanner().nextInt();
+            switch (index) {
+                case (1):
+                    createPlayer();
+                    break;
+                case (2):
+                    cli.print("Introduce el nombre del jugador");
+                    removePlayer(cli.scanner().nextLine());
+                    break;
+                case (3):
+                    showPlayers();
+                    break;
+                case (4):
+                    rankPlayer();
+                    break;
+                case (5):
+                    cli.print("Introduce el nombre del jugador");
+                    String name = cli.scanner().nextLine();
+                    cli.print("Introduce la puntuacion");
+                    setScore(name,cli.scanner().nextInt());
+                    break;
+                case (6):
+                    showMatchups();
+                    break;
+                case (7):
+                    clearMatchups();
+                    break;
+                case (8):
+                    cli.print("Introduce el nombre de el jugador1");
+                    String name1 = cli.scanner().nextLine();
+                    cli.print("Introduce el nombre de el jugador2");
+                    matchPlayers(name1,cli.scanner().nextLine());
+                    break;
+                case (9):
+                    randomMatchup();
+                    break;
+                case (10):
+                    resume = false;
+                    break;
+                default:
+                    cli.print("El indice introducido no es correcto");
+            }
+        }
+
     }
 
 }
