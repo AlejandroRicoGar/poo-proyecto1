@@ -3,6 +3,9 @@ public class Player {
     private String name;
     private Double score;
 
+    public Player(String name){
+        this.name = name;
+    }
     public Player(String name,Double score){
         this.name = name;
         this.score = score;

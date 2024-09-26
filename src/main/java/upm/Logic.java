@@ -1,6 +1,7 @@
 package upm;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Logic {
     private ArrayList<Match> matchList;
@@ -86,7 +87,14 @@ public class Logic {
         }
     }
     public void createPlayer(){
-
+        cli.print("Introduce el nombre del nuevo jugador");
+        String name = cli.scanner().nextLine();
+        if(!exists(name) && cli.esNombre(name)) {
+            Player player = new Player(name);
+            playerList.add(player);
+        }else{
+            cli.print("El jugador ya existe");
+        }
     }
     public void removePlayer(String name){
 
@@ -111,6 +119,17 @@ public class Logic {
     }
     public void randomMatchup(){
 
+    }
+
+    private boolean exists(String name){
+        Iterator<Player> iter  = playerList.iterator();
+        boolean exists = false;
+        while(!exists && iter.hasNext()){
+            if(iter.next().getName().equals(name)){
+                exists = true;
+            }
+        }
+        return exists;
     }
 
 
