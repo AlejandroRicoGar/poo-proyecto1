@@ -3,7 +3,16 @@ public class Logic {
     private Match[] matchList;
     private Player[] playerList;
 
+    /**
+     * Metodo que inicializa el programa
+     */
     public void start(){
+        CLI cli = new CLI();
+        Player Luisa = new Player("Luisa",4.5);
+        Player Manuel = new Player("Manuel",2.7);
+        Player Kurt = new Player("Luisa",4.5);
+        Player Luisa = new Player("Luisa",4.5);
+        Player Luisa = new Player("Luisa",4.5);
 
     }
     public void createPlayer(String name){
