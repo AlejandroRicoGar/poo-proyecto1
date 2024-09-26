@@ -58,17 +58,27 @@ public class Logic {
                     break;
                 case (5):
                     cli.print("Introduce el nombre del jugador");
-                    setScore(cli);
+                    String name = cli.scanner().nextLine();
+                    cli.print("Introduce la puntuacion");
+                    setScore(name,cli.scanner().nextInt());
                     break;
                 case (6):
+                    showMatchups();
                     break;
                 case (7):
+                    clearMatchups();
                     break;
                 case (8):
+                    cli.print("Introduce el nombre de el jugador1");
+                    String name1 = cli.scanner().nextLine();
+                    cli.print("Introduce el nombre de el jugador2");
+                    matchPlayers(name1,cli.scanner().nextLine());
                     break;
                 case (9):
+                    randomMatchup();
                     break;
                 case (10):
+                    seguir = false;
                     break;
                 default:
                     cli.print("El indice introducido no es correcto");
@@ -76,7 +86,6 @@ public class Logic {
         }
     }
     public void createPlayer(){
-
 
     }
     public void removePlayer(String name){
@@ -103,8 +112,6 @@ public class Logic {
     public void randomMatchup(){
 
     }
-    public void terminate(){
 
-    }
 
 }
