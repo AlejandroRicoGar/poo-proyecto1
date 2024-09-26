@@ -27,8 +27,10 @@ public class Player {
         this.score = score;
     }
 
+
     public String toString(){
         return name+" "+score;
     }
+
 
 }

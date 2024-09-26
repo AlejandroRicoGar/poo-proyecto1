@@ -92,13 +92,23 @@ public class Logic {
         if(!exists(name) && cli.esNombre(name)) {
             Player player = new Player(name);
             playerList.add(player);
-            cli.print("Jugador "+player.getName()+" creado correctamente");
+            cli.print("Jugador "+player.getName()+" creado correctamente\n");
         }else{
             cli.print("El jugador ya existe \n");
         }
     }
     public void removePlayer(String name){
-
+        if(exists(name)){
+            Player player = searchPlayer(name);
+            if(player != null) {
+                playerList.remove(player);
+                cli.print("Jugador " + name + " eliminado correctamente\n");
+            }else{
+                cli.print("Hubo un problema eliminando el jugador");
+            }
+        }else{
+            cli.print("El jugador "+name+" no existe\n");
+        }
 
     }
     public void showPlayers(){
@@ -133,6 +143,18 @@ public class Logic {
         }
         return exists;
     }
-
+    private Player searchPlayer(String name){
+        Iterator<Player> iter  = playerList.iterator();
+        boolean exists = false;
+        Player player = null;
+        while(!exists && iter.hasNext()){
+            Player aux = iter.next();
+            if(aux.getName().equals(name)){
+                player = aux;
+                exists = true;
+            }
+        }
+        return player;
+    }
 
 }
