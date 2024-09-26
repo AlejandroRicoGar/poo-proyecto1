@@ -4,7 +4,8 @@ public class Player {
     private Double score;
 
     public Player(String name,Double score){
-
+        this.name = name;
+        this.score = score;
     }
 
     public String getName() {
@@ -26,6 +27,5 @@ public class Player {
     public String toString(){
         return name+" "+score;
     }
-
 
 }
