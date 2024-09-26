@@ -55,7 +55,7 @@ public class Logic {
                     cli.print("El jugador ya existe \n");
                 }
             }else {
-                cli.print("¿Quiere volver a intentar Y/N");
+                cli.print("¿Quiere volver a intentar Y/N ");
                 if(cli.scanner().nextLine().equals("N")){
                     esNombre = true;
                 }
@@ -68,25 +68,26 @@ public class Logic {
      * Metodo que crea un jugador siempre que este no exista anteriormente
      */
     public void removePlayer(String name){
-        cli.print(playerList.toString());
         if(exists(name)){
             Player player = searchPlayer(name);
             if(player != null) {
                 if(playerList.remove(player)) {
-                    cli.print("Jugador " + name + " eliminado correctamente\n");
-                    cli.print(playerList.toString());
+                    cli.print("Jugador " + name + " eliminado correctamente: ");
                 }else{
-                    cli.print("Hubo un problema eliminando el jugador");
+                    cli.print("Hubo un problema eliminando el jugador\n");
                 }
             }else{
-                cli.print("Hubo un problema eliminando el jugador");
+                cli.print("Hubo un problema eliminando el jugador\n");
             }
         }else{
             cli.print("El jugador "+name+" no existe\n");
         }
     }
     public void showPlayers(){
-
+        Iterator<Player> iter = playerList.iterator();
+        while(iter.hasNext()){
+            cli.print(iter.next().getName()+" ");
+        }
     }
     public void setScore(String name,int score){
 
@@ -133,7 +134,8 @@ public class Logic {
     private void menu(){
         boolean resume = true;
         while(resume) {
-            cli.print("""
+            cli.print(""" 
+                   
                     1> create [player]
                     2> remove [player]
                     3> show
