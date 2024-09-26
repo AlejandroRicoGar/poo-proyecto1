@@ -20,6 +20,11 @@ public class CLI {
     public void print(String s) {
         System.out.print(s);
     }
+
+    /**
+     * @param s nombre para comprobar
+     * @return si el nombre es una sola palabra
+     */
     public boolean esNombre(String s){
         boolean esNombre = true;
         String[] espacios = s.split(" ");
