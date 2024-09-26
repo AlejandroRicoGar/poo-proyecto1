@@ -87,16 +87,18 @@ public class Logic {
         }
     }
     public void createPlayer(){
-        cli.print("Introduce el nombre del nuevo jugador");
+        cli.print("Introduce el nombre del nuevo jugador: ");
         String name = cli.scanner().nextLine();
         if(!exists(name) && cli.esNombre(name)) {
             Player player = new Player(name);
             playerList.add(player);
+            cli.print("Jugador "+player.getName()+" creado correctamente");
         }else{
-            cli.print("El jugador ya existe");
+            cli.print("El jugador ya existe \n");
         }
     }
     public void removePlayer(String name){
+
 
     }
     public void showPlayers(){
