@@ -86,7 +86,7 @@ public class Logic {
     public void showPlayers(){
         Iterator<Player> iter = playerList.iterator();
         while(iter.hasNext()){
-            cli.print(iter.next().getName()+" ");
+            cli.print(iter.next().toString());
         }
     }
     public void setScore(String name,int score){
