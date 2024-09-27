@@ -87,22 +87,37 @@ public class Logic {
     public void showPlayers(){
         Iterator<Player> iter = playerList.iterator();
         while(iter.hasNext()){
-            cli.print(iter.next().toString()+"\t");
+            cli.print(iter.next().toString()+"\n");
         }
     }
+
+    /**
+     * Método que asigna una puntuación valida a un jugador,
+     * en caso de puntuacion no valida imprime mensaje
+     * @param name Nombre del jugador
+     * @param score Puntuacion que se va a asignar al jugador
+     *
+     */
     public void setScore(String name,double score){
         Player player=searchPlayer(name);
         if(player!=null){
             if(score>-999999.0){
                 player.setScore(score);
+            }else{
+                cli.print("Puntuacion inferior a -999999.0 no es valida\n");
             }
         }
     }
+
+    /**
+     * Método que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
+     * e imprime el resultado ordenado por pantalla
+     */
     public void rankPlayers(){
         ArrayList<Player> sortedPlayerList= (ArrayList<Player>) playerList.clone();
         for(int j=sortedPlayerList.size()-1;j>0;j--){
             for(int i=0;i<j;i++){
-                if(sortedPlayerList.get(i).getScore()>sortedPlayerList.get(i+1).getScore()){
+                if(sortedPlayerList.get(i).getScore()<sortedPlayerList.get(i+1).getScore()){
                     Player aux=sortedPlayerList.get(i);
                     sortedPlayerList.set(i,sortedPlayerList.get(i+1));
                     sortedPlayerList.set(i+1,aux);
@@ -111,7 +126,7 @@ public class Logic {
         }
         Iterator<Player> iter = sortedPlayerList.iterator();
         while(iter.hasNext()){
-            cli.print(iter.next().toString()+"\t");
+            cli.print(iter.next().toString()+"\n");
         }
     }
     public void showMatchups(){
@@ -120,6 +135,13 @@ public class Logic {
     public void clearMatchups(){
 
     }
+
+    /**
+     * Método crea un nuevo objeto emparejamiento entre dos jugadores existentes
+     * @param name1 Jugador 1 del enfrentamiento creado
+     * @param name2 Jugador 2 del enfrentamiento creado
+     * @return true si existen ambos jugadores y false en caso contrario
+     */
     public boolean matchPlayers(String name1,String name2){
         if(exists(name1)&&exists(name2)){
             Match match=new Match(searchPlayer(name1),searchPlayer(name2));
