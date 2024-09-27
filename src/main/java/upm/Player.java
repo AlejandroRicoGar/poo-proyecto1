@@ -30,7 +30,7 @@ public class Player {
 
 
     public String toString(){
-        return name+" "+score;
+        return name+" ("+score+")";
     }
 
 

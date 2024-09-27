@@ -87,7 +87,7 @@ public class Logic {
     public void showPlayers(){
         Iterator<Player> iter = playerList.iterator();
         while(iter.hasNext()){
-            cli.print(iter.next().toString()+"\n");
+            cli.print(iter.next().toString()+"\t");
         }
     }
     public void setScore(String name,double score){
@@ -111,8 +111,7 @@ public class Logic {
         }
         Iterator<Player> iter = sortedPlayerList.iterator();
         while(iter.hasNext()){
-            Player player=iter.next();
-            cli.print(player.getName()+" ("+player.getScore()+") \n");
+            cli.print(iter.next().toString()+"\t");
         }
     }
     public void showMatchups(){
