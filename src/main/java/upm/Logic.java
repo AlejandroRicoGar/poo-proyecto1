@@ -122,7 +122,12 @@ public class Logic {
 
     }
     public boolean matchPlayers(String name1,String name2){
-        return true;
+        if(exists(name1)&&exists(name2)){
+            Match match=new Match(searchPlayer(name1),searchPlayer(name2));
+            matchList.add(match);
+            return true;
+        }
+        return false;
     }
     public void randomMatchup(){
 
