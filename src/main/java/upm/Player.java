@@ -5,6 +5,7 @@ public class Player {
 
     public Player(String name){
         this.name = name;
+        this.score = 0.0;
     }
     public Player(String name,Double score){
         this.name = name;

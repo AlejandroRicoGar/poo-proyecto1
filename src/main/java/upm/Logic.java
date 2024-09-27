@@ -1,7 +1,6 @@
 package upm;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 public class Logic {
@@ -87,34 +86,14 @@ public class Logic {
     public void showPlayers(){
         Iterator<Player> iter = playerList.iterator();
         while(iter.hasNext()){
-            Player player=iter.next();
-            cli.print(player.getName()+" ("+player.getScore()+") \n");
+            cli.print(iter.next().toString());
         }
     }
-    public void setScore(String name,double score){
-        Player player=searchPlayer(name);
-        if(player!=null){
-            if(score>-999999.0){
-                player.setScore(score);
-            }
-        }
+    public void setScore(String name,int score){
+
     }
-    public void rankPlayers(){
-        ArrayList<Player> sortedPlayerList=playerList;
-        for(int j=sortedPlayerList.size()-1;j>0;j--){
-            for(int i=0;i<j;i++){
-                if(sortedPlayerList.get(i).getScore()>sortedPlayerList.get(i+1).getScore()){
-                    Player aux=sortedPlayerList.get(i);
-                    sortedPlayerList.set(i,sortedPlayerList.get(i+1));
-                    sortedPlayerList.set(i+1,aux);
-                }
-            }
-        }
-        Iterator<Player> iter = sortedPlayerList.iterator();
-        while(iter.hasNext()){
-            Player player=iter.next();
-            cli.print(player.getName()+" ("+player.getScore()+") \n");
-        }
+    public void rankPlayer(){
+
     }
     public void showMatchups(){
 
@@ -181,7 +160,7 @@ public class Logic {
                     showPlayers();
                     break;
                 case (4):
-                    rankPlayers();
+                    rankPlayer();
                     break;
                 case (5):
                     cli.print("Introduce el nombre del jugador");
