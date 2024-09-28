@@ -1,7 +1,6 @@
 package upm;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 public class Logic {
     private ArrayList<Match> matchList;
@@ -162,8 +161,18 @@ public class Logic {
         }
         return false;
     }
-    public void randomMatchup(){
 
+    public void randomMatchup(){
+        if (playerList.size() % 2 != 0) {
+            cli.print("No se pueden emparejar todos los jugadores\n");
+        } else {
+            //TODO Ver si se puede hacer sin duplicar la lista
+            List<Player> playerCopy = new ArrayList<>(playerList);
+            Collections.shuffle(playerCopy);
+            for (int i = 0; i < playerList.size(); i += 2) {
+                matchPlayers(playerCopy.get(i).getName(), playerCopy.get(i + 1).getName());
+            }
+        }
     }
 
     private boolean exists(String name){
