@@ -1,7 +1,6 @@
 package upm;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 public class Logic {
@@ -92,7 +91,7 @@ public class Logic {
     }
 
     /**
-     * Método que asigna una puntuación valida a un jugador,
+     * Metodo que asigna una puntuación valida a un jugador,
      * en caso de puntuacion no valida imprime mensaje
      * @param name Nombre del jugador
      * @param score Puntuacion que se va a asignar al jugador
@@ -110,7 +109,7 @@ public class Logic {
     }
 
     /**
-     * Método que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
+     * Metodo que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
      * e imprime el resultado ordenado por pantalla
      */
     public void rankPlayers(){
@@ -130,14 +129,19 @@ public class Logic {
         }
     }
     public void showMatchups(){
-
+        if (matchList.isEmpty()){
+            cli.print("No hay emparejamientos.\n");
+        }
+        //Lo he hecho con una expresión lambda porque así me evito problemas con el iterador en bucle infinito
+        matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
     }
+
     public void clearMatchups(){
 
     }
 
     /**
-     * Método crea un nuevo objeto emparejamiento entre dos jugadores existentes
+     * Metodo crea un nuevo objeto emparejamiento entre dos jugadores existentes
      * @param name1 Jugador 1 del enfrentamiento creado
      * @param name2 Jugador 2 del enfrentamiento creado
      * @return true si existen ambos jugadores y false en caso contrario
