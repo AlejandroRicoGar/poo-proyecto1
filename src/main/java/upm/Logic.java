@@ -135,7 +135,6 @@ public class Logic {
         if (matchList.isEmpty()){
             cli.print("No hay emparejamientos.\n");
         }else{
-            //Lo he hecho con una expresión lambda porque así me evito problemas con el iterador en bucle infinito
             matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
         }
     }
@@ -162,6 +161,10 @@ public class Logic {
         return false;
     }
 
+    /**
+     * Empareja aleatoriamente a los jugadores en parejas.
+     * Si el número de jugadores es impar, indica que no se puede ejecutar la operación.
+     */
     public void randomMatchup(){
         if (playerList.size() % 2 != 0) {
             cli.print("No se pueden emparejar todos los jugadores\n");
