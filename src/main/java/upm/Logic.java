@@ -128,12 +128,17 @@ public class Logic {
             cli.print(iter.next().toString()+"\n");
         }
     }
+    /**
+     * Imprime por pantalla el listado de enfrentamientos existentes,
+     * si no hay emparejamientos imprime un mensaje de no hay emparejamientos
+     */
     public void showMatchups(){
         if (matchList.isEmpty()){
             cli.print("No hay emparejamientos.\n");
+        }else{
+            //Lo he hecho con una expresión lambda porque así me evito problemas con el iterador en bucle infinito
+            matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
         }
-        //Lo he hecho con una expresión lambda porque así me evito problemas con el iterador en bucle infinito
-        matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
     }
 
     public void clearMatchups(){
