@@ -83,9 +83,8 @@ public class Logic {
         }
     }
     public void showPlayers(){
-        Iterator<Player> iter = playerList.iterator();
-        while(iter.hasNext()){
-            cli.print(iter.next().toString()+"\n");
+        for (Player player : playerList) {
+            cli.print(player.toString() + "\n");
         }
     }
 
