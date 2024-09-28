@@ -121,9 +121,8 @@ public class Logic {
                 }
             }
         }
-        Iterator<Player> iter = sortedPlayerList.iterator();
-        while(iter.hasNext()){
-            cli.print(iter.next().toString()+"\n");
+        for (Player player : sortedPlayerList) {
+            cli.print(player.toString() + "\n");
         }
     }
     /**
