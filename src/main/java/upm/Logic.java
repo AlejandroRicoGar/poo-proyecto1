@@ -168,6 +168,9 @@ public class Logic {
             cli.print("No se pueden emparejar todos los jugadores\n");
         } else {
             //TODO Ver si se puede hacer sin duplicar la lista
+            //Tigrán: no creo que se pueda porque de alguna forma tienes llevar registro de jugadores emparejados,
+            // si no usas un ArrayList duplicado tendrias que llevar registro al menos de los indices y usar un array
+            // para no emparejar al mismo jugardor dos veces
             List<Player> playerCopy = new ArrayList<>(playerList);
             Collections.shuffle(playerCopy);
             for (int i = 0; i < playerList.size(); i += 2) {
