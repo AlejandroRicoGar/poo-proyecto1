@@ -141,8 +141,11 @@ public class Logic {
         }
     }
 
+    /**
+     * Elimina los emparejamientos existentes de matchList
+     */
     public void clearMatchups(){
-
+        matchList.clear();
     }
 
     /**
