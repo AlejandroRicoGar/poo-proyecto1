@@ -31,6 +31,9 @@ public class CLI {
         if(espacios.length!=1){
             esNombre = false;
         }
+        if(!s.matches("[a-zA-Z]+")){
+            esNombre = false;
+        }
         return esNombre;
     }
 }
