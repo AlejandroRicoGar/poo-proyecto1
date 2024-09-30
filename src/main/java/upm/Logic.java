@@ -3,9 +3,13 @@ package upm;
 import java.util.*;
 
 public class Logic {
-    private ArrayList<Match> matchList;
-    private ArrayList<Player> playerList;
-    private CLI cli;
+    private  ArrayList<Match> matchList;
+    private  ArrayList<Player> playerList;
+    private final CLI cli;
+
+    public Logic(CLI cli) {
+        this.cli = cli;
+    }
 
     /**
      * Metodo que inicializa el programa
@@ -14,8 +18,8 @@ public class Logic {
      * Para finalizar comienza el menu de ejecuacion
      */
     public void start(){
-        this.cli = new CLI();
-
+        this.matchList = new ArrayList<>();
+        this.playerList = new ArrayList<>();
 
         Player Luisa = new Player("Luisa",4.5);
         Player Manuel = new Player("Manuel",2.7);
@@ -23,8 +27,7 @@ public class Logic {
         Player Sofia = new Player("Sofia",3.8);
         Player Robert = new Player("Robert",3.8);
 
-        matchList = new ArrayList<>();
-        playerList = new ArrayList<>();
+
 
         playerList.add(Luisa);
         playerList.add(Manuel);
@@ -82,9 +85,10 @@ public class Logic {
             cli.print("El jugador "+name+" no existe\n");
         }
     }
-    public void showPlayers(){
-        for (Player player : playerList) {
-            cli.print(player.toString() + "\n");
+    public void showPlayers() {
+        Iterator<Player> iter = playerList.iterator();
+        while (iter.hasNext()) {
+            cli.print(iter.next().toString() + "\n");
         }
     }
 
@@ -140,6 +144,7 @@ public class Logic {
     /**
      * Elimina los emparejamientos existentes de matchList
      */
+    //TODO Mostrar algun mensaje
     public void clearMatchups(){
         matchList.clear();
     }
@@ -163,6 +168,7 @@ public class Logic {
      * Empareja aleatoriamente a los jugadores en parejas.
      * Si el número de jugadores es impar, indica que no se puede ejecutar la operación.
      */
+
     public void randomMatchup(){
         if (playerList.size() % 2 != 0) {
             cli.print("No se pueden emparejar todos los jugadores\n");
