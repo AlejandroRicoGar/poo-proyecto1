@@ -231,8 +231,9 @@ public class Logic {
                     9> random_matchmake
                     10> end
                     """);
-            int index = cli.scanner().nextInt();
             try {
+                int index = cli.scanner().nextInt();
+
                 switch (index) {
                     case (1):
                         createPlayer();
