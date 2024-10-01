@@ -120,6 +120,7 @@ public class Logic {
      * Metodo que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
      * e imprime el resultado ordenado por pantalla
      */
+    //TODO Ver si se puede implementar con algo como "sortedPlayerList.sort((p1, p2) -> p1.compareTo(p2));"
     public void rankPlayers(){
         ArrayList<Player> sortedPlayerList= (ArrayList<Player>) playerList.clone();
         for(int j=sortedPlayerList.size()-1;j>0;j--){
@@ -150,7 +151,6 @@ public class Logic {
     /**
      * Elimina los emparejamientos existentes de matchList
      */
-    //TODO Mostrar algun mensaje
     public void clearMatchups(){
         matchList.clear();
         cli.print("Eliminados todos los emparejamientos correctamente");
@@ -162,6 +162,7 @@ public class Logic {
      * @param name2 Jugador 2 del enfrentamiento creado
      * @return true si existen ambos jugadores y false en caso contrario
      */
+    //TODO Utilizar el valor del return para imprimir mensajes de error ("x jugador no existe" o algo asi)
     public boolean matchPlayers(String name1,String name2){
         if(exists(name1)&&exists(name2)){
             Match match=new Match(searchPlayer(name1),searchPlayer(name2));

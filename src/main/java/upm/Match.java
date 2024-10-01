@@ -32,6 +32,7 @@ public class Match {
     }
     @Override
     public String toString() {
+        //TODO Cambiar el mensaje a español para mantener cohesion con el resto del proyecto
         return "Match between "+player1.getName()+" and "+player2.getName();
     }
 }
