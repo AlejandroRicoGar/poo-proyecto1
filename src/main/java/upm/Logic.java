@@ -122,7 +122,7 @@ public class Logic {
      */
     public void rankPlayers(){
         ArrayList<Player> sortedPlayerList= new ArrayList<>(playerList);
-        sortedPlayerList.sort((Player p1,Player p2)->{return p2.getScore().compareTo(p1.getScore());});
+        sortedPlayerList.sort((Player p1,Player p2) -> p2.getScore().compareTo(p1.getScore()));
         /*for(int j=sortedPlayerList.size()-1;j>0;j--){
             for(int i=0;i<j;i++){
                 if(sortedPlayerList.get(i).getScore()<sortedPlayerList.get(i+1).getScore()){
