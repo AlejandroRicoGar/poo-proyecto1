@@ -120,10 +120,10 @@ public class Logic {
      * Metodo que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
      * e imprime el resultado ordenado por pantalla
      */
-    //TODO Ver si se puede implementar con algo como "sortedPlayerList.sort((p1, p2) -> p1.compareTo(p2));"
     public void rankPlayers(){
-        ArrayList<Player> sortedPlayerList= (ArrayList<Player>) playerList.clone();
-        for(int j=sortedPlayerList.size()-1;j>0;j--){
+        ArrayList<Player> sortedPlayerList= new ArrayList<>(playerList);
+        sortedPlayerList.sort((Player p1,Player p2)->{return p2.getScore().compareTo(p1.getScore());});
+        /*for(int j=sortedPlayerList.size()-1;j>0;j--){
             for(int i=0;i<j;i++){
                 if(sortedPlayerList.get(i).getScore()<sortedPlayerList.get(i+1).getScore()){
                     Player aux=sortedPlayerList.get(i);
@@ -131,7 +131,7 @@ public class Logic {
                     sortedPlayerList.set(i+1,aux);
                 }
             }
-        }
+        }Bubble Sort ^*/
         for (Player player : sortedPlayerList) {
             cli.print(player.toString() + "\n");
         }
