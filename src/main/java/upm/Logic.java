@@ -44,6 +44,7 @@ public class Logic {
      */
     public void createPlayer(){
         boolean esNombre = false;
+        boolean yesOrNo = false;
         while(!esNombre) {
                 cli.print("Introduce el nombre del nuevo jugador: ");
                 String name = cli.scanner().nextLine();
@@ -58,10 +59,16 @@ public class Logic {
                     }
                 } else {
                     cli.print("No es un nombre\n");
-                    cli.print("¿Quiere volver a intentar? Y/N ");
-                    if (cli.scanner().nextLine().equals("N")) {
-                        esNombre = true;
-                    }
+                    do {
+                        cli.print("¿Quiere volver a intentar? Y/n\n");
+                        String input = cli.scanner().nextLine();
+                        if (input.equalsIgnoreCase("n")) {
+                            esNombre = true;
+                            yesOrNo = true;
+                        } else if (input.equalsIgnoreCase("y") || input.isEmpty()) {
+                            yesOrNo = true;
+                        }
+                    } while (!yesOrNo);
                 }
         }
     }
