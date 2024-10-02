@@ -167,7 +167,7 @@ public class Logic {
             matchList.add(match);
             cli.print("Jugadores "+name1+" y "+name2+" correctamenete emparejados\n");
         }else{
-            cli.print("No se ha podido realizar el emparejamiento");
+            cli.print("No se ha podido realizar el emparejamiento\n");
         }
 
     }
@@ -219,7 +219,6 @@ public class Logic {
         boolean resume = true;
         while(resume) {
             cli.print(""" 
-                   
                     1> create [player]
                     2> remove [player]
                     3> show
@@ -235,45 +234,30 @@ public class Logic {
                 int index = cli.scanner().nextInt();
 
                 switch (index) {
-                    case (1):
-                        createPlayer();
-                        break;
-                    case (2):
+                    case 1 -> createPlayer();
+                    case 2 -> {
                         cli.print("Introduce el nombre del jugador");
                         removePlayer(cli.scanner().nextLine());
-                        break;
-                    case (3):
-                        showPlayers();
-                        break;
-                    case (4):
-                        rankPlayers();
-                        break;
-                    case (5):
+                    }
+                    case 3 -> showPlayers();
+                    case 4 -> rankPlayers();
+                    case 5 -> {
                         cli.print("Introduce el nombre del jugador");
                         String name = cli.scanner().nextLine();
                         cli.print("Introduce la puntuacion");
                         setScore(name, cli.scanner().nextInt());
-                        break;
-                    case (6):
-                        showMatchups();
-                        break;
-                    case (7):
-                        clearMatchups();
-                        break;
-                    case (8):
+                    }
+                    case 6 -> showMatchups();
+                    case 7 -> clearMatchups();
+                    case 8 -> {
                         cli.print("Introduce el nombre de el jugador1");
                         String name1 = cli.scanner().nextLine();
                         cli.print("Introduce el nombre de el jugador2");
                         matchPlayers(name1, cli.scanner().nextLine());
-                        break;
-                    case (9):
-                        randomMatchup();
-                        break;
-                    case (10):
-                        resume = false;
-                        break;
-                    default:
-                        cli.print("El indice introducido no es correcto");
+                    }
+                    case 9 -> randomMatchup();
+                    case 10 -> resume = false;
+                    default -> cli.print("El indice introducido no es correcto");
                 }
             }catch (InputMismatchException e){
                 cli.print("Dato introducido no reconocido \n");
