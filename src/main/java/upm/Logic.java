@@ -160,16 +160,16 @@ public class Logic {
      * Metodo crea un nuevo objeto emparejamiento entre dos jugadores existentes
      * @param name1 Jugador 1 del enfrentamiento creado
      * @param name2 Jugador 2 del enfrentamiento creado
-     * @return true si existen ambos jugadores y false en caso contrario
      */
-    //TODO Utilizar el valor del return para imprimir mensajes de error ("x jugador no existe" o algo asi)
-    public boolean matchPlayers(String name1,String name2){
+    public void matchPlayers(String name1,String name2){
         if(exists(name1)&&exists(name2)){
             Match match=new Match(searchPlayer(name1),searchPlayer(name2));
             matchList.add(match);
-            return true;
+            cli.print("Jugadores "+name1+" y "+name2+" correctamenete emparejados\n");
+        }else{
+            cli.print("No se ha podido realizar el emparejamiento");
         }
-        return false;
+
     }
 
     /**
