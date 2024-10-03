@@ -58,9 +58,9 @@ public class Logic {
                         cli.print("El jugador ya existe \n");
                     }
                 } else {
-                    cli.print("No es un nombre\n");
+                    cli.print(name + " no es un nombre valido\n");
                     do {
-                        cli.print("¿Quiere volver a intentar? Y/n\n");
+                        cli.print("¿Desea volver a intentarlo? Y/n\n");
                         String input = cli.scanner().nextLine();
                         if (input.equalsIgnoreCase("n")) {
                             esNombre = true;
@@ -82,7 +82,7 @@ public class Logic {
             Player player = searchPlayer(name);
             if(player != null) {
                 if(playerList.remove(player)) {
-                    cli.print("Jugador " + name + " eliminado correctamente: ");
+                    cli.print("Jugador " + name + " eliminado correctamente\n");
                 }else{
                     cli.print("Hubo un problema eliminando el jugador\n");
                 }
@@ -120,6 +120,8 @@ public class Logic {
             }else{
                 cli.print("Puntuacion inferior a -999999.0 no es valida\n");
             }
+        } else {
+            cli.print("El jugador "+name+" no existe\n");
         }
     }
 
@@ -130,7 +132,8 @@ public class Logic {
     public void rankPlayers(){
         ArrayList<Player> sortedPlayerList= new ArrayList<>(playerList);
         sortedPlayerList.sort((Player p1,Player p2) -> p2.getScore().compareTo(p1.getScore()));
-        /*for(int j=sortedPlayerList.size()-1;j>0;j--){
+        /* Implementacion antigua con un Bubble Sort
+        for(int j=sortedPlayerList.size()-1;j>0;j--){
             for(int i=0;i<j;i++){
                 if(sortedPlayerList.get(i).getScore()<sortedPlayerList.get(i+1).getScore()){
                     Player aux=sortedPlayerList.get(i);
@@ -138,7 +141,7 @@ public class Logic {
                     sortedPlayerList.set(i+1,aux);
                 }
             }
-        }Bubble Sort ^*/
+        }*/
         for (Player player : sortedPlayerList) {
             cli.print(player.toString() + "\n");
         }
@@ -149,7 +152,7 @@ public class Logic {
      */
     public void showMatchups(){
         if (matchList.isEmpty()){
-            cli.print("No hay emparejamientos.\n");
+            cli.print("No hay emparejamientos\n");
         }else{
             matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
         }
@@ -160,7 +163,7 @@ public class Logic {
      */
     public void clearMatchups(){
         matchList.clear();
-        cli.print("Eliminados todos los emparejamientos correctamente");
+        cli.print("Eliminados todos los emparejamientos correctamente\n");
     }
 
     /**
@@ -186,7 +189,7 @@ public class Logic {
 
     public void randomMatchup(){
         if (playerList.size() % 2 != 0) {
-            cli.print("No se pueden emparejar todos los jugadores\n");
+            cli.print("No se pueden emparejar todos los jugadores (numero de jugadores debe ser par)\n");
         } else {
             List<Player> playerCopy = new ArrayList<>(playerList);
             Collections.shuffle(playerCopy);
@@ -226,6 +229,7 @@ public class Logic {
         boolean resume = true;
         while(resume) {
             cli.print(""" 
+                    
                     1> create [player]
                     2> remove [player]
                     3> show
@@ -243,28 +247,28 @@ public class Logic {
                 switch (index) {
                     case 1 -> createPlayer();
                     case 2 -> {
-                        cli.print("Introduce el nombre del jugador");
+                        cli.print("Introduce el nombre del jugador: ");
                         removePlayer(cli.scanner().nextLine());
                     }
                     case 3 -> showPlayers();
                     case 4 -> rankPlayers();
                     case 5 -> {
-                        cli.print("Introduce el nombre del jugador");
+                        cli.print("Introduce el nombre del jugador: ");
                         String name = cli.scanner().nextLine();
-                        cli.print("Introduce la puntuacion");
+                        cli.print("Introduce la puntuacion: ");
                         setScore(name, cli.scanner().nextInt());
                     }
                     case 6 -> showMatchups();
                     case 7 -> clearMatchups();
                     case 8 -> {
-                        cli.print("Introduce el nombre de el jugador1");
+                        cli.print("Introduce el nombre de el jugador1: ");
                         String name1 = cli.scanner().nextLine();
-                        cli.print("Introduce el nombre de el jugador2");
+                        cli.print("Introduce el nombre de el jugador2: ");
                         matchPlayers(name1, cli.scanner().nextLine());
                     }
                     case 9 -> randomMatchup();
                     case 10 -> resume = false;
-                    default -> cli.print("El indice introducido no es correcto");
+                    default -> cli.print("El indice introducido no es correcto\n");
                 }
             }catch (InputMismatchException e){
                 cli.print("Dato introducido no reconocido \n");
