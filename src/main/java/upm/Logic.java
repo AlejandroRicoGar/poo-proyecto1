@@ -154,7 +154,10 @@ public class Logic {
         if (matchList.isEmpty()){
             cli.print("No hay emparejamientos\n");
         }else{
-            matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
+            Iterator<Match> iter = matchList.iterator();
+            while(iter.hasNext()){
+               cli.print(iter.next().toString()+"\n");
+            }
         }
     }
 
@@ -196,7 +199,6 @@ public class Logic {
             for (int i = 0; i < playerList.size(); i += 2) {
                 matchPlayers(playerCopy.get(i).getName(), playerCopy.get(i + 1).getName());
             }
-            showMatchups();
         }
 
     }
