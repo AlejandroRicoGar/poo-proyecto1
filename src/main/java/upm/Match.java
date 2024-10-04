@@ -5,10 +5,10 @@ public class Match {
     private Player player2;
 
     /**
-     * Constrcutor of the class
+     * Constructor de la clase
      *
-     * @param player1 Player object
-     * @param player2 Player object
+     * @param player1 Objeto Player
+     * @param player2 Objeto Player
      */
     public Match (Player player1, Player player2){
         this.player1=player1;

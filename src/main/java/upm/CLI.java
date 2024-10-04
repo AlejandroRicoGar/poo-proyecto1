@@ -4,26 +4,30 @@ import java.util.Scanner;
 
 public class CLI {
     /**
-     * Creates a new Scanner to read inputs.
+     * Crea un nuevo objeto Scanner para recibir inputs
      *
-     * @return  a new Scanner object
+     * @return  un nuevo objeto Scanner
      */
     public Scanner scanner() {
         return new Scanner(System.in);
     }
 
     /**
-     * Prints the given string.
+     * Imprime el string dado.
      *
-     * @param s the string to be printed
+     * @param s el string a imprimir
      */
     public void print(String s) {
         System.out.print(s);
     }
 
+
     /**
-     * @param s nombre para comprobar
-     * @return si el nombre es una sola palabra
+     * Verifica si una cadena es un nombre válido.
+     * Un nombre válido es una cadena que solo contiene letras.
+     *
+     * @param s la cadena a verificar
+     * @return true si la cadena es válida, false de lo contrario
      */
     public boolean esNombre(String s){
         boolean esNombre = true;
