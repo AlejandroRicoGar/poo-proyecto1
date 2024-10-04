@@ -44,6 +44,7 @@ public class Logic {
      */
     public void createPlayer(){
         boolean esNombre = false;
+        boolean yesOrNo = false;
         while(!esNombre) {
                 cli.print("Introduce el nombre del nuevo jugador: ");
                 String name = cli.scanner().nextLine();
@@ -57,11 +58,17 @@ public class Logic {
                         cli.print("El jugador ya existe \n");
                     }
                 } else {
-                    cli.print("No es un nombre\n");
-                    cli.print("¿Quiere volver a intentar? Y/N ");
-                    if (cli.scanner().nextLine().equals("N")) {
-                        esNombre = true;
-                    }
+                    cli.print(name + " no es un nombre valido\n");
+                    do {
+                        cli.print("¿Desea volver a intentarlo? Y/n\n");
+                        String input = cli.scanner().nextLine();
+                        if (input.equalsIgnoreCase("n")) {
+                            esNombre = true;
+                            yesOrNo = true;
+                        } else if (input.equalsIgnoreCase("y") || input.isEmpty()) {
+                            yesOrNo = true;
+                        }
+                    } while (!yesOrNo);
                 }
         }
     }
@@ -75,7 +82,7 @@ public class Logic {
             Player player = searchPlayer(name);
             if(player != null) {
                 if(playerList.remove(player)) {
-                    cli.print("Jugador " + name + " eliminado correctamente: ");
+                    cli.print("Jugador " + name + " eliminado correctamente\n");
                 }else{
                     cli.print("Hubo un problema eliminando el jugador\n");
                 }
@@ -113,6 +120,8 @@ public class Logic {
             }else{
                 cli.print("Puntuacion inferior a -999999.0 no es valida\n");
             }
+        } else {
+            cli.print("El jugador "+name+" no existe\n");
         }
     }
 
@@ -120,9 +129,10 @@ public class Logic {
      * Metodo que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
      * e imprime el resultado ordenado por pantalla
      */
-    //TODO Ver si se puede implementar con algo como "sortedPlayerList.sort((p1, p2) -> p1.compareTo(p2));"
     public void rankPlayers(){
-        ArrayList<Player> sortedPlayerList= (ArrayList<Player>) playerList.clone();
+        ArrayList<Player> sortedPlayerList= new ArrayList<>(playerList);
+        sortedPlayerList.sort((Player p1,Player p2) -> p2.getScore().compareTo(p1.getScore()));
+        /* Implementacion antigua con un Bubble Sort
         for(int j=sortedPlayerList.size()-1;j>0;j--){
             for(int i=0;i<j;i++){
                 if(sortedPlayerList.get(i).getScore()<sortedPlayerList.get(i+1).getScore()){
@@ -131,7 +141,7 @@ public class Logic {
                     sortedPlayerList.set(i+1,aux);
                 }
             }
-        }
+        }*/
         for (Player player : sortedPlayerList) {
             cli.print(player.toString() + "\n");
         }
@@ -142,7 +152,7 @@ public class Logic {
      */
     public void showMatchups(){
         if (matchList.isEmpty()){
-            cli.print("No hay emparejamientos.\n");
+            cli.print("No hay emparejamientos\n");
         }else{
             matchList.iterator().forEachRemaining(match -> cli.print(match.toString()+"\n"));
         }
@@ -153,23 +163,23 @@ public class Logic {
      */
     public void clearMatchups(){
         matchList.clear();
-        cli.print("Eliminados todos los emparejamientos correctamente");
+        cli.print("Eliminados todos los emparejamientos correctamente\n");
     }
 
     /**
      * Metodo crea un nuevo objeto emparejamiento entre dos jugadores existentes
      * @param name1 Jugador 1 del enfrentamiento creado
      * @param name2 Jugador 2 del enfrentamiento creado
-     * @return true si existen ambos jugadores y false en caso contrario
      */
-    //TODO Utilizar el valor del return para imprimir mensajes de error ("x jugador no existe" o algo asi)
-    public boolean matchPlayers(String name1,String name2){
+    public void matchPlayers(String name1,String name2){
         if(exists(name1)&&exists(name2)){
             Match match=new Match(searchPlayer(name1),searchPlayer(name2));
             matchList.add(match);
-            return true;
+            cli.print("Jugadores "+name1+" y "+name2+" correctamenete emparejados\n");
+        }else{
+            cli.print("No se ha podido realizar el emparejamiento\n");
         }
-        return false;
+
     }
 
     /**
@@ -179,7 +189,7 @@ public class Logic {
 
     public void randomMatchup(){
         if (playerList.size() % 2 != 0) {
-            cli.print("No se pueden emparejar todos los jugadores\n");
+            cli.print("No se pueden emparejar todos los jugadores (numero de jugadores debe ser par)\n");
         } else {
             List<Player> playerCopy = new ArrayList<>(playerList);
             Collections.shuffle(playerCopy);
@@ -219,7 +229,7 @@ public class Logic {
         boolean resume = true;
         while(resume) {
             cli.print(""" 
-                   
+                    
                     1> create [player]
                     2> remove [player]
                     3> show
@@ -235,45 +245,30 @@ public class Logic {
                 int index = cli.scanner().nextInt();
 
                 switch (index) {
-                    case (1):
-                        createPlayer();
-                        break;
-                    case (2):
-                        cli.print("Introduce el nombre del jugador");
+                    case 1 -> createPlayer();
+                    case 2 -> {
+                        cli.print("Introduce el nombre del jugador: ");
                         removePlayer(cli.scanner().nextLine());
-                        break;
-                    case (3):
-                        showPlayers();
-                        break;
-                    case (4):
-                        rankPlayers();
-                        break;
-                    case (5):
-                        cli.print("Introduce el nombre del jugador");
+                    }
+                    case 3 -> showPlayers();
+                    case 4 -> rankPlayers();
+                    case 5 -> {
+                        cli.print("Introduce el nombre del jugador: ");
                         String name = cli.scanner().nextLine();
-                        cli.print("Introduce la puntuacion");
+                        cli.print("Introduce la puntuacion: ");
                         setScore(name, cli.scanner().nextInt());
-                        break;
-                    case (6):
-                        showMatchups();
-                        break;
-                    case (7):
-                        clearMatchups();
-                        break;
-                    case (8):
-                        cli.print("Introduce el nombre de el jugador1");
+                    }
+                    case 6 -> showMatchups();
+                    case 7 -> clearMatchups();
+                    case 8 -> {
+                        cli.print("Introduce el nombre de el jugador1: ");
                         String name1 = cli.scanner().nextLine();
-                        cli.print("Introduce el nombre de el jugador2");
+                        cli.print("Introduce el nombre de el jugador2: ");
                         matchPlayers(name1, cli.scanner().nextLine());
-                        break;
-                    case (9):
-                        randomMatchup();
-                        break;
-                    case (10):
-                        resume = false;
-                        break;
-                    default:
-                        cli.print("El indice introducido no es correcto");
+                    }
+                    case 9 -> randomMatchup();
+                    case 10 -> resume = false;
+                    default -> cli.print("El indice introducido no es correcto\n");
                 }
             }catch (InputMismatchException e){
                 cli.print("Dato introducido no reconocido \n");
