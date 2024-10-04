@@ -29,15 +29,15 @@ public class CLI {
      * @param s la cadena a verificar
      * @return true si la cadena es válida, false de lo contrario
      */
-    public boolean esNombre(String s){
-        boolean esNombre = true;
-        String[] espacios = s.split(" ");
-        if(espacios.length!=1){
-            esNombre = false;
+    public boolean isName(String s){
+        boolean isName = true;
+        String[] space = s.split(" ");
+        if(space.length!=1){
+            isName = false;
         }
         if(!s.matches("[a-zA-Z]+")){
-            esNombre = false;
+            isName = false;
         }
-        return esNombre;
+        return isName;
     }
 }
