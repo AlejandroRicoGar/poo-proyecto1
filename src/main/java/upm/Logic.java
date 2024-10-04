@@ -47,7 +47,7 @@ public class Logic {
         while(!esNombre) {
                 cli.print("Introduce el nombre del nuevo jugador: ");
                 String name = cli.scanner().nextLine();
-                if (cli.esNombre(name)) {
+                if (cli.isName(name)) {
                     esNombre = true;
                     if (!exists(name)) {
                         Player player = new Player(name);

@@ -25,15 +25,15 @@ public class CLI {
      * @param s nombre para comprobar
      * @return si el nombre es una sola palabra
      */
-    public boolean esNombre(String s){
-        boolean esNombre = true;
-        String[] espacios = s.split(" ");
-        if(espacios.length!=1){
-            esNombre = false;
+    public boolean isName(String s){
+        boolean isName = true;
+        String[] space = s.split(" ");
+        if(space.length!=1){
+            isName = false;
         }
         if(!s.matches("[a-zA-Z]+")){
-            esNombre = false;
+            isName = false;
         }
-        return esNombre;
+        return isName;
     }
 }
