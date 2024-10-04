@@ -156,7 +156,7 @@ public class Logic {
         }else{
             Iterator<Match> iter = matchList.iterator();
             while(iter.hasNext()){
-                System.out.println(iter.next().toString());
+               cli.print(iter.next().toString()+"\n");
             }
         }
     }
