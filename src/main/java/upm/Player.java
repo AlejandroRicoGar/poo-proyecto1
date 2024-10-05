@@ -22,38 +22,28 @@ public class Player {
         this.score = score;
     }
 
-    /**
-     * @return the name of the player
-     */
+
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name that is going to be changed
-     */
+
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the score of the player
-     */
+
     public Double getScore() {
         return score;
     }
 
-    /**
-     * @param score the score that is going to be changed
-     */
+
     public void setScore(Double score) {
         this.score = score;
     }
 
 
-    /**
-     * @return a way to recognise the player
-     */
+    @Override
     public String toString(){
         return name+" ("+score+")";
     }
