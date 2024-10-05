@@ -4,9 +4,9 @@ public class Player {
     private Double score;
 
     /**
-     * Constructs a new Player object with the given name and initializes the score to 0.0.
+     * Crea un nuevo objeto Player con el nombre dado e inicializa la puntuacion por defecto a 0.0
      *
-     * @param name the name of the player
+     * @param name el nombre del jugador
      */
     public Player(String name){
         this.name = name;
@@ -14,10 +14,10 @@ public class Player {
     }
 
     /**
-     * Constructs a new Player object with the given name and score.
+     * Crea un nuevo objeto Player con el nombre y la puntuacion dada
      *
-     * @param name  the name of the player
-     * @param score the initial score of the player
+     * @param name  el nombre del jugador
+     * @param score la puntuacion inicial del jugador
      */
     public Player(String name,Double score){
         this.name = name;
