@@ -4,8 +4,9 @@ public class Player {
     private Double score;
 
     /**
-     * @param name Name of the player is initialized
-     *             Initialices a player with the name and sets its score to 0
+     * Constructs a new Player object with the given name and initializes the score to 0.0.
+     *
+     * @param name the name of the player
      */
     public Player(String name){
         this.name = name;
@@ -13,9 +14,10 @@ public class Player {
     }
 
     /**
-     * @param name Name of the player is initialized
-     * @param score Score of the plauer is initialized
-     *              Other option of constructor with score in it
+     * Constructs a new Player object with the given name and score.
+     *
+     * @param name  the name of the player
+     * @param score the initial score of the player
      */
     public Player(String name,Double score){
         this.name = name;
