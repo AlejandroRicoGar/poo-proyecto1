@@ -81,7 +81,7 @@ public class Logic {
         if(exists(name)){
             Player player = searchPlayer(name);
             if(player != null) {
-                if(playerList.remove(player)) {
+                if(playerList.remove(player) && removeMatch(player)) {
                     cli.print("Jugador " + name + " eliminado correctamente\n");
                 }else{
                     cli.print("Hubo un problema eliminando el jugador\n");
@@ -95,6 +95,21 @@ public class Logic {
         }
     }
 
+    /**
+     * Elimina los emparejamientos que contienen al jugador
+     * @param player Jugador que se va a eliminar de los emparejamientos
+     * @return true si el emparejamiento ha sido eliminado correctamente, false de lo contrario
+     */
+    public boolean removeMatch(Player player) {
+        for (Match match : matchList) {
+            if (match.getPlayer1().equals(player) || match.getPlayer2().equals(player)) {
+                matchList.remove(match);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * Metodo que muestra todos los jugadores
      */
