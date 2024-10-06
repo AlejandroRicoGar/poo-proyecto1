@@ -242,8 +242,7 @@ public class Logic {
     }
 
     private void menu(){
-        boolean resume = true;
-        while(resume) {
+        do {
             cli.print(""" 
                     
                     1> create [player]
@@ -272,7 +271,7 @@ public class Logic {
                         cli.print("Introduce el nombre del jugador: ");
                         String name = cli.scanner().nextLine();
                         cli.print("Introduce la puntuacion: ");
-                        setScore(name, cli.scanner().nextInt());
+                        setScore(name, cli.scanner().nextDouble());
                     }
                     case 6 -> showMatchups();
                     case 7 -> clearMatchups();
@@ -283,15 +282,13 @@ public class Logic {
                         matchPlayers(name1, cli.scanner().nextLine());
                     }
                     case 9 -> randomMatchup();
-                    case 10 -> resume = false;
+                    case 10 -> System.exit(0);
                     default -> cli.print("El indice introducido no es correcto\n");
                 }
             }catch (InputMismatchException e){
                 cli.print("Dato introducido no reconocido \n");
                 menu();
             }
-        }
-
+        } while (true);
     }
-
 }
