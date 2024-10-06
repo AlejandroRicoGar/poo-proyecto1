@@ -101,13 +101,16 @@ public class Logic {
      * @param player Jugador que se va a eliminar de los emparejamientos
      */
     public void removeMatch(Player player) {
-        for (Match match : matchList) {
+        Iterator<Match> iter = matchList.iterator();
+        while (iter.hasNext()) {
+            Match match = iter.next();
             if (match.getPlayer1().equals(player) || match.getPlayer2().equals(player)) {
-                matchList.remove(match);
+                iter.remove();
             }
         }
     }
-    
+
+
     /**
      * Metodo que muestra todos los jugadores
      */
@@ -191,11 +194,10 @@ public class Logic {
         if(exists(name1)&&exists(name2)){
             Match match=new Match(searchPlayer(name1),searchPlayer(name2));
             matchList.add(match);
-            cli.print("Jugadores "+name1+" y "+name2+" correctamenete emparejados\n");
+            cli.print("Jugadores "+name1+" y "+name2+" correctamente emparejados\n");
         }else{
             cli.print("No se ha podido realizar el emparejamiento\n");
         }
-
     }
 
     /**
@@ -213,7 +215,6 @@ public class Logic {
                 matchPlayers(playerCopy.get(i).getName(), playerCopy.get(i + 1).getName());
             }
         }
-
     }
 
     private boolean exists(String name){
