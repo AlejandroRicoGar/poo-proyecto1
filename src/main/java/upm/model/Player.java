@@ -1,4 +1,4 @@
-package upm;
+package upm.model;
 public class Player {
     private String name;
     private Double score;

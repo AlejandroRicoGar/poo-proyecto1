@@ -1,20 +1,23 @@
 package upm;
 
-import java.sql.SQLOutput;
+
+import upm.model.Match;
+import upm.model.Player;
+
 import java.util.*;
 
 public class Logic {
     private ArrayList<Match> matchList;
     private ArrayList<Player> playerList;
     private final CLI cli;
-    private static final String CREATE_USER = "create";
-    private static final String REMOVE_USER = "remove";
+    private static final String CREATE_USER = "player-create";
+    private static final String REMOVE_USER = "player-delete";
     private static final String SET_SCORE_USER = "score";
     private static final String SHOW_USERS = "show";
     private static final String RANK_USERS = "rank";
     private static final String MATCHMAKE_USERS = "matchmake";
-    private static final String SHOW_MATCHMAKE_USERS = "show_matchmake";
-    private static final String MATCHMAKE_USERS_RANDOMLY = "random_matchmake";
+    private static final String SHOW_MATCHMAKE_USERS = "show-matchmake";
+    private static final String MATCHMAKE_USERS_RANDOMLY = "random-matchmake";
     private static final String CLEAR_MATCHMAKE = "clear_matchmake";
 
     private static final String COMMAND_ERROR = "command arguments incorrect";

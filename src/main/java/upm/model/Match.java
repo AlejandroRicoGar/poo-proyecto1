@@ -1,4 +1,4 @@
-package upm;
+package upm.model;
 
 public class Match {
     private Player player1;
