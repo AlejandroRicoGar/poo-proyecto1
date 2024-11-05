@@ -47,7 +47,7 @@ public class App {
 
         commandsPublic.add(new LogIn(publicController));
         commandsPublic.add(new Logout(publicController));
-        commandsPublic.add(new TournamentList(tournament));
+        commandsPublic.add(new TournamentList(tournament,publicController));
 
 
         commandsPlayer.add(new TournamentAdd(tournament));
@@ -75,7 +75,7 @@ public class App {
             commands.add(command);
         }
 
-        Init i = new Init(publicController);
+        Init i = new Init(publicController,tournament);
         i.start();
     }
 
@@ -120,8 +120,8 @@ public class App {
                 String[] args = command.split(" ");
                 String input = "";
                 for (Command c:Permitedcommands) {
-                    input = c.apply(args);
-                    if (input!=null) {
+                    if(c.getCommand().equals(args[0])){
+                        input = c.apply(args);
                         output.append(input);
                     }
                 }

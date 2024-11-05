@@ -43,6 +43,17 @@ public class PublicController {
         }
         return output;
     }
+    public String logout() {
+        String output = "";
+        if(isAdmin || isPlayer){
+            isAdmin = false;
+            isPlayer = false;
+            output = "Logged out";
+        }else{
+            output = "The user has not been logged in";
+        }
+        return output;
+    }
 
     public void signUpUser(User user) {
         users.add(user);

@@ -11,17 +11,19 @@ public class Logout implements Command{
 
 
     @Override
-    public String apply(String[] stringsep) {
-        return "";
+    public String apply(String[] params) {
+        String output = "";
+        output = controller.logout();
+        return output;
     }
 
     @Override
     public String toString() {
-        return "";
+        return "> logout";
     }
 
     @Override
     public String getCommand() {
-        return "";
+        return "logout";
     }
 }

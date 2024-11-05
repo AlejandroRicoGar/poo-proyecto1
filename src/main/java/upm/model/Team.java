@@ -12,11 +12,23 @@ public class Team {
         this.name = name;
         this.members = new ArrayList<>();
     }
+    public String getName() {
+        return name;
+    }
 
     public void addMember(Player player) {
         members.add(player);
     }
-    public Double getCategory(String categoria) {
-        return 0.0;
+    public Double getCategory(Categorys categoria) {
+        System.out.println(name);
+        Double total = 0.0;
+        for(Player member : members) {
+            total += member.getCategory(categoria);
+        }
+        System.out.println(total);
+        System.out.println(members.size());
+        Double resul = total/members.size();
+        System.out.println(resul);
+        return resul;
     }
 }

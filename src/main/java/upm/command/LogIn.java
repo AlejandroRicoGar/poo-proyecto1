@@ -14,13 +14,17 @@ public class LogIn implements Command{
     @Override
     public String apply(String[] params) {
         String output = "";
-        if(params.length == 2 ){
-            String[] args = params[1].split(";");
-            if(args.length == 2) {
-                output = controller.login(args);
+        if(!controller.isAdmin() && !controller.isPlayer()) {
+            if (params.length == 2) {
+                String[] args = params[1].split(";");
+                if (args.length == 2) {
+                    output = controller.login(args);
+                }
+            } else {
+                output = "Incorrect number of arguments";
             }
         }else{
-            output = "Incorrect number of arguments";
+            output = "You are already logged in, if you wish to use another account logout and login again";
         }
         return output;
     }

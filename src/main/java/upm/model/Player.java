@@ -9,6 +9,7 @@ public class Player extends User{
     private String ID;
     private ArrayList<Category> categories;
     private ArrayList<Tournament> tournaments;
+    private Admin creator;
 
 
     /**
@@ -16,11 +17,12 @@ public class Player extends User{
      *
      * @param name el nombre del jugador
      */
-    public Player(String name, String surname, String ID, String password, String email) {
+    public Player(String name, String surname, String ID, String password, String email,Admin creator) {
         super(password,email,Users.PLAYER);
         this.name = name;
         this.surname = surname;
         this.ID = ID;
+        this.creator = creator;
 
         Category points = new Category(Categorys.SCORED_POINTS,0.0);
         Category matchWon = new Category(Categorys.MATCH_WON,0.0);
@@ -47,10 +49,32 @@ public class Player extends User{
     public void setName(String name) {
         this.name = name;
     }
+    public Double getCategory(Categorys C){
+        Double resul = 0.0;
+        for(Category c : categories){
+            if(c.getType().equals(C)){
+                resul =  c.getValue();
+            }
+        }
+
+        return resul;
+    }
+    public void setCategory(Categorys C, Double value){
+        for(Category c : categories){
+            if(c.getType().equals(C)){
+                c.setValue(value);
+            }
+
+        }
+    }
 
     public void addTournament(Tournament tournament) {
         tournaments.add(tournament);
     }
+    public void removeTournament(Tournament tournament) {
+        tournaments.remove(tournament);
+    }
+
     @Override
     public String toString() {
         return "Player{" +
