@@ -1,10 +1,10 @@
 package upm.command;
 
-import upm.controller.AdminController;
+import upm.controller.TournamentController;
 
 public class TournamentMatchMaking implements Command {
-    private AdminController admin;
-    public TournamentMatchMaking(AdminController admin) {
+    private TournamentController admin;
+    public TournamentMatchMaking(TournamentController admin) {
         this.admin = admin;
     }
     @Override

@@ -1,6 +1,6 @@
 package upm.model;
 
-import upm.model.category.Category;
+import upm.model.category.Categoria;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Team {
     public void addMember(Player player) {
         members.add(player);
     }
-    public Double getCategory(Category category) {
+    public Double getCategory(String categoria) {
         return 0.0;
     }
 }

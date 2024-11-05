@@ -1,6 +1,6 @@
 package upm.model;
 
-import upm.model.category.Category;
+import upm.model.category.Categoria;
 
 public class Tournament {
     private String name;
@@ -8,10 +8,10 @@ public class Tournament {
     private Double endDate;
     private String league;
     private String sport;
-    private Category category;
+    private Categoria categoria;
     private String type;
 
-    public Tournament(String name, Double startDate, Double endDate, String league, String sport, Category category) {
+    public Tournament(String name, Double startDate, Double endDate, String league, String sport, Categoria categoria) {
 
     }
 

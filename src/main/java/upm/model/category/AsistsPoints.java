@@ -1,7 +1,7 @@
 package upm.model.category;
 
 
-public class AsistsPoints implements Category{
+public class AsistsPoints implements Categoria {
     private double value;
     private String name;
 

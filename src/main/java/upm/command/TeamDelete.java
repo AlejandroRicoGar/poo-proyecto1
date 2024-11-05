@@ -1,12 +1,11 @@
 package upm.command;
 
-import upm.controller.AdminController;
-import upm.model.Admin;
+import upm.controller.TeamController;
 
 public class TeamDelete implements Command{
-    private AdminController admin;
+    private TeamController admin;
 
-    public TeamDelete(AdminController admin) {
+    public TeamDelete(TeamController admin) {
         this.admin = admin;
     }
     @Override

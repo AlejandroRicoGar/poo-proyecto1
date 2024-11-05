@@ -1,6 +1,6 @@
 package upm.model.category;
 
-public interface Category {
+public interface Categoria {
 
     public abstract Double getValue();
 

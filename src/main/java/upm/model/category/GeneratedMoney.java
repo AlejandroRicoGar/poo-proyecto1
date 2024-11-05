@@ -1,6 +1,6 @@
 package upm.model.category;
 
-public class GeneratedMoney implements Category{
+public class GeneratedMoney implements Categoria {
 
     private double value;
 

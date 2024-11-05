@@ -1,8 +1,11 @@
 package upm;
 
 import upm.command.*;
+import upm.controller.TeamController;
+import upm.controller.TournamentController;
+import upm.model.Team;
+import upm.model.Tournament;
 import upm.view.CLI;
-import upm.controller.AdminController;
 import  upm.controller.PlayerController;
 import  upm.controller.PublicController;
 
@@ -12,7 +15,8 @@ import java.util.List;
 
 public class App {
 
-    private AdminController admin;
+    private TeamController team;
+    private TournamentController tournament;
     private PlayerController player;
     private PublicController publicController;
     private CLI cli;
@@ -30,9 +34,11 @@ public class App {
 
     public App(){
         cli = new CLI();
-        admin = new AdminController(false);
-        player = new PlayerController(false);
-        publicController = new PublicController(player,admin);
+        player = new PlayerController();
+        publicController = new PublicController();
+        tournament = new TournamentController();
+        team = new TeamController();
+
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
         commandsPlayer = new LinkedList<>();
@@ -41,23 +47,23 @@ public class App {
 
         commandsPublic.add(new LogIn(publicController));
         commandsPublic.add(new Logout(publicController));
-        commandsPublic.add(new TournamentList(publicController));
+        commandsPublic.add(new TournamentList(tournament));
 
 
-        commandsPlayer.add(new TournamentAdd(player));
-        commandsPlayer.add(new TournamentRemove(player));
+        commandsPlayer.add(new TournamentAdd(tournament));
+        commandsPlayer.add(new TournamentRemove(tournament));
         commandsPlayer.add(new StaticsShow(player));
 
 
-        commandsAdmin.add(new PlayerCreate(admin));
-        commandsAdmin.add(new TeamCreate(admin));
-        commandsAdmin.add(new PlayerDelete(admin));
-        commandsAdmin.add(new TeamDelete(admin));
-        commandsAdmin.add(new TeamAdd(admin));
-        commandsAdmin.add(new TeamRemove(admin));
-        commandsAdmin.add(new TournamentCreate(admin));
-        commandsAdmin.add(new TournamentDelete(admin));
-        commandsAdmin.add(new TournamentDelete(admin));
+        commandsAdmin.add(new PlayerCreate(player));
+        commandsAdmin.add(new TeamCreate(team));
+        commandsAdmin.add(new PlayerDelete(player));
+        commandsAdmin.add(new TeamDelete(team));
+        commandsAdmin.add(new TeamAdd(team));
+        commandsAdmin.add(new TeamRemove(team));
+        commandsAdmin.add(new TournamentCreate(tournament));
+        commandsAdmin.add(new TournamentDelete(tournament));
+        commandsAdmin.add(new TournamentMatchMaking(tournament));
 
         for (Command command : commandsPublic) {
             commands.add(command);
@@ -81,7 +87,7 @@ public class App {
             List<String> commandsList=new LinkedList<>();
             List<Command> Permitedcommands=new LinkedList<>();
 
-            if(admin.isLoggedin()){
+            if(publicController.isAdmin()){
                 for (Command command : commandsAdmin) {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
@@ -90,7 +96,7 @@ public class App {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
                 }
-            } else if (player.isLogged()) {
+            } else if (publicController.isPlayer()) {
                 for (Command command : commandsPlayer) {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);

@@ -1,10 +1,10 @@
 package upm.command;
 
-import upm.controller.AdminController;
+import upm.controller.TeamController;
 
 public class TeamRemove implements Command{
-    private AdminController admin;
-    public TeamRemove(AdminController admin) {
+    private TeamController admin;
+    public TeamRemove(TeamController admin) {
         this.admin = admin;
     }
     @Override

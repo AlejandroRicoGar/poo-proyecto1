@@ -1,6 +1,6 @@
 package upm.model.category;
 
-public class ScoredPoints implements Category{
+public class ScoredPoints implements Categoria {
     private double value;
     private String name;
 

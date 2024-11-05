@@ -1,10 +1,10 @@
 package upm.command;
 
-import upm.controller.AdminController;
+import upm.controller.TeamController;
 
 public class TeamAdd implements Command{
-    private AdminController admin;
-    public TeamAdd(AdminController admin) {
+    private TeamController admin;
+    public TeamAdd(TeamController admin) {
         this.admin = admin;
     }
     @Override

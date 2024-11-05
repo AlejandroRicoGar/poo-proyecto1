@@ -1,12 +1,11 @@
 package upm.command;
 
-import upm.controller.AdminController;
-import upm.model.Player;
+import upm.controller.PlayerController;
 
 public class PlayerDelete implements Command{
-    private AdminController admin;
+    private PlayerController admin;
 
-    public PlayerDelete(AdminController admin) {
+    public PlayerDelete(PlayerController admin) {
         this.admin = admin;
     }
 

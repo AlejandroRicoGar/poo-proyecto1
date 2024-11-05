@@ -1,6 +1,6 @@
 package upm.model.category;
 
-public class MatchWon implements Category {
+public class MatchWon implements Categoria {
     private double value;
 
     private String name;

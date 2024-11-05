@@ -1,13 +1,12 @@
 package upm.command;
 
-import upm.controller.AdminController;
+
 import upm.controller.PlayerController;
 
-
 public class PlayerCreate implements Command{
-    private AdminController controller;
+    private PlayerController controller;
 
-    public PlayerCreate(AdminController controller) {
+    public PlayerCreate(PlayerController controller) {
         this.controller = controller;
     }
 

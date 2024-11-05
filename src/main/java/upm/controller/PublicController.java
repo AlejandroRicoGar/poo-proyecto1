@@ -8,13 +8,20 @@ import java.util.Iterator;
 
 public class PublicController {
     private ArrayList<User> users;
-    private PlayerController playerController;
-    private AdminController adminController;
+    private boolean isAdmin;
+    private boolean isPlayer;
 
-    public PublicController(PlayerController playerController, AdminController adminController) {
+    public PublicController() {
         users = new ArrayList<>();
-        this.adminController = adminController;
-        this.playerController = playerController;
+        isAdmin = false;
+        isPlayer = false;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
     }
 
     public String login(String[] params) {
@@ -23,9 +30,9 @@ public class PublicController {
         if(user != null) {
             if(user.getPassword().equals(params[1])) {
                if(user.getUser() == User.Users.PLAYER){
-                  playerController.setLogged(true);
+                  isPlayer = true;
                }else{
-                   adminController.setLoggedin(true);
+                   isAdmin = true;
                }
                output = "User "+user.getMail()+" Logged in";
             }else{
@@ -53,5 +60,6 @@ public class PublicController {
         }
         return user;
     }
+
 
 }

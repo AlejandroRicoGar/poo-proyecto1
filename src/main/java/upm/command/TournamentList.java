@@ -1,10 +1,10 @@
 package upm.command;
 
-import upm.controller.PublicController;
+import upm.controller.TournamentController;
 
 public class TournamentList implements Command{
-    private PublicController controller;
-    public TournamentList(PublicController controller) {
+    private TournamentController controller;
+    public TournamentList(TournamentController controller) {
         this.controller = controller;
     }
     @Override

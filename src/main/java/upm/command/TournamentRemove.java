@@ -1,11 +1,11 @@
 package upm.command;
 
-import upm.controller.PlayerController;
+import upm.controller.TournamentController;
 import upm.model.Player;
 
 public class TournamentRemove implements Command{
-    private PlayerController pc;
-    public TournamentRemove(PlayerController pc) {
+    private TournamentController pc;
+    public TournamentRemove(TournamentController pc) {
         this.pc = pc;
     }
     @Override

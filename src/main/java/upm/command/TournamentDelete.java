@@ -1,12 +1,10 @@
 package upm.command;
 
-import upm.controller.AdminController;
-import upm.model.Admin;
-import upm.model.Tournament;
+import upm.controller.TournamentController;
 
 public class TournamentDelete implements Command {
-    private AdminController admin;
-    public TournamentDelete(AdminController admin) {
+    private TournamentController admin;
+    public TournamentDelete(TournamentController admin) {
         this.admin = admin;
     }
     @Override
