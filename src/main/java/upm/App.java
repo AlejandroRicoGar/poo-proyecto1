@@ -75,7 +75,7 @@ public class App {
             commands.add(command);
         }
 
-        Init i = new Init(publicController,admin,player);
+        Init i = new Init(publicController);
         i.start();
     }
 

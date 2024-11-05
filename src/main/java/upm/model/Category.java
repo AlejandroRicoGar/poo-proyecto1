@@ -1,20 +1,16 @@
 package upm.model;
 
 public class Category {
-    private String nombre;
+    private Categorys type;
     private double value;
 
-    public Category(String nombre, double value) {
-        this.nombre = nombre;
+    public Category(Categorys nombre, double value) {
+        this.type = nombre;
         this.value = value;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getType() {
+        return type.toString();
     }
 
     public double getValue() {

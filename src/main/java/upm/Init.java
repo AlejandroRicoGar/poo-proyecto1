@@ -8,14 +8,9 @@ import upm.model.User;
 
 public class Init {
     private PublicController publicController;
-    private AdminController adminController;
-    private PlayerController playerController;
 
-
-    public Init(PublicController publicController, AdminController adminController, PlayerController playerController) {
+    public Init(PublicController publicController) {
         this.publicController = publicController;
-        this.adminController = adminController;
-        this.playerController = playerController;
     }
 
     public void start(){

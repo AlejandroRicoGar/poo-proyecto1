@@ -1,9 +1,14 @@
 package upm.model;
 
+import javax.smartcardio.Card;
+import java.util.ArrayList;
+
 public class Player extends User{
     private String name;
     private String surname;
     private String ID;
+    private ArrayList<Category> categories;
+    private ArrayList<Tournament> tournaments;
 
 
     /**
@@ -16,6 +21,22 @@ public class Player extends User{
         this.name = name;
         this.surname = surname;
         this.ID = ID;
+
+        Category points = new Category(Categorys.SCORED_POINTS,0.0);
+        Category matchWon = new Category(Categorys.MATCH_WON,0.0);
+        Category AsistsPoints = new Category(Categorys.ASISTS_POINTS,0.0);
+        Category pastTournaments = new Category(Categorys.PAST_TOURNAMENTS,0.0);
+        Category generatedMoney = new Category(Categorys.GENERATED_MONEY,0.0);
+
+        categories = new ArrayList<Category>();
+
+        categories.add(points);
+        categories.add(matchWon);
+        categories.add(AsistsPoints);
+        categories.add(pastTournaments);
+        categories.add(generatedMoney);
+
+        tournaments = new ArrayList<Tournament>();
     }
 
     public String getName() {
@@ -27,7 +48,9 @@ public class Player extends User{
         this.name = name;
     }
 
-
+    public void addTournament(Tournament tournament) {
+        tournaments.add(tournament);
+    }
     @Override
     public String toString() {
         return "Player{" +
