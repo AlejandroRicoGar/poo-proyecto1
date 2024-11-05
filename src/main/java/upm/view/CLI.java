@@ -1,17 +1,28 @@
-package upm;
+package upm.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CLI {
+
+    private Scanner sc;
+
+    @Deprecated
     /**
+     * TODO: METODO QUE NO SE VA A VOLVER A UTILIZAR
      * Crea un nuevo objeto Scanner para recibir inputs
      *
      * @return  un nuevo objeto Scanner
      */
+
     public Scanner scanner() {
         return new Scanner(System.in);
     }
 
+
+     public CLI(){
+         sc = new Scanner(System.in);
+     }
     /**
      * Imprime el string dado.
      *
@@ -23,6 +34,7 @@ public class CLI {
 
 
     /**
+     * TODO: HAY QUE CAMBIARLO AL CONTROLADOR DE USUARIO O DE ADMIN CUANDO LLEGUEMOS
      * Verifica si una cadena es un nombre válido.
      * Un nombre válido es una cadena que solo contiene letras.
      *
@@ -40,4 +52,14 @@ public class CLI {
         }
         return isName;
     }
+    public String getCommand(List<String> ListCommand) {
+        print("Available commands: \n");
+        for (String comandb: ListCommand)
+            print(comandb.toString());
+        String input = sc.nextLine();
+        return input;
+    }
+
+
+
 }

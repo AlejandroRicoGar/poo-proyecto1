@@ -1,4 +1,4 @@
 package upm.model.category;
 
-public class Category {
+public interface Category {
 }

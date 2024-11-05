@@ -1,6 +1,6 @@
 package upm.view;
 
-public enum Usuarios {
+public enum Users {
     ADMIN,
     PLAYER,
     PUBLIC

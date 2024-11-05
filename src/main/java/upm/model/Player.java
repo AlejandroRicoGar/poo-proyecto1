@@ -1,16 +1,19 @@
 package upm.model;
-public class Player {
+public class Player extends User{
     private String name;
-    private Double score;
+    private String surname;
+    private String ID;
+
 
     /**
      * Crea un nuevo objeto Player con el nombre dado e inicializa la puntuacion por defecto a 0.0
      *
      * @param name el nombre del jugador
      */
-    public Player(String name){
+    public Player(String name,String surname,String ID) {
         this.name = name;
-        this.score = 0.0;
+        this.surname = surname;
+        this.ID = ID;
     }
 
     /**
@@ -32,16 +35,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-
-    public Double getScore() {
-        return score;
-    }
-
-
-    public void setScore(Double score) {
-        this.score = score;
     }
 
 

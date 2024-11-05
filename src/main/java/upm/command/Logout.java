@@ -1,4 +1,27 @@
 package upm.command;
 
-public class Logout {
+import upm.controller.PublicController;
+
+public class Logout extends Command{
+    private PublicController controller;
+
+    public Logout(PublicController controller) {
+        this.controller = controller;
+    }
+
+
+    @Override
+    public String apply(String[] stringsep) {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "";
+    }
+
+    @Override
+    public String getCommand() {
+        return "";
+    }
 }

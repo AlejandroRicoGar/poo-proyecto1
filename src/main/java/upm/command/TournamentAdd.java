@@ -1,4 +1,24 @@
 package upm.command;
 
-public class TournametAdd extends Command{
+import upm.controller.PlayerController;
+
+public class TournamentAdd extends Command{
+    private PlayerController playerController;
+    public TournamentAdd(PlayerController playerController) {
+        this.playerController = playerController;
+    }
+    @Override
+    public String apply(String[] stringsep) {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "";
+    }
+
+    @Override
+    public String getCommand() {
+        return "";
+    }
 }

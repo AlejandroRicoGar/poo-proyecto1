@@ -1,13 +1,14 @@
 package upm;
 
 
-import upm.model.Match;
+import upm.model.Matchmaking;
 import upm.model.Player;
+import upm.view.CLI;
 
 import java.util.*;
 
 public class Logic {
-    private ArrayList<Match> matchList;
+    private ArrayList<Matchmaking> matchmakingList;
     private ArrayList<Player> playerList;
     private final CLI cli;
     private static final String CREATE_USER = "player-create";
@@ -35,7 +36,7 @@ public class Logic {
      * Para finalizar comienza el menu de ejecuacion
      */
     public void start() {
-        this.matchList = new ArrayList<>();
+        this.matchmakingList = new ArrayList<>();
         this.playerList = new ArrayList<>();
 
         Player Luisa = new Player("Luisa", 4.5);
@@ -114,10 +115,10 @@ public class Logic {
      * @param player Jugador que se va a eliminar de los emparejamientos
      */
     public void removeMatch(Player player) {
-        Iterator<Match> iter = matchList.iterator();
+        Iterator<Matchmaking> iter = matchmakingList.iterator();
         while (iter.hasNext()) {
-            Match match = iter.next();
-            if (match.getPlayer1().equals(player) || match.getPlayer2().equals(player)) {
+            Matchmaking matchmaking = iter.next();
+            if (matchmaking.getPlayer1().equals(player) || matchmaking.getPlayer2().equals(player)) {
                 iter.remove();
             }
         }
@@ -178,10 +179,10 @@ public class Logic {
      */
     public String showMatchups() {
         String output = " ";
-        if (matchList.isEmpty()) {
+        if (matchmakingList.isEmpty()) {
             output = ("No hay emparejamientos\n");
         } else {
-            Iterator<Match> iter = matchList.iterator();
+            Iterator<Matchmaking> iter = matchmakingList.iterator();
             while (iter.hasNext()) {
                 cli.print(iter.next().toString() + "\n");
             }
@@ -193,7 +194,7 @@ public class Logic {
      * Elimina los emparejamientos existentes de matchList
      */
     public String clearMatchups() {
-        matchList.clear();
+        matchmakingList.clear();
         return ("Eliminados todos los emparejamientos correctamente\n");
     }
 
@@ -206,8 +207,8 @@ public class Logic {
             String name1 = args[0];
             String name2 = args[1];
             if (exists(name1) && exists(name2)) {
-                Match match = new Match(searchPlayer(name1), searchPlayer(name2));
-                matchList.add(match);
+                Matchmaking matchmaking = new Matchmaking(searchPlayer(name1), searchPlayer(name2));
+                matchmakingList.add(matchmaking);
                 output = ("Jugadores " + name1 + " y " + name2 + " correctamente emparejados\n");
             } else {
                 output = ("No se ha podido realizar el emparejamiento\n");

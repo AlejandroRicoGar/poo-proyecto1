@@ -1,4 +1,4 @@
-package upm.App;
+package upm;
 
 import upm.controller.AdminController;
 import upm.controller.PlayerController;
@@ -21,7 +21,8 @@ public class Init {
     public void start(){
         User Alejandro = new User("UPM","alejandro.ricog@alumnos.es", Users.ADMIN);
         publicController.signUpUser(Alejandro);
+        User Admin = new User("A","B", Users.ADMIN);
+        publicController.signUpUser(Admin);
     }
-
 
 }

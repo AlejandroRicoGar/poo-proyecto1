@@ -1,4 +1,4 @@
 package upm.model;
 
-public class tournament {
+public class Tournament {
 }

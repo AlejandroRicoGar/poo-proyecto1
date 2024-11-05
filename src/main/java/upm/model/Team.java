@@ -1,4 +1,4 @@
 package upm.model;
 
-public class team {
+public class Team {
 }

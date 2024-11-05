@@ -1,4 +1,4 @@
-package upm.App;
+package upm;
 
 import upm.command.*;
 import upm.view.CLI;
@@ -21,7 +21,7 @@ public class App {
     private List<Command> commandsAdmin;
     private List<Command> commandsPlayer;
     private List<Command> commands;
-    private Users users;
+
 
 
     public static void main(String[] args) {
@@ -31,10 +31,9 @@ public class App {
 
     public App(){
         cli = new CLI();
-        admin = new AdminController();
-        player = new PlayerController();
-        publicController = new PublicController();
-        users = Users.PUBLIC;
+        admin = new AdminController(false);
+        player = new PlayerController(false);
+        publicController = new PublicController(player,admin);
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
         commandsPlayer = new LinkedList<>();
@@ -72,29 +71,31 @@ public class App {
         }
 
         Init i = new Init(publicController,admin,player);
+        i.start();
     }
 
-    public void changeStatus(Users usuario){
-        this.users = usuario;
-    }
+    //TODO: SE TENDRA QUE DIVIDIR EN DOS SUBMETODOS PARA REDUCIR COMPLEJIDAD
 
     private void start(){
         boolean finish = false;
-        List<String> commandsList=new LinkedList<>();
-
         while(!finish){
-            if(users.equals(users.ADMIN)){
+            List<String> commandsList=new LinkedList<>();
+            List<Command> Permitedcommands=new LinkedList<>();
+
+            if(admin.isLoggedin()){
                 for (Command command : commandsAdmin) {
                     commandsList.add(command.toString());
+                    Permitedcommands.add(command);
                 }
-            } else if (users.equals(users.PUBLIC)) {
-                for (Command command : commandsPublic) {
-                    commandsList.add(command.toString());
-                }
-
-            }else {
+            } else if (player.isLogged()) {
                 for (Command command : commandsPlayer) {
                     commandsList.add(command.toString());
+                    Permitedcommands.add(command);
+                }
+            }else {
+                for (Command command : commandsPublic) {
+                    commandsList.add(command.toString());
+                    Permitedcommands.add(command);
                 }
             }
 
@@ -102,16 +103,22 @@ public class App {
             if(command.equals("exit")){
                 finish = true;
             }else {
-                String input = cli.getCommand(commandsList);
-                String[] params = input.split(" ");;
-                String output = "";
-                for(Command c : commands){
-                    output = c.apply(params);
+                StringBuffer output=new StringBuffer();
+                String[] args = command.split(" ");
+                String input = "";
+                for (Command c:Permitedcommands) {
+                    input = c.apply(args);
+                    if (input!=null) {
+                        output.append(input);
+                    }
                 }
-                if(output.equals("")){
-                    cli.print("Command not found");
+                if (output.toString().isEmpty()){
+                    cli.print("Command not found \n");
+                }else {
+                    cli.print(output.toString()+"\n");
                 }
             }
+
         }
     }
 }
