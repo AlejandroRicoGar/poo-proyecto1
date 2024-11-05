@@ -35,6 +35,7 @@ public class Logic {
      * Luego inicializa y añade en las Arraylist los ejemplos requeridos
      * Para finalizar comienza el menu de ejecuacion
      */
+    /*
     public void start() {
         this.matchmakingList = new ArrayList<>();
         this.playerList = new ArrayList<>();
@@ -52,13 +53,14 @@ public class Logic {
         playerList.add(Sofia);
         playerList.add(Robert);
 
-        menu();
+
     }
 
     /**
      * Metodo que crea un jugador
      * Comprueba si el nombre existe y es unico y crea el jugador
      */
+    /*
     public String createPlayer(String[] args) {
         String output;
         boolean esNombre = false;
@@ -80,6 +82,9 @@ public class Logic {
         } else output = COMMAND_ERROR;
         return output;
     }
+
+     */
+
 
     /**
      * @param args Nombre del jugador a eliminar
@@ -135,10 +140,12 @@ public class Logic {
         }
     }
 
+
     /**
      * Metodo que asigna una puntuación valida a un jugador,
      * en caso de puntuacion no valida imprime mensaje
      */
+    /*
     public String setScore(String[] args) {
         String output = "";
         if (args.length == 2) {
@@ -161,10 +168,13 @@ public class Logic {
         return output;
     }
 
+     */
+
     /**
      * Metodo que crea un clon de la lista de jugadores, la ordena según puntuación en orden descendiente
      * e imprime el resultado ordenado por pantalla
      */
+    /*
     public void rankPlayers() {
         ArrayList<Player> sortedPlayerList = new ArrayList<>(playerList);
         sortedPlayerList.sort((Player p1, Player p2) -> p2.getScore().compareTo(p1.getScore()));
@@ -172,6 +182,8 @@ public class Logic {
             cli.print(player.toString() + "\n");
         }
     }
+
+     */
 
     /**
      * Imprime por pantalla el listado de enfrentamientos existentes,
@@ -261,7 +273,7 @@ public class Logic {
         }
         return player;
     }
-
+    /*
     private void menu() {
         boolean exit = false;
         while (!exit) {
@@ -326,6 +338,8 @@ public class Logic {
 
         return str.toString();
     }
+
+     */
 }
 
 

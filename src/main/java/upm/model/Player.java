@@ -1,4 +1,7 @@
 package upm.model;
+
+import upm.view.Users;
+
 public class Player extends User{
     private String name;
     private String surname;
@@ -10,23 +13,12 @@ public class Player extends User{
      *
      * @param name el nombre del jugador
      */
-    public Player(String name,String surname,String ID) {
+    public Player(String name, String surname, String ID, String password, String email,Users users) {
+        super(password,email,users);
         this.name = name;
         this.surname = surname;
         this.ID = ID;
     }
-
-    /**
-     * Crea un nuevo objeto Player con el nombre y la puntuacion dada
-     *
-     * @param name  el nombre del jugador
-     * @param score la puntuacion inicial del jugador
-     */
-    public Player(String name,Double score){
-        this.name = name;
-        this.score = score;
-    }
-
 
     public String getName() {
         return name;
@@ -39,9 +31,11 @@ public class Player extends User{
 
 
     @Override
-    public String toString(){
-        return name+" ("+score+")";
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", ID='" + ID + '\'' +
+                '}';
     }
-
-
 }
