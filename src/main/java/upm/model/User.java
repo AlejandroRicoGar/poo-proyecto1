@@ -2,7 +2,7 @@ package upm.model;
 
 import upm.view.Users;
 
-public class User {
+public abstract class User {
     private String mail;
     private String password;
     private Users user;
