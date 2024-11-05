@@ -87,8 +87,16 @@ public class App {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
                 }
+                for(Command command : commandsPublic){
+                    commandsList.add(command.toString());
+                    Permitedcommands.add(command);
+                }
             } else if (player.isLogged()) {
                 for (Command command : commandsPlayer) {
+                    commandsList.add(command.toString());
+                    Permitedcommands.add(command);
+                }
+                for(Command command : commandsPublic){
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
                 }

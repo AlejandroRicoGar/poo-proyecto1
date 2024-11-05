@@ -3,7 +3,7 @@ package upm.command;
 import upm.controller.AdminController;
 import upm.model.Player;
 
-public class PlayerDelete extends Command{
+public class PlayerDelete implements Command{
     private AdminController admin;
 
     public PlayerDelete(AdminController admin) {

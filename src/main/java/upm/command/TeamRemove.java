@@ -2,7 +2,7 @@ package upm.command;
 
 import upm.controller.AdminController;
 
-public class TeamRemove extends Command{
+public class TeamRemove implements Command{
     private AdminController admin;
     public TeamRemove(AdminController admin) {
         this.admin = admin;

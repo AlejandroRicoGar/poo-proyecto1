@@ -3,7 +3,7 @@ package upm.command;
 import upm.controller.AdminController;
 import upm.model.Admin;
 
-public class TeamDelete extends Command{
+public class TeamDelete implements Command{
     private AdminController admin;
 
     public TeamDelete(AdminController admin) {

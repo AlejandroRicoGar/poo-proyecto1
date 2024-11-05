@@ -2,7 +2,7 @@ package upm.command;
 
 import upm.controller.PublicController;
 
-public class TournamentList extends Command{
+public class TournamentList implements Command{
     private PublicController controller;
     public TournamentList(PublicController controller) {
         this.controller = controller;

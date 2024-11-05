@@ -4,7 +4,7 @@ import upm.controller.AdminController;
 import upm.controller.PlayerController;
 
 
-public class PlayerCreate extends Command{
+public class PlayerCreate implements Command{
     private AdminController controller;
 
     public PlayerCreate(AdminController controller) {

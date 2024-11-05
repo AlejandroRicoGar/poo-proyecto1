@@ -3,7 +3,7 @@ package upm.command;
 import upm.controller.PlayerController;
 import upm.model.Player;
 
-public class TournamentRemove extends Command{
+public class TournamentRemove implements Command{
     private PlayerController pc;
     public TournamentRemove(PlayerController pc) {
         this.pc = pc;
