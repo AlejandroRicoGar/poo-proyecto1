@@ -12,7 +12,7 @@ public class MatchWon implements Category {
 
     @Override
     public Double getValue() {
-        return 0.0;
+        return value;
     }
 
     @Override
@@ -22,6 +22,6 @@ public class MatchWon implements Category {
 
     @Override
     public void setValue(Double value) {
-
+        this.value = value;
     }
 }

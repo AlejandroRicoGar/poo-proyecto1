@@ -7,13 +7,13 @@ public class GeneratedMoney implements Category{
     private String name;
 
     public GeneratedMoney(String nombre, Double value) {
-        this.name = name;
+        this.name = nombre;
         this.value = value;
     }
 
     @Override
     public Double getValue() {
-        return 0.0;
+        return value;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class GeneratedMoney implements Category{
 
     @Override
     public void setValue(Double value) {
-
+        this.value = value;
     }
 }
