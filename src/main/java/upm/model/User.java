@@ -1,7 +1,5 @@
 package upm.model;
 
-import upm.view.Users;
-
 public abstract class User {
     private String mail;
     private String password;
@@ -31,5 +29,11 @@ public abstract class User {
                 "mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public enum Users {
+        ADMIN,
+        PLAYER,
+        PUBLIC
     }
 }

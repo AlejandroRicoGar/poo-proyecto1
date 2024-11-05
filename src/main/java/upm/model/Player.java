@@ -1,7 +1,5 @@
 package upm.model;
 
-import upm.view.Users;
-
 public class Player extends User{
     private String name;
     private String surname;
@@ -13,8 +11,8 @@ public class Player extends User{
      *
      * @param name el nombre del jugador
      */
-    public Player(String name, String surname, String ID, String password, String email,Users users) {
-        super(password,email,users);
+    public Player(String name, String surname, String ID, String password, String email) {
+        super(password,email,Users.PLAYER);
         this.name = name;
         this.surname = surname;
         this.ID = ID;

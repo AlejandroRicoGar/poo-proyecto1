@@ -2,7 +2,7 @@ package upm.command;
 
 import upm.controller.PublicController;
 
-public class Logout extends Command{
+public class Logout implements Command{
     private PublicController controller;
 
     public Logout(PublicController controller) {

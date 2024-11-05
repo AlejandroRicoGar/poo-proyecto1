@@ -2,7 +2,7 @@ package upm.command;
 
 import upm.controller.AdminController;
 
-public class TournamentMatchMaking extends Command {
+public class TournamentMatchMaking implements Command {
     private AdminController admin;
     public TournamentMatchMaking(AdminController admin) {
         this.admin = admin;

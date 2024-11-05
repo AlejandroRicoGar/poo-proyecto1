@@ -55,7 +55,7 @@ public class CLI {
     public String getCommand(List<String> ListCommand) {
         print("Available commands: \n");
         for (String comandb: ListCommand)
-            print(comandb.toString());
+            print(comandb.toString()+"\n");
         String input = sc.nextLine();
         return input;
     }

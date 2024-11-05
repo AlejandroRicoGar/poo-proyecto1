@@ -2,7 +2,6 @@ package upm.controller;
 
 
 import upm.model.User;
-import upm.view.Users;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,7 +22,7 @@ public class PublicController {
         User user = searchUser(params[0]);
         if(user != null) {
             if(user.getPassword().equals(params[1])) {
-               if(user.getUser() == Users.PLAYER){
+               if(user.getUser() == User.Users.PLAYER){
                   playerController.setLogged(true);
                }else{
                    adminController.setLoggedin(true);

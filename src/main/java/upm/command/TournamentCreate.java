@@ -4,7 +4,7 @@ import upm.controller.AdminController;
 import upm.model.Admin;
 import upm.model.Tournament;
 
-public class TournamentCreate extends Command{
+public class TournamentCreate implements Command{
     private AdminController admin;
     public TournamentCreate(AdminController admin) {
         this.admin = admin;
