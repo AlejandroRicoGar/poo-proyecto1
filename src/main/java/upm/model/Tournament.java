@@ -136,6 +136,50 @@ public class Tournament {
             return matchmakeTeam(args);
         }
     }
+
+    public String autoMatchmake(){
+        if(type.equals(TournamentTypes.INDIVIDUAL)){
+            return autoMatchmakePlayer();
+        }else{
+            return autoMatchmakeTeam();
+        }
+    }
+
+
+    private String autoMatchmakePlayer(){
+        String output = "";
+        if(players.size()%2==0) {
+            List<Player> playerCopy = new ArrayList<>(players);
+            Collections.shuffle(playerCopy);
+            for (int i = 0; i < players.size(); i += 2) {
+                Player[] players = {playerCopy.get(i), playerCopy.get(i + 1)};
+                Matchmaking m = new Matchmaking(players[0], players[1]);
+                matches.add(m);
+            }
+            output = showMatchmakes();
+        }else{
+            output = "There are not an even number of players in this tournament";
+        }
+        return output;
+    }
+
+    private String autoMatchmakeTeam(){
+        String output = "";
+        if(teams.size()%2==0) {
+            List<Team> teamCopy = new ArrayList<>(teams);
+            Collections.shuffle(teamCopy);
+            for (int i = 0; i < teams.size(); i += 2) {
+                Team[] teams = {teamCopy.get(i), teamCopy.get(i + 1)};
+                Matchmaking m = new Matchmaking(teams[i], teams[i + 1]);
+                matches.add(m);
+            }
+            output = showMatchmakes();
+        }else{
+            output = "There are not an even number of players in this tournament";
+        }
+        return output;
+    }
+
     private String matchmakePlayer(String[] args){
         if(args.length-1 == players.size()){
             for(int i = 1;i<args.length;i+=2){

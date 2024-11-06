@@ -87,6 +87,17 @@ public class TournamentController {
         return output;
     }
 
+    public String autoMatchmaking(String[] args){
+        String output = "";;
+        Tournament tournament = search(args[0]);
+        if(tournament != null){
+            output = tournament.autoMatchmake();
+        }else{
+            output = "The tournament "+args[0]+" doesn't exist";
+        }
+        return output;
+    }
+
     public Tournament search(String name){
         for (Tournament tournament : tournaments) {
             if(tournament.getName().equals(name)){
