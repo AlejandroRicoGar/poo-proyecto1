@@ -26,12 +26,20 @@ public class App {
     private List<Command> commands;
 
 
-
+    /**
+     * Inicia la aplicacion
+     * @param args
+     */
     public static void main(String[] args) {
         App app = new App();
         app.start();
     }
 
+    /**
+     * Iniciliza las controladoras y el CLI, añade los comandos a las listas de los tipos de usuarios de la aplicacion,
+     * para que pueda mostrar los comandos permitidos para cada usuario. Tambien inicializa init introduciendo los datos
+     * de la aplicacion.
+     */
     public App(){
         cli = new CLI();
         player = new PlayerController();
@@ -81,6 +89,17 @@ public class App {
 
     //TODO: SE TENDRA QUE DIVIDIR EN DOS SUBMETODOS PARA REDUCIR COMPLEJIDAD
 
+    /**
+     * Crea dos listas, una de Strings para mostrar los comandos permitidos y otra de comandos para añadir los objetos
+     * comandos.
+     * > Comandos publicos seran permitidos para los casos: Not Logged,Player, Admin
+     * > Comandos player seran permitidos para los casos: PLayer
+     * > Comandos Admin seran permitidos para los casos: Admin
+     *
+     * Posteriormente llama al CLI para obtener el comando que se escribe por pantalla y comprueba comando a comando
+     * permitido (lista PermitedCommands). El output sera lo que va a devolver el comando.
+     *
+     */
     private void start(){
         boolean finish = false;
         while(!finish){

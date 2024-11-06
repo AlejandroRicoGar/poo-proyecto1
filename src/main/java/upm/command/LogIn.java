@@ -11,6 +11,11 @@ public class LogIn implements Command{
         this.controller = controller;
     }
 
+    /**
+     * Metodo que comprueba que los parametros que se pasan es correcto y que el usuario no estan logueado ya
+     * @param params Division por espacios el param[0] es el comando en si y el param[1] son los argumentos
+     * @return
+     */
     @Override
     public String apply(String[] params) {
         String output = "";

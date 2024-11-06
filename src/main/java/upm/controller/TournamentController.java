@@ -5,22 +5,36 @@ import upm.model.Tournament;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class TournamentController {
     private ArrayList<Tournament> tournaments;
+
     public TournamentController() {
         tournaments = new ArrayList<>();
     }
+
+    /**
+     * @param tournament Tournament to be added to the tournaments list
+     */
     public void AddTournament(Tournament tournament) {
         tournaments.add(tournament);
     }
+
+    /**
+     * Deletes the tournament and in the players list
+     * @param tournament Tournament that is going to be deleted
+     */
     public void DeleteTournament(Tournament tournament) {
         ArrayList<Player> jugadores = tournament.getPlayers();
         for(Player jugador : jugadores) {
             jugador.removeTournament(tournament);
         }
     }
+
+    /**
+     * Ranks the players of all tournmanets and deletes the tournaments which endDate is before actualDate
+     * @return String of the name of all tournament and its ranked members
+     */
     public String rankAndPrune(){
         LocalDate date = LocalDate.now();
         StringBuilder output = new StringBuilder();
@@ -34,6 +48,11 @@ public class TournamentController {
         }
         return output.toString();
     }
+
+    /**
+     * Ranks the players of all tournaments
+     * @return String of the name of all tournament and its ranked members
+     */
     public String rank(){
         StringBuilder output = new StringBuilder();
         for (Tournament tournament : tournaments) {
@@ -42,11 +61,16 @@ public class TournamentController {
         }
         return output.toString();
     }
+
+    /**
+     * Shows all tournaments and its members without ranking them
+     * @return String of the name of all tournament and its  members
+     */
     public String show(){
         StringBuilder output = new StringBuilder();
         for (Tournament tournament : tournaments) {
             output.append(tournament.getName()).append("\n");
-            output.append(tournament.showPlayers()).append("\n");
+            output.append(tournament.showMembers()).append("\n");
         }
         return output.toString();
     }

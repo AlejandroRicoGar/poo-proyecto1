@@ -1,12 +1,8 @@
 package upm.model;
 
-import upm.model.category.Categoria;
-
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Tournament {
     private String name;
@@ -19,6 +15,15 @@ public class Tournament {
     private ArrayList<Player> players;
     private ArrayList<Team> teams;
 
+    /**
+     * @param name Name of the tournament
+     * @param startDate Date of the begging of the tournament
+     * @param endDate  Date of the end of the tournament
+     * @param league    League of the tournament
+     * @param sport Sport that is played in the tournament
+     * @param categoria Category that is used to rank in the tournament
+     * @param type Enum that says if its individual or colletive
+     */
     public Tournament(String name, String startDate, String endDate, String league, String sport, Categorys categoria,TournamentTypes type) {
         this.name = name;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -35,6 +40,7 @@ public class Tournament {
             teams = new ArrayList<Team>();
         }
     }
+
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -42,16 +48,33 @@ public class Tournament {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
     public String getName() {
         return name;
     }
+
+    /**
+     * @param player player to be added to the tournament
+     */
     public void addPlayer(Player player) {
-        players.add(player);
+        if(type.equals(TournamentTypes.INDIVIDUAL)){
+            players.add(player);
+        }
     }
+
+    /**
+     * @param team team to be added to the tournament
+     */
     public void addTeam(Team team) {
-        teams.add(team);
+        if(type.equals(TournamentTypes.COLECTIVO)){
+            teams.add(team);
+        }
     }
-    public String showPlayers(){
+
+    /**
+     * @return all the members of a tournament
+     */
+    public String showMembers(){
         StringBuilder builder = new StringBuilder();
         if(TournamentTypes.INDIVIDUAL.equals(type)){
             for(Player p : players){
@@ -64,6 +87,10 @@ public class Tournament {
         }
         return builder.toString();
     }
+
+    /**
+     * @return ranks the members of the tournaments
+     */
     public String rank(){
         String output = "";
         if(type.equals(TournamentTypes.INDIVIDUAL)){

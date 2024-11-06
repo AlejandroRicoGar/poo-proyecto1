@@ -13,9 +13,7 @@ public class Player extends User{
 
 
     /**
-     * Crea un nuevo objeto Player con el nombre dado e inicializa la puntuacion por defecto a 0.0
      *
-     * @param name el nombre del jugador
      */
     public Player(String name, String surname, String ID, String password, String email,Admin creator) {
         super(password,email,Users.PLAYER);
@@ -71,6 +69,7 @@ public class Player extends User{
     public void addTournament(Tournament tournament) {
         tournaments.add(tournament);
     }
+
     public void removeTournament(Tournament tournament) {
         tournaments.remove(tournament);
     }
