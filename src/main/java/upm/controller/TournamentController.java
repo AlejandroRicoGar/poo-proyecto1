@@ -2,8 +2,12 @@ package upm.controller;
 
 import upm.model.*;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,9 +32,44 @@ public class TournamentController {
      */
     public void DeleteTournament(Tournament tournament) {
         ArrayList<Player> jugadores = tournament.getPlayers();
-        for(Player jugador : jugadores) {
-            jugador.removeTournament(tournament);
+        if(jugadores.size() > 0) {
+            for(Player jugador : jugadores) {
+                jugador.removeTournament(tournament);
+            }
         }
+    }
+
+    public String createTournament(String[] args) {
+        String output = "";
+        if(search(args[0])==null){
+            String[] espacios = args[0].split(" ");
+            if(espacios.length==1){
+                LocalDate startDate = null;
+                LocalDate endDate = null;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                try{
+                    startDate = LocalDate.parse(args[1], formatter);
+                    endDate = LocalDate.parse(args[2], formatter);
+                    try{
+                        Categorys cat = Categorys.valueOf(args[5]);
+                        TournamentTypes type = TournamentTypes.valueOf(args[6]);
+                        Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat,type);
+                        tournaments.add(tournament);
+                        output = args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
+                                +args[3]+" is going to be played and is going to be ranked by  "+cat+" and is going to be  "+type;
+                    }catch (IllegalArgumentException e){
+                        output = "The category or the type are not ones of the permmited ";
+                    }
+                }catch (DateTimeParseException e){
+                    output = "The format of the date is not correct it must be DD/MM/YYYY";
+                }
+            }else{
+                output = "The name has blank spaces in it";
+            }
+        }else{
+            output = "The tournament "+args[0]+" already exists";
+        }
+        return output;
     }
 
     /**
@@ -42,6 +81,7 @@ public class TournamentController {
         StringBuilder output = new StringBuilder();
         for (Tournament tournament : tournaments) {
             if(tournament.getEndDate().isBefore(date)){
+                output.append("The tournament "+tournament.getName()+" was finished the day "+tournament.getEndDate().toString()+"and is being deleted");
                 DeleteTournament(tournament);
             }else{
                 output.append(tournament.getName()).append("\n");
@@ -107,6 +147,24 @@ public class TournamentController {
         }
         return null;
     }
+
+    public String matchmakeAux(String[] args,Tournament tournament){
+        tournament.clearMathchups();
+        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
+            return matchmakePlayer(args,tournament);
+        }else{
+            return matchmakeTeam(args,tournament);
+        }
+    }
+
+    public String autoMatchmakeAux(Tournament tournament){
+        tournament.clearMathchups();
+        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
+            return autoMatchmakePlayer(tournament);
+        }else{
+            return autoMatchmakeTeam(tournament);
+        }
+    }
     private String rankAux(Tournament tournament){
         String output = "";
         if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
@@ -135,25 +193,6 @@ public class TournamentController {
             output.append(player.getName() +" "+player.getCategory(tournament.getCategoria())+"\n");
         }
         return output.toString();
-    }
-
-
-    public String matchmakeAux(String[] args,Tournament tournament){
-        tournament.clearMathchups();
-        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
-            return matchmakePlayer(args,tournament);
-        }else{
-            return matchmakeTeam(args,tournament);
-        }
-    }
-
-    public String autoMatchmakeAux(Tournament tournament){
-        tournament.clearMathchups();
-        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
-            return autoMatchmakePlayer(tournament);
-        }else{
-            return autoMatchmakeTeam(tournament);
-        }
     }
 
 
@@ -229,6 +268,10 @@ public class TournamentController {
         }
         return builder.toString();
     }
+
+
+
+
 
 
 }

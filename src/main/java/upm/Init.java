@@ -1,9 +1,11 @@
 package upm;
 
-import upm.controller.PlayerController;
 import upm.controller.PublicController;
 import upm.controller.TournamentController;
 import upm.model.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Init {
     private PublicController publicController;
@@ -51,14 +53,24 @@ public class Init {
 
         //Creacion de dos torneos, uno individual y otro colectivo
 
-        Tournament Individual = new Tournament("Open_de_Cuenca","06/07/2005","24/12/2025","Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.INDIVIDUAL);
+        String fecha1 = "06/07/2005";
+        String fin = "24/12/2025";
+
+        // Definimos el formato de la fecha (día/mes/año)
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Convertimos los strings a objetos LocalDate
+        LocalDate fechaInicio = LocalDate.parse(fecha1, formato);
+        LocalDate fechaFinal = LocalDate.parse(fin, formato);
+
+        Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.INDIVIDUAL);
         tournamentController.AddTournament(Individual);
         Individual.addPlayer(Alfonso);
         Individual.addPlayer(Alejandro);
         Individual.addPlayer(Alfredo);
         Individual.addPlayer(Victor);
 
-        Tournament Colectivo = new Tournament("Copa_del_rey","06/07/2005","24/12/2025","Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.COLECTIVO);
+        Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.COLECTIVE);
         tournamentController.AddTournament(Colectivo);
         Colectivo.addTeam(equipo1);
         Colectivo.addTeam(equipo2);

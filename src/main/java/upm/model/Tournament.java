@@ -1,6 +1,5 @@
 package upm.model;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -26,11 +25,10 @@ public class Tournament {
      * @param categoria Category that is used to rank in the tournament
      * @param type Enum that says if its individual or colletive
      */
-    public Tournament(String name, String startDate, String endDate, String league, String sport, Categorys categoria,TournamentTypes type) {
+    public Tournament(String name, LocalDate startDate, LocalDate endDate, String league, String sport, Categorys categoria,TournamentTypes type) {
         this.name = name;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.startDate = LocalDate.parse(startDate, formatter);
-        this.endDate = LocalDate.parse(endDate, formatter);
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.league = league;
         this.sport = sport;
         this.categoria = categoria;
@@ -86,7 +84,7 @@ public class Tournament {
      * @param team team to be added to the tournament
      */
     public void addTeam(Team team) {
-        if(type.equals(TournamentTypes.COLECTIVO)){
+        if(type.equals(TournamentTypes.COLECTIVE)){
             teams.add(team);
         }
     }
