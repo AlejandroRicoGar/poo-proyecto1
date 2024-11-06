@@ -3,22 +3,29 @@ package upm.command;
 import upm.controller.TournamentController;
 
 public class TournamentDelete implements Command {
-    private TournamentController admin;
-    public TournamentDelete(TournamentController admin) {
-        this.admin = admin;
+    private TournamentController controller;
+    public TournamentDelete(TournamentController controller) {
+        this.controller = controller;
     }
     @Override
     public String apply(String[] stringsep) {
-        return "";
+        String output = "";
+        if(stringsep.length == 2) {
+            output = controller.remove(stringsep[1]);
+        }
+        else{
+            output = "Incorrect number of parameters, only the name of the tournament is required";
+        }
+        return output;
     }
 
     @Override
     public String toString() {
-        return "";
+        return "> tournament-delete tournamentname";
     }
 
     @Override
     public String getCommand() {
-        return "";
+        return "tournament-delete";
     }
 }

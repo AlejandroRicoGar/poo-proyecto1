@@ -1,12 +1,11 @@
 package upm.command;
 
 import upm.controller.TournamentController;
-import upm.model.Player;
 
 public class TournamentRemove implements Command{
-    private TournamentController pc;
-    public TournamentRemove(TournamentController pc) {
-        this.pc = pc;
+    private TournamentController controller;
+    public TournamentRemove(TournamentController controller) {
+        this.controller = controller;
     }
     @Override
     public String apply(String[] stringsep) {
@@ -15,7 +14,7 @@ public class TournamentRemove implements Command{
 
     @Override
     public String toString() {
-        return "tournamentRemove username/teamName;";
+        return "tournament-remove username/teamName";
     }
 
     @Override

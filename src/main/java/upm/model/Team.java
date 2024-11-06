@@ -28,4 +28,14 @@ public class Team {
         Double resul = total/members.size();
         return resul;
     }
+    public void removeTournament(Tournament tournament) {
+        for(Player member : members) {
+            member.removeTournament(tournament);
+        }
+    }
+    public void addTournament(Tournament tournament) {
+        for(Player member : members) {
+            member.addTournament(tournament);
+        }
+    }
 }

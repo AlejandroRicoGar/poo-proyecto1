@@ -36,6 +36,7 @@ public class TournamentController {
             for(Player jugador : jugadores) {
                 jugador.removeTournament(tournament);
             }
+            tournaments.remove(tournament);
         }
     }
 
@@ -68,6 +69,33 @@ public class TournamentController {
             }
         }else{
             output = "The tournament "+args[0]+" already exists";
+        }
+        return output;
+    }
+
+    public String remove(String name){
+        String output = "";
+        Tournament tournament = search(name);
+        if(tournament!=null){
+            output = name+" eliminado correctamente";
+            if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)) {
+                ArrayList<Player> jugadores = tournament.getPlayers();
+                if (jugadores.size() > 0) {
+                    for (Player jugador : jugadores) {
+                        jugador.removeTournament(tournament);
+                    }
+                }
+            }else{
+                ArrayList<Team> teams = tournament.getTeams();
+                if (teams.size() > 0) {
+                    for (Team team : teams) {
+                        team.removeTournament(tournament);
+                    }
+                }
+            }
+            tournaments.remove(tournament);
+        }else{
+            output = "The tournament "+name+" does not exist";
         }
         return output;
     }
