@@ -4,7 +4,7 @@ public interface Command {
 
     /**
      * @param params Division por espacios el param[0] es el comando en si y el param[1] son los argumentos
-     * @return  output del comando
+     * @retrn  output del comando
      */
     public String apply(String[] params);
 
