@@ -139,6 +139,7 @@ public class TournamentController {
 
 
     public String matchmakeAux(String[] args,Tournament tournament){
+        tournament.clearMathchups();
         if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
             return matchmakePlayer(args,tournament);
         }else{
@@ -147,6 +148,7 @@ public class TournamentController {
     }
 
     public String autoMatchmakeAux(Tournament tournament){
+        tournament.clearMathchups();
         if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
             return autoMatchmakePlayer(tournament);
         }else{

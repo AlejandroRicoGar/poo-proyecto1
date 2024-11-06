@@ -137,6 +137,10 @@ public class Tournament {
         return t;
     }
 
+    public void clearMathchups(){
+        matches.clear();
+    }
+
 
 
 }
