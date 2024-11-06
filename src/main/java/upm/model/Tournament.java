@@ -1,5 +1,6 @@
 package upm.model;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -14,6 +15,7 @@ public class Tournament {
     private TournamentTypes type;
     private ArrayList<Player> players;
     private ArrayList<Team> teams;
+    private ArrayList<Matchmaking> matches;
 
     /**
      * @param name Name of the tournament
@@ -39,6 +41,8 @@ public class Tournament {
         }else{
             teams = new ArrayList<Team>();
         }
+
+        matches = new ArrayList<Matchmaking>();
     }
 
     public LocalDate getEndDate() {
@@ -69,6 +73,10 @@ public class Tournament {
         if(type.equals(TournamentTypes.COLECTIVO)){
             teams.add(team);
         }
+    }
+
+    public void addMatch(Matchmaking matchmaking) {
+        matches.add(matchmaking);
     }
 
     /**
@@ -119,6 +127,81 @@ public class Tournament {
             output.append(player.getName() +" "+player.getCategory(categoria)+"\n");
         }
         return output.toString();
+    }
+
+    public String matchmake(String[] args){
+        if(type.equals(TournamentTypes.INDIVIDUAL)){
+            return matchmakePlayer(args);
+        }else{
+            return matchmakeTeam(args);
+        }
+    }
+    private String matchmakePlayer(String[] args){
+        if(args.length-1 == players.size()){
+            for(int i = 1;i<args.length;i+=2){
+
+                Player p1 = searchPlayer(args[i]);
+                Player p2 = searchPlayer(args[i+1]) ;
+                if(p1!=null && p2!= null){
+                    Matchmaking m = new Matchmaking(p1,p2);
+                    matches.add(m);
+                }else{
+                    return "One of the players does not exist or is not in the tournament";
+                }
+            }
+        }
+        return showMatchmakes();
+    }
+    private String matchmakeTeam(String[] args){
+        if(args.length-1 == teams.size()){
+            for(int i = 1;i<args.length;i+=2){
+                Team t1 = searchTeam(args[i]);
+                Team t2 = searchTeam(args[i+1]);
+                if(t1!=null && t2 != null){
+                    Matchmaking m = new Matchmaking(t1,t2);
+                    matches.add(m);
+                }else{
+                    return "One of the teams does not exist or is not in the tournament";
+                }
+            }
+        }
+        return showMatchmakes();
+    }
+
+    private Player searchPlayer(String name) {
+        Iterator<Player> iter = players.iterator();
+        boolean exists = false;
+        Player player = null;
+        while (!exists && iter.hasNext()) {
+            Player aux = iter.next();
+            if (aux.getName().equals(name)) {
+                player = aux;
+                exists = true;
+            }
+        }
+        return player;
+    }
+
+    private Team searchTeam(String name) {
+        Iterator<Team> iter = teams.iterator();
+        boolean exists = false;
+        Team t = null;
+        while (!exists && iter.hasNext()) {
+            Team aux = iter.next();
+            if (aux.getName().equals(name)) {
+                t = aux;
+                exists = true;
+            }
+        }
+        return t;
+    }
+
+    private String showMatchmakes(){
+        StringBuilder builder = new StringBuilder();
+        for(Matchmaking m : matches){
+            builder.append(m.toString()).append("\n");
+        }
+        return builder.toString();
     }
 
 

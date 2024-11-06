@@ -27,6 +27,5 @@ public class Category {
 
     public void setValue(double value) {
         this.value = value;
-        System.out.println(this.value);
     }
 }

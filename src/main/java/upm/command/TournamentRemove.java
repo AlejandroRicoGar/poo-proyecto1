@@ -15,11 +15,11 @@ public class TournamentRemove implements Command{
 
     @Override
     public String toString() {
-        return "";
+        return "tournamentRemove username/teamName;";
     }
 
     @Override
     public String getCommand() {
-        return "";
+        return "tournament-remove";
     }
 }

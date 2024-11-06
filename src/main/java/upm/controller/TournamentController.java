@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class TournamentController {
     private ArrayList<Tournament> tournaments;
+    private PublicController publicController;
 
     public TournamentController() {
         tournaments = new ArrayList<>();
@@ -73,5 +74,25 @@ public class TournamentController {
             output.append(tournament.showMembers()).append("\n");
         }
         return output.toString();
+    }
+
+    public String manualMatchmaking(String[] args){
+        String output = "";
+        Tournament tournament = search(args[0]);
+        if(tournament != null){
+            output = tournament.matchmake(args);
+        }else{
+            output = "The tournament "+args[0]+" doesn't exist";
+        }
+        return output;
+    }
+
+    public Tournament search(String name){
+        for (Tournament tournament : tournaments) {
+            if(tournament.getName().equals(name)){
+                return tournament;
+            }
+        }
+        return null;
     }
 }

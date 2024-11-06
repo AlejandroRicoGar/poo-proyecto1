@@ -1,14 +1,12 @@
 package upm;
 
 
-import upm.model.Matchmaking;
 import upm.model.Player;
 import upm.view.CLI;
 
 import java.util.*;
 
 public class Logic {
-    private ArrayList<Matchmaking> matchmakingList;
     private ArrayList<Player> playerList;
     private final CLI cli;
     private static final String CREATE_USER = "player-create";
@@ -90,6 +88,7 @@ public class Logic {
      * @param args Nombre del jugador a eliminar
      *             Metodo que crea un jugador siempre que este no exista anteriormente
      */
+    /*
     public String removePlayer(String[] args) {
         String output;
         if (args.length == 1) {
@@ -114,11 +113,14 @@ public class Logic {
 
     }
 
+     */
+
     /**
      * Elimina los emparejamientos que contienen al jugador
      *
      * @param player Jugador que se va a eliminar de los emparejamientos
      */
+    /*
     public void removeMatch(Player player) {
         Iterator<Matchmaking> iter = matchmakingList.iterator();
         while (iter.hasNext()) {
@@ -128,6 +130,8 @@ public class Logic {
             }
         }
     }
+
+     */
 
 
     /**
@@ -189,6 +193,7 @@ public class Logic {
      * Imprime por pantalla el listado de enfrentamientos existentes,
      * si no hay emparejamientos imprime un mensaje de no hay emparejamientos
      */
+    /*
     public String showMatchups() {
         String output = " ";
         if (matchmakingList.isEmpty()) {
@@ -202,17 +207,24 @@ public class Logic {
         return output;
     }
 
+     */
+
+
     /**
      * Elimina los emparejamientos existentes de matchList
      */
+    /*
     public String clearMatchups() {
         matchmakingList.clear();
         return ("Eliminados todos los emparejamientos correctamente\n");
     }
 
+     */
+
     /**
      * Metodo crea un nuevo objeto emparejamiento entre dos jugadores existentes
      */
+    /*
     public String matchPlayers(String[] args) {
         String output = "";
         if (args.length == 2) {
@@ -229,11 +241,13 @@ public class Logic {
         return output;
     }
 
+     */
+
     /**
      * Empareja aleatoriamente a los jugadores en parejas.
      * Si el número de jugadores es impar, indica que no se puede ejecutar la operación.
      */
-
+    /*
     public String randomMatchup() {
         String output = "Emparejamientos realizados con exito";
         if (playerList.size() % 2 != 0) {
@@ -248,6 +262,8 @@ public class Logic {
         }
         return output;
     }
+
+     */
 
     private boolean exists(String name) {
         Iterator<Player> iter = playerList.iterator();

@@ -3,8 +3,6 @@ package upm;
 import upm.command.*;
 import upm.controller.TeamController;
 import upm.controller.TournamentController;
-import upm.model.Team;
-import upm.model.Tournament;
 import upm.view.CLI;
 import  upm.controller.PlayerController;
 import  upm.controller.PublicController;
