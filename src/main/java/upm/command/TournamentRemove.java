@@ -9,7 +9,13 @@ public class TournamentRemove implements Command{
     }
     @Override
     public String apply(String[] stringsep) {
-        return "";
+        String output= "";
+        if(stringsep.length==2) {
+            output = controller.remove(stringsep[1]);
+        }else{
+            output= "Incorrect number of arguments";
+        }
+        return output;
     }
 
     @Override
