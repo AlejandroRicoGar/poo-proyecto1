@@ -38,6 +38,10 @@ public class PublicController {
         return isPlayer;
     }
 
+    public User getLogged() {
+        return logged;
+    }
+
     /**
      * Logs a user
      * @param params  An array of strings containing the user's email and password.
