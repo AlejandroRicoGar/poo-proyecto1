@@ -11,7 +11,7 @@ public class TournamentDelete implements Command {
     public String apply(String[] stringsep) {
         String output = "";
         if(stringsep.length == 2) {
-            output = controller.remove(stringsep[1]);
+            output = controller.delete(stringsep[1]);
         }
         else{
             output = "Incorrect number of parameters, only the name of the tournament is required";

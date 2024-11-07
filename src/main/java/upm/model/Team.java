@@ -16,6 +16,10 @@ public class Team {
         return name;
     }
 
+    public Boolean isMember(Player player) {
+        return members.contains(player);
+    }
+
     public void addMember(Player player) {
         members.add(player);
     }
@@ -38,4 +42,5 @@ public class Team {
             member.addTournament(tournament);
         }
     }
+
 }

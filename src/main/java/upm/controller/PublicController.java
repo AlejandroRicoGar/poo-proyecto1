@@ -1,6 +1,8 @@
 package upm.controller;
 
 
+import upm.model.Admin;
+import upm.model.Player;
 import upm.model.User;
 
 import java.util.ArrayList;
@@ -110,5 +112,21 @@ public class PublicController {
             }
         }
         return user;
+    }
+
+    public Player getPlayer(User user) {
+        if(isPlayer){
+            return (Player) user;
+        }else{
+            return null;
+        }
+    }
+
+    public Admin getAdmin(User user) {
+        if(isAdmin){
+            return (Admin) user;
+        }else{
+            return null;
+        }
     }
 }

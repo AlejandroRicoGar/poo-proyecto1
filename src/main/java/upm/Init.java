@@ -1,6 +1,7 @@
 package upm;
 
 import upm.controller.PublicController;
+import upm.controller.TeamController;
 import upm.controller.TournamentController;
 import upm.model.*;
 
@@ -10,10 +11,12 @@ import java.time.format.DateTimeFormatter;
 public class Init {
     private PublicController publicController;
     private TournamentController tournamentController;
+    private TeamController teamController;
 
-    public Init(PublicController publicController,TournamentController tournamentController) {
+    public Init(PublicController publicController,TournamentController tournamentController,TeamController teamController) {
         this.publicController = publicController;
         this.tournamentController = tournamentController;
+        this.teamController = teamController;
     }
 
     /**
@@ -48,8 +51,8 @@ public class Init {
         equipo2.addMember(Alejandro);
         equipo1.addMember(Alfredo);
         equipo2.addMember(Victor);
-
-
+        teamController.addTeam(equipo1);
+        teamController.addTeam(equipo2);
 
         //Creacion de dos torneos, uno individual y otro colectivo
 
@@ -64,16 +67,15 @@ public class Init {
         LocalDate fechaFinal = LocalDate.parse(fin, formato);
 
         Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.INDIVIDUAL);
-        tournamentController.AddTournament(Individual);
+        tournamentController.addTournament(Individual);
         Individual.addPlayer(Alfonso);
-        Individual.addPlayer(Alejandro);
         Individual.addPlayer(Alfredo);
         Individual.addPlayer(Victor);
+        Individual.addPlayer(Alejandro);
 
         Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.COLECTIVE);
-        tournamentController.AddTournament(Colectivo);
+        tournamentController.addTournament(Colectivo);
         Colectivo.addTeam(equipo1);
-        Colectivo.addTeam(equipo2);
 
     }
 

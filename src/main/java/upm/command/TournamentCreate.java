@@ -22,7 +22,7 @@ public class TournamentCreate implements Command{
 
     @Override
     public String toString() {
-        return "> tournament-create name;startDate;endDate;league;sport;category;type \n    Name must not have spaces \n    Dates Format DD/MM/YYYY    Categories:\n     >SCORED_POINTS,\n" +
+        return "> tournament-create name;startDate;endDate;sport;league;category;type \n    Name must not have spaces \n    Dates Format DD/MM/YYYY\n    Categories:\n     >SCORED_POINTS,\n" +
                 "     >MATCH_WON,\n" +
                 "     >ASISTS_POINTS,\n" +
                 "     >PAST_TOURNAMENTS,\n" +

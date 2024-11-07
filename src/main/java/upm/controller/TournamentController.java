@@ -2,18 +2,17 @@ package upm.controller;
 
 import upm.model.*;
 
-import java.sql.SQLOutput;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 public class TournamentController {
     private ArrayList<Tournament> tournaments;
-    private PublicController publicController;
 
     public TournamentController() {
         tournaments = new ArrayList<>();
@@ -22,22 +21,48 @@ public class TournamentController {
     /**
      * @param tournament Tournament to be added to the tournaments list
      */
-    public void AddTournament(Tournament tournament) {
+    public void addTournament(Tournament tournament) {
         tournaments.add(tournament);
     }
 
-    /**
-     * Deletes the tournament and in the players list
-     * @param tournament Tournament that is going to be deleted
-     */
-    public void DeleteTournament(Tournament tournament) {
-        ArrayList<Player> jugadores = tournament.getPlayers();
-        if(jugadores.size() > 0) {
-            for(Player jugador : jugadores) {
-                jugador.removeTournament(tournament);
+    public String addPlayer(Tournament t,Player p) {
+        String output = "";
+        if(t != null){
+            if(t.getType().equals(TournamentTypes.INDIVIDUAL)){
+                t.addPlayer(p);
+                output =    "   Player with email "+p.getName()+" added to tournament"+t.getName();
+            }else{
+                output = "  The tournament you are trying to add is colective";
             }
-            tournaments.remove(tournament);
+        }else{
+            output = "  The tournament does not exist";
         }
+        return output;
+
+    }
+
+    public String addTeam(String tournamentName,Team team,Player p){
+        Tournament t = search(tournamentName);
+        String output = "";
+        if(t != null) {
+            if(team != null) {
+                if(team.isMember(p)) {
+                    if (t.getType().equals(TournamentTypes.COLECTIVE)) {
+                        t.addTeam(team);
+                        output = "  Team " + team.getName() + " added to tournament " + tournamentName;
+                    } else {
+                        output = "  The tournament is not colective";
+                    }
+                }else{
+                    output = " You are not part of this team";
+                }
+            }else{
+                output = "  The inserted team does not exists";
+            }
+        }else{
+            output = "  The tournament "+tournamentName+" does not exists.";
+        }
+        return output;
     }
 
     public String createTournament(String[] args) {
@@ -56,28 +81,28 @@ public class TournamentController {
                         TournamentTypes type = TournamentTypes.valueOf(args[6]);
                         Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat,type);
                         tournaments.add(tournament);
-                        output = args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
+                        output = "  "+args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
                                 +args[3]+" is going to be played and is going to be ranked by  "+cat+" and is going to be  "+type;
                     }catch (IllegalArgumentException e){
-                        output = "The category or the type are not ones of the permmited ";
+                        output = "  The category or the type are not ones of the permmited ";
                     }
                 }catch (DateTimeParseException e){
-                    output = "The format of the date is not correct it must be DD/MM/YYYY";
+                    output = "  The format of the date is not correct it must be DD/MM/YYYY";
                 }
             }else{
-                output = "The name has blank spaces in it";
+                output = "  The name has blank spaces in it";
             }
         }else{
-            output = "The tournament "+args[0]+" already exists";
+            output = "  The tournament "+args[0]+" already exists";
         }
         return output;
     }
 
-    public String remove(String name){
+    public String delete(String name){
         String output = "";
         Tournament tournament = search(name);
         if(tournament!=null){
-            output = name+" eliminado correctamente";
+            output = "  "+name+" eliminado correctamente";
             if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)) {
                 ArrayList<Player> jugadores = tournament.getPlayers();
                 if (jugadores.size() > 0) {
@@ -95,10 +120,49 @@ public class TournamentController {
             }
             tournaments.remove(tournament);
         }else{
-            output = "The tournament "+name+" does not exist";
+            output = "  The tournament "+name+" does not exist";
         }
         return output;
     }
+
+    public String removeTeam(Tournament t,String teamName,Player p){
+        String output = "";
+        if(t != null) {
+            if (t.searchTeam(teamName) != null && t.getType().equals(TournamentTypes.COLECTIVE)) {
+                if(t.searchTeam(teamName).isMember(p)) {
+                    output = "  Team " + teamName + " removed from Tournament " + t.getName();
+                    t.deleteTeam(t.searchTeam(teamName));
+                }else{
+                    output = "You are not part of this team";
+                }
+            } else {
+                output = "  The team " + teamName + " does not exists";
+            }
+        }else{
+            output = "  The tournament does not exists";
+        }
+        return output;
+    }
+
+    public String removePlayer(User u,Tournament t){
+        String output = "";
+        if(t != null) {
+            if(t.getType().equals(TournamentTypes.INDIVIDUAL)) {
+                if (t.searchPlayer(u.getMail()) != null) {
+                    output = "  Player " + u.getMail() + " removed from Tournament " + t.getName();
+                    t.deletePlayer(t.searchPlayer(u.getMail()));
+                } else {
+                    output = "  The player " + u.getMail() + " is not logged in the selected tournament";
+                }
+            }else{
+                output = "  The player " + u.getMail() + " is not logged in the selected tournament";
+            }
+        }else{
+            output = "  The tournament  does not exists";
+        }
+        return output;
+    }
+
 
     /**
      * Ranks the players of all tournmanets and deletes the tournaments which endDate is before actualDate
@@ -110,7 +174,7 @@ public class TournamentController {
         for (Tournament tournament : tournaments) {
             if(tournament.getEndDate().isBefore(date)){
                 output.append("The tournament "+tournament.getName()+" was finished the day "+tournament.getEndDate().toString()+"and is being deleted");
-                DeleteTournament(tournament);
+                delete(tournament.getName());
             }else{
                 output.append(tournament.getName()).append("\n");
                 output.append(rankAux(tournament)).append("\n");
@@ -296,10 +360,4 @@ public class TournamentController {
         }
         return builder.toString();
     }
-
-
-
-
-
-
 }

@@ -13,7 +13,6 @@ public class TournamentList implements Command{
     @Override
     public String apply(String[] params) {
         String output =  "";
-
         if(publicController.isAdmin()){
             output = controller.rankAndPrune();
         }else if(publicController.isPlayer()){

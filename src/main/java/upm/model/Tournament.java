@@ -75,8 +75,11 @@ public class Tournament {
      * @param player player to be added to the tournament
      */
     public void addPlayer(Player player) {
-        if(type.equals(TournamentTypes.INDIVIDUAL)){
-            players.add(player);
+        if(player != null) {
+            if (type.equals(TournamentTypes.INDIVIDUAL)) {
+                players.add(player);
+                player.addTournament(this);
+            }
         }
     }
 
@@ -84,8 +87,11 @@ public class Tournament {
      * @param team team to be added to the tournament
      */
     public void addTeam(Team team) {
-        if(type.equals(TournamentTypes.COLECTIVE)){
-            teams.add(team);
+        if(team != null) {
+            if (type.equals(TournamentTypes.COLECTIVE)) {
+                teams.add(team);
+                team.addTournament(this);
+            }
         }
     }
 
@@ -107,13 +113,13 @@ public class Tournament {
         return builder.toString();
     }
 
-    public Player searchPlayer(String name) {
+    public Player searchPlayer(String email) {
         Iterator<Player> iter = players.iterator();
         boolean exists = false;
         Player player = null;
         while (!exists && iter.hasNext()) {
             Player aux = iter.next();
-            if (aux.getName().equals(name)) {
+            if (aux.getMail().equals(email)) {
                 player = aux;
                 exists = true;
             }
@@ -133,6 +139,14 @@ public class Tournament {
             }
         }
         return t;
+    }
+
+    public void deleteTeam(Team team) {
+        teams.remove(team);
+    }
+
+    public void deletePlayer(Player player) {
+        players.remove(player);
     }
 
     public void clearMathchups(){

@@ -36,4 +36,6 @@ public abstract class User {
         PLAYER,
         PUBLIC
     }
+
+
 }

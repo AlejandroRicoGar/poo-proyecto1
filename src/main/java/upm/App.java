@@ -56,8 +56,8 @@ public class App {
         commandsPublic.add(new TournamentList(tournament,publicController));
 
 
-        commandsPlayer.add(new TournamentAdd(tournament));
-        commandsPlayer.add(new TournamentRemove(tournament));
+        commandsPlayer.add(new TournamentAdd(tournament,team,publicController));
+        commandsPlayer.add(new TournamentRemove(tournament,publicController));
         commandsPlayer.add(new StaticsShow(player));
 
 
@@ -81,7 +81,7 @@ public class App {
             commands.add(command);
         }
 
-        Init i = new Init(publicController,tournament);
+        Init i = new Init(publicController,tournament,team);
         i.start();
     }
 
