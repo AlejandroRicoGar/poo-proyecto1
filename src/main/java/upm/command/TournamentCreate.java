@@ -11,7 +11,7 @@ public class TournamentCreate implements Command{
     public String apply(String[] stringsep) {
         String output = "";
         String[] params = stringsep[1].split(";");
-        if(params.length == 7){
+        if(params.length == 6){
             output = controller.createTournament(params);
         }else {
             output = "Incorrect number of parameters";
@@ -26,8 +26,7 @@ public class TournamentCreate implements Command{
                 "     >MATCH_WON,\n" +
                 "     >ASISTS_POINTS,\n" +
                 "     >PAST_TOURNAMENTS,\n" +
-                "     >GENERATED_MONEY \n    Types:\n     >INDIVIDUAL,\n" +
-                "     >COLECTIVE";
+                "     >GENERATED_MONEY \n  ";
     }
 
     @Override

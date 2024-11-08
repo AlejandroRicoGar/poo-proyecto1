@@ -25,15 +25,11 @@ public class TournamentController {
         tournaments.add(tournament);
     }
 
-    public String addPlayer(Tournament t,Player p) {
+    public String addMember(Tournament t,Player p) {
         String output = "";
         if(t != null){
-            if(t.getType().equals(TournamentTypes.INDIVIDUAL)){
-                t.addPlayer(p);
+                t.addMember(p);
                 output =    "   Player with email "+p.getName()+" added to tournament"+t.getName();
-            }else{
-                output = "  The tournament you are trying to add is colective";
-            }
         }else{
             output = "  The tournament does not exist";
         }
@@ -47,12 +43,8 @@ public class TournamentController {
         if(t != null) {
             if(team != null) {
                 if(team.isMember(p)) {
-                    if (t.getType().equals(TournamentTypes.COLECTIVE)) {
-                        t.addTeam(team);
+                        t.addMember(team);
                         output = "  Team " + team.getName() + " added to tournament " + tournamentName;
-                    } else {
-                        output = "  The tournament is not colective";
-                    }
                 }else{
                     output = " You are not part of this team";
                 }
@@ -78,11 +70,10 @@ public class TournamentController {
                     endDate = LocalDate.parse(args[2], formatter);
                     try{
                         Categorys cat = Categorys.valueOf(args[5]);
-                        TournamentTypes type = TournamentTypes.valueOf(args[6]);
-                        Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat,type);
+                        Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat);
                         tournaments.add(tournament);
                         output = "  "+args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
-                                +args[3]+" is going to be played and is going to be ranked by  "+cat+" and is going to be  "+type;
+                                +args[3]+" is going to be played and is going to be ranked by  "+cat;
                     }catch (IllegalArgumentException e){
                         output = "  The category or the type are not ones of the permmited ";
                     }
@@ -103,19 +94,10 @@ public class TournamentController {
         Tournament tournament = search(name);
         if(tournament!=null){
             output = "  "+name+" eliminado correctamente";
-            if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)) {
-                ArrayList<Player> jugadores = tournament.getPlayers();
-                if (jugadores.size() > 0) {
-                    for (Player jugador : jugadores) {
-                        jugador.removeTournament(tournament);
-                    }
-                }
-            }else{
-                ArrayList<Team> teams = tournament.getTeams();
-                if (teams.size() > 0) {
-                    for (Team team : teams) {
-                        team.removeTournament(tournament);
-                    }
+            ArrayList<Member> jugadores = tournament.getMembers();
+            if (jugadores.size() > 0) {
+                for (Member jugador : jugadores) {
+                    jugador.deleteTournament(tournament);
                 }
             }
             tournaments.remove(tournament);
@@ -128,10 +110,12 @@ public class TournamentController {
     public String removeTeam(Tournament t,String teamName,Player p){
         String output = "";
         if(t != null) {
-            if (t.searchTeam(teamName) != null && t.getType().equals(TournamentTypes.COLECTIVE)) {
-                if(t.searchTeam(teamName).isMember(p)) {
+            if (t.searchMember(teamName) != null) {
+                Member m = t.searchMember(teamName);
+                Team team = (Team)m;
+                if(team.isMember(p)) {
                     output = "  Team " + teamName + " removed from Tournament " + t.getName();
-                    t.deleteTeam(t.searchTeam(teamName));
+                    t.deleteTeam(team);
                 }else{
                     output = "You are not part of this team";
                 }
@@ -144,19 +128,16 @@ public class TournamentController {
         return output;
     }
 
-    public String removePlayer(User u,Tournament t){
+    public String removePlayer(Player u,Tournament t){
         String output = "";
         if(t != null) {
-            if(t.getType().equals(TournamentTypes.INDIVIDUAL)) {
-                if (t.searchPlayer(u.getMail()) != null) {
-                    output = "  Player " + u.getMail() + " removed from Tournament " + t.getName();
-                    t.deletePlayer(t.searchPlayer(u.getMail()));
-                } else {
-                    output = "  The player " + u.getMail() + " is not logged in the selected tournament";
-                }
-            }else{
+            if (t.searchMember(u.getName()) != null) {
+                output = "  Player " + u.getMail() + " removed from Tournament " + t.getName();
+                t.deletePlayer((Player)t.searchMember(u.getName()));
+            } else {
                 output = "  The player " + u.getMail() + " is not logged in the selected tournament";
             }
+
         }else{
             output = "  The tournament  does not exists";
         }
@@ -224,7 +205,18 @@ public class TournamentController {
         String output = "";;
         Tournament tournament = search(args[0]);
         if(tournament != null){
-            output = autoMatchmakeAux(tournament);
+            output = "Emparejamientos realizados con exito";
+            if (tournament.getMembers().size() % 2 != 0) {
+                output = ("No se pueden emparejar todos los jugadores (numero de jugadores debe ser par)\n");
+            } else {
+                List<Member> playerCopy = tournament.getMembers();
+                Collections.shuffle(playerCopy);
+                for (int i = 0; i < tournament.getMembers().size(); i += 2) {
+                    Matchmaking m = new Matchmaking(playerCopy.get(i), playerCopy.get(i+1));
+                    tournament.addMatchups(m);
+                }
+            }
+            return output;
         }else{
             output = "The tournament "+args[0]+" doesn't exist";
         }
@@ -240,117 +232,29 @@ public class TournamentController {
         return null;
     }
 
-    public String matchmakeAux(String[] args,Tournament tournament){
+    private String matchmakeAux(String[] args,Tournament tournament){
         tournament.clearMathchups();
-        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
-            return matchmakePlayer(args,tournament);
-        }else{
-            return matchmakeTeam(args,tournament);
+        for(int i = 0;i<args.length;i+=2){
+            Member m = tournament.searchMember(args[i]);
+            Member m2 = tournament.searchMember(args[i+1]);
+            if(m != null && m2 != null){
+                Matchmaking match = new Matchmaking(m,m2);
+                tournament.addMatchups(match);
+            }else{
+                return "One of the members is not in the tournament";
+            }
         }
+        return showMatchmakes(tournament);
     }
 
-    public String autoMatchmakeAux(Tournament tournament){
-        tournament.clearMathchups();
-        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
-            return autoMatchmakePlayer(tournament);
-        }else{
-            return autoMatchmakeTeam(tournament);
-        }
-    }
     private String rankAux(Tournament tournament){
-        String output = "";
-        if(tournament.getType().equals(TournamentTypes.INDIVIDUAL)){
-            output = rankPlayer(tournament);
-        }else{
-            output = rankTeam(tournament);
-        }
-        return output;
-    }
-
-    private String rankTeam(Tournament tournament){
         StringBuilder output = new StringBuilder();
-        ArrayList<Team> sortedPlayerList = new ArrayList<>(tournament.getTeams());
-        sortedPlayerList.sort((Team p1, Team p2) -> p2.getCategory(tournament.getCategoria()).compareTo(p1.getCategory(tournament.getCategoria())));
-        for (Team team : sortedPlayerList) {
+        ArrayList<Member> sortedPlayerList = tournament.getMembers();
+        sortedPlayerList.sort((Member p1, Member p2) -> p2.getCategory(tournament.getCategoria()).compareTo(p1.getCategory(tournament.getCategoria())));
+        for (Member team : sortedPlayerList) {
             output.append(team.getName() +" "+team.getCategory(tournament.getCategoria())+ "\n");
         }
         return output.toString();
-
-    }
-    private String rankPlayer(Tournament tournament){
-        StringBuilder output = new StringBuilder();
-        ArrayList<Player> sortedPlayerList = new ArrayList<>(tournament.getPlayers());
-        sortedPlayerList.sort((Player p1, Player p2) -> p2.getCategory(tournament.getCategoria()).compareTo(p1.getCategory(tournament.getCategoria())));
-        for (Player player : sortedPlayerList) {
-            output.append(player.getName() +" "+player.getCategory(tournament.getCategoria())+"\n");
-        }
-        return output.toString();
-    }
-
-
-    private String autoMatchmakePlayer(Tournament tournament){
-        String output = "";
-        if(tournament.getPlayers().size()%2==0) {
-            List<Player> playerCopy = new ArrayList<>(tournament.getPlayers());
-            Collections.shuffle(playerCopy);
-            for (int i = 0; i < tournament.getPlayers().size(); i += 2) {
-                Player[] players = {playerCopy.get(i), playerCopy.get(i + 1)};
-                Matchmaking m = new Matchmaking(players[0], players[1]);
-                tournament.getMatches().add(m);
-            }
-            output = showMatchmakes(tournament);
-        }else{
-            output = "There are not an even number of players in this tournament";
-        }
-        return output;
-    }
-
-    private String autoMatchmakeTeam(Tournament tournament){
-        String output = "";
-        if(tournament.getTeams().size()%2==0) {
-            List<Team> teamCopy = new ArrayList<>(tournament.getTeams());
-            Collections.shuffle(teamCopy);
-            for (int i = 0; i < tournament.getTeams().size(); i += 2) {
-                Team[] teams = {teamCopy.get(i), teamCopy.get(i + 1)};
-                Matchmaking m = new Matchmaking(teams[i], teams[i + 1]);
-                tournament.getMatches().add(m);
-            }
-            output = showMatchmakes(tournament);
-        }else{
-            output = "There are not an even number of players in this tournament";
-        }
-        return output;
-    }
-
-    private String matchmakePlayer(String[] args,Tournament tournament){
-        if(args.length-1 == tournament.getPlayers().size()){
-            for(int i = 1;i<args.length;i+=2){
-                Player p1 = tournament.searchPlayer(args[i]);
-                Player p2 = tournament.searchPlayer(args[i+1]) ;
-                if(p1!=null && p2!= null){
-                    Matchmaking m = new Matchmaking(p1,p2);
-                    tournament.getMatches().add(m);
-                }else{
-                    return "One of the players does not exist or is not in the tournament";
-                }
-            }
-        }
-        return showMatchmakes(tournament);
-    }
-    private String matchmakeTeam(String[] args,Tournament tournament){
-        if(args.length-1 == tournament.getTeams().size()){
-            for(int i = 1;i<args.length;i+=2){
-                Team t1 = tournament.searchTeam(args[i]);
-                Team t2 = tournament.searchTeam(args[i+1]);
-                if(t1!=null && t2 != null){
-                    Matchmaking m = new Matchmaking(t1,t2);
-                    tournament.getMatches().add(m);
-                }else{
-                    return "One of the teams does not exist or is not in the tournament";
-                }
-            }
-        }
-        return showMatchmakes(tournament);
     }
 
     private String showMatchmakes(Tournament tournament){

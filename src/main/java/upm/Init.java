@@ -66,16 +66,16 @@ public class Init {
         LocalDate fechaInicio = LocalDate.parse(fecha1, formato);
         LocalDate fechaFinal = LocalDate.parse(fin, formato);
 
-        Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.INDIVIDUAL);
+        Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS);
         tournamentController.addTournament(Individual);
-        Individual.addPlayer(Alfonso);
-        Individual.addPlayer(Alfredo);
-        Individual.addPlayer(Victor);
-        Individual.addPlayer(Alejandro);
+        Individual.addMember(Alfonso);
+        Individual.addMember(Alfredo);
+        Individual.addMember(Victor);
+        Individual.addMember(Alejandro);
 
-        Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS,TournamentTypes.COLECTIVE);
+        Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS);
         tournamentController.addTournament(Colectivo);
-        Colectivo.addTeam(equipo1);
+        Colectivo.addMember(equipo1);
 
     }
 

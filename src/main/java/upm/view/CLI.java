@@ -31,9 +31,6 @@ public class CLI {
     public void print(String s) {
         System.out.print(s);
     }
-
-
-
     public String getCommand(List<String> ListCommand) {
         print("Available commands: \n");
         for (String comandb: ListCommand)

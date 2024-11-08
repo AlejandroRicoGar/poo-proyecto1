@@ -10,10 +10,8 @@ public class Tournament {
     private LocalDate endDate;
     private String league;
     private String sport;
-    private Categorys categoria;
-    private TournamentTypes type;
-    private ArrayList<Player> players;
-    private ArrayList<Team> teams;
+    private Categorys categoria;;
+    private ArrayList<Member> members;
     private ArrayList<Matchmaking> matches;
 
     /**
@@ -23,23 +21,16 @@ public class Tournament {
      * @param league    League of the tournament
      * @param sport Sport that is played in the tournament
      * @param categoria Category that is used to rank in the tournament
-     * @param type Enum that says if its individual or colletive
      */
-    public Tournament(String name, LocalDate startDate, LocalDate endDate, String league, String sport, Categorys categoria,TournamentTypes type) {
+    public Tournament(String name, LocalDate startDate, LocalDate endDate, String league, String sport, Categorys categoria) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.league = league;
         this.sport = sport;
         this.categoria = categoria;
-        this.type = type;
 
-        if(type.equals(TournamentTypes.INDIVIDUAL)){
-            players = new ArrayList<Player>();
-        }else{
-            teams = new ArrayList<Team>();
-        }
-
+        members = new ArrayList<Member>();
         matches = new ArrayList<Matchmaking>();
     }
 
@@ -47,20 +38,12 @@ public class Tournament {
         return endDate;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public ArrayList<Member> getMembers() {
+        return members;
     }
 
     public String getName() {
         return name;
-    }
-
-    public TournamentTypes getType() {
-        return type;
-    }
-
-    public ArrayList<Team> getTeams() {
-        return teams;
     }
 
     public ArrayList<Matchmaking> getMatches() {
@@ -72,85 +55,54 @@ public class Tournament {
     }
 
     /**
-     * @param player player to be added to the tournament
+     * @param m player to be added to the tournament
      */
-    public void addPlayer(Player player) {
-        if(player != null) {
-            if (type.equals(TournamentTypes.INDIVIDUAL)) {
-                players.add(player);
-                player.addTournament(this);
-            }
+    public void addMember(Member m) {
+        if(m != null) {
+            members.add(m);
+            m.addTournament(this);
         }
     }
-
-    /**
-     * @param team team to be added to the tournament
-     */
-    public void addTeam(Team team) {
-        if(team != null) {
-            if (type.equals(TournamentTypes.COLECTIVE)) {
-                teams.add(team);
-                team.addTournament(this);
-            }
-        }
-    }
-
-
     /**
      * @return all the members of a tournament
      */
     public String showMembers(){
         StringBuilder builder = new StringBuilder();
-        if(TournamentTypes.INDIVIDUAL.equals(type)){
-            for(Player p : players){
-                builder.append(p.getName()+" ");
+            for(Member m : members){
+                builder.append( m.getName()+"  ");
             }
-        }else{
-            for(Team t : teams){
-                builder.append(t.getName()+"  ");
-            }
-        }
         return builder.toString();
     }
 
-    public Player searchPlayer(String email) {
-        Iterator<Player> iter = players.iterator();
+    public Member searchMember(String name) {
+        Iterator<Member> iter = members.iterator();
         boolean exists = false;
-        Player player = null;
+        Member sol = null;
         while (!exists && iter.hasNext()) {
-            Player aux = iter.next();
-            if (aux.getMail().equals(email)) {
-                player = aux;
+            Member m = iter.next();
+            if (m.getName().equals(name)) {
+                sol = m;
                 exists = true;
             }
         }
-        return player;
+        return sol;
     }
 
-    public Team searchTeam(String name) {
-        Iterator<Team> iter = teams.iterator();
-        boolean exists = false;
-        Team t = null;
-        while (!exists && iter.hasNext()) {
-            Team aux = iter.next();
-            if (aux.getName().equals(name)) {
-                t = aux;
-                exists = true;
-            }
-        }
-        return t;
-    }
 
     public void deleteTeam(Team team) {
-        teams.remove(team);
+        members.remove(team);
     }
 
     public void deletePlayer(Player player) {
-        players.remove(player);
+        members.remove(player);
     }
 
     public void clearMathchups(){
         matches.clear();
+    }
+
+    public void addMatchups(Matchmaking m) {
+        matches.add(m);
     }
 
 

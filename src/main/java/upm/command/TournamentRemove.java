@@ -19,7 +19,7 @@ public class TournamentRemove implements Command{
             if (espacios.length == 2) {
                 output = controller.removeTeam(controller.search(espacios[0]), espacios[1],controllerPublic.getPlayer(controllerPublic.getLogged()));
             } else if (espacios.length == 1) {
-                output = controller.removePlayer(controllerPublic.getLogged(), controller.search(stringsep[1]));
+                output = controller.removePlayer(controllerPublic.getPlayer(controllerPublic.getLogged()), controller.search(stringsep[1]));
             } else {
                 output = "Incorrect number of arguments";
             }

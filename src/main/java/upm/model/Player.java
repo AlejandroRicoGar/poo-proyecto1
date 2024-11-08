@@ -3,7 +3,7 @@ package upm.model;
 import javax.smartcardio.Card;
 import java.util.ArrayList;
 
-public class Player extends User{
+public class Player extends User implements Member{
     private String name;
     private String surname;
     private String ID;
@@ -38,15 +38,12 @@ public class Player extends User{
 
         tournaments = new ArrayList<Tournament>();
     }
-
+    @Override
     public String getName() {
         return name;
     }
 
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Override
     public Double getCategory(Categorys C){
         Double resul = 0.0;
         for(Category c : categories){

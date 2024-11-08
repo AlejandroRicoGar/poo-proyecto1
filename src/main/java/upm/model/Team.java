@@ -4,7 +4,7 @@ import upm.model.category.Categoria;
 
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements Member{
     private String name;
     private ArrayList<Player> members;
 
@@ -32,6 +32,14 @@ public class Team {
         Double resul = total/members.size();
         return resul;
     }
+
+    @Override
+    public void setCategory(Categorys category, Double value) {
+        for (Player member : members) {
+            member.setCategory(category, value);
+        }
+    }
+
     public void removeTournament(Tournament tournament) {
         for(Player member : members) {
             member.removeTournament(tournament);
