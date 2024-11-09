@@ -40,14 +40,17 @@ public class Team implements Member{
         }
     }
 
-    public void removeTournament(Tournament tournament) {
-        for(Player member : members) {
-            member.removeTournament(tournament);
-        }
-    }
+
     public void addTournament(Tournament tournament) {
         for(Player member : members) {
             member.addTournament(tournament);
+        }
+    }
+
+    @Override
+    public void deleteTournament(Tournament tournament) {
+        for(Player member : members) {
+            member.deleteTournament(tournament);
         }
     }
 

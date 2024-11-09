@@ -67,9 +67,11 @@ public class Player extends User implements Member{
         tournaments.add(tournament);
     }
 
-    public void removeTournament(Tournament tournament) {
+    @Override
+    public void deleteTournament(Tournament tournament) {
         tournaments.remove(tournament);
     }
+
 
     @Override
     public String toString() {
