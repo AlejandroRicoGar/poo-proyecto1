@@ -1,14 +1,17 @@
 package upm.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Team implements Member{
     private String name;
     private ArrayList<Player> members;
+    private ArrayList<Tournament> tournaments;
 
     public Team(String name) {
         this.name = name;
         this.members = new ArrayList<>();
+        this.tournaments = new ArrayList<>();
     }
     public String getName() {
         return name;
@@ -50,6 +53,11 @@ public class Team implements Member{
         for(Player member : members) {
             member.deleteTournament(tournament);
         }
+    }
+
+    @Override
+    public List<Tournament> getTournaments() {
+        return tournaments;
     }
 
 }
