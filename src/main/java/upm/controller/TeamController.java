@@ -4,6 +4,7 @@ import upm.model.Team;
 import upm.model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TeamController {
     private ArrayList<Team> teams;
@@ -16,7 +17,7 @@ public class TeamController {
         teams.add(team);
     }
 
-    public Team search(String name){
+    public Team searchTeam(String name){
         Team team = null;
         if(!teams.isEmpty()){
             for(Team t : teams){
@@ -37,5 +38,9 @@ public class TeamController {
             output = "The team does not exist";
         }
         return output;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
     }
 }
