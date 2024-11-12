@@ -1,6 +1,7 @@
 package upm.controller;
 
 import upm.model.Team;
+import upm.model.Player;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,10 @@ public class TeamController {
 
     public TeamController() {
         teams = new ArrayList<>();
+    }
+
+    public void addTeam(Team team){
+        teams.add(team);
     }
 
     public Team search(String name){
@@ -22,7 +27,15 @@ public class TeamController {
         }
         return team;
     }
-    public void addTeam(Team team){
-        teams.add(team);
+    
+    public String addPlayerToTeam(Player player, Team team) {
+        String output = "";
+        if (team != null) {
+            team.addMember(player);
+            output = "Player with email " + player.getName() + " added to team " + team.getName();
+        } else {
+            output = "The team does not exist";
+        }
+        return output;
     }
 }
