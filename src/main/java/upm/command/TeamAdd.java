@@ -42,7 +42,7 @@ public class TeamAdd implements Command {
         String[] params = stringsep[1].split(";");
         if(params.length == 2) {
             if (playerController.search(params[0]) != null) {
-                output = teamController.addPlayerToTeam(playerController.search(params[0]), teamController.search(params[1]));
+                output = teamController.addPlayerToTeam(playerController.search(params[0]), teamController.searchTeam(params[1]));
             } else {
                 output = "The player does not exist";
             }
