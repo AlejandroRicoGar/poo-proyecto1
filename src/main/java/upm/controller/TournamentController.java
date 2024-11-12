@@ -69,7 +69,7 @@ public class TournamentController {
                     startDate = LocalDate.parse(args[1], formatter);
                     endDate = LocalDate.parse(args[2], formatter);
                     try{
-                        Categorys cat = Categorys.valueOf(args[5]);
+                        Categories cat = Categories.valueOf(args[5]);
                         Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat);
                         tournaments.add(tournament);
                         output = "  "+args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "

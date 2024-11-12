@@ -1,7 +1,5 @@
 package upm.model;
 
-import upm.model.category.Categoria;
-
 import java.util.ArrayList;
 
 public class Team implements Member{
@@ -24,7 +22,7 @@ public class Team implements Member{
         members.add(player);
     }
 
-    public Double getCategory(Categorys categoria) {
+    public Double getCategory(Categories categoria) {
         Double total = 0.0;
         for(Player member : members) {
             total += member.getCategory(categoria);
@@ -34,7 +32,7 @@ public class Team implements Member{
     }
 
     @Override
-    public void setCategory(Categorys category, Double value) {
+    public void setCategory(Categories category, Double value) {
         for (Player member : members) {
             member.setCategory(category, value);
         }

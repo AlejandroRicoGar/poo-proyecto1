@@ -1,7 +1,7 @@
 package upm.model;
 
 public class Category {
-    private Categorys type;
+    private Categories type;
     private double value;
 
     @Override
@@ -12,12 +12,12 @@ public class Category {
                 '}';
     }
 
-    public Category(Categorys nombre, double value) {
+    public Category(Categories nombre, double value) {
         this.type = nombre;
         this.value = value;
     }
 
-    public Categorys getType() {
+    public Categories getType() {
         return type;
     }
 

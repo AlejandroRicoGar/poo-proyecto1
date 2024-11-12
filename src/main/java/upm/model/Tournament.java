@@ -10,7 +10,7 @@ public class Tournament {
     private LocalDate endDate;
     private String league;
     private String sport;
-    private Categorys categoria;;
+    private Categories categoria;;
     private ArrayList<Member> members;
     private ArrayList<Matchmaking> matches;
 
@@ -22,7 +22,7 @@ public class Tournament {
      * @param sport Sport that is played in the tournament
      * @param categoria Category that is used to rank in the tournament
      */
-    public Tournament(String name, LocalDate startDate, LocalDate endDate, String league, String sport, Categorys categoria) {
+    public Tournament(String name, LocalDate startDate, LocalDate endDate, String league, String sport, Categories categoria) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,7 +50,7 @@ public class Tournament {
         return matches;
     }
 
-    public Categorys getCategoria() {
+    public Categories getCategoria() {
         return categoria;
     }
 

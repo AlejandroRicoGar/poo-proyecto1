@@ -12,15 +12,15 @@ public class TeamController {
     }
 
     public Team search(String name){
-        Team Team = null;
+        Team team = null;
         if(!teams.isEmpty()){
             for(Team t : teams){
                 if(t.getName().equals(name)){
-                    Team = t;
+                    team = t;
                 }
             }
         }
-        return Team;
+        return team;
     }
     public void addTeam(Team team){
         teams.add(team);

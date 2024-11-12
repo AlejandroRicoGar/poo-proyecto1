@@ -1,12 +1,11 @@
 package upm.model;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 
 public class Player extends User implements Member{
     private String name;
     private String surname;
-    private String ID;
+    private String id;
     private ArrayList<Category> categories;
     private ArrayList<Tournament> tournaments;
     private Admin creator;
@@ -15,24 +14,24 @@ public class Player extends User implements Member{
     /**
      *
      */
-    public Player(String name, String surname, String ID, String password, String email,Admin creator) {
+    public Player(String name, String surname, String id, String password, String email,Admin creator) {
         super(password,email,Users.PLAYER);
         this.name = name;
         this.surname = surname;
-        this.ID = ID;
+        this.id = id;
         this.creator = creator;
 
-        Category points = new Category(Categorys.SCORED_POINTS,0.0);
-        Category matchWon = new Category(Categorys.MATCH_WON,0.0);
-        Category AsistsPoints = new Category(Categorys.ASISTS_POINTS,0.0);
-        Category pastTournaments = new Category(Categorys.PAST_TOURNAMENTS,0.0);
-        Category generatedMoney = new Category(Categorys.GENERATED_MONEY,0.0);
+        Category points = new Category(Categories.SCORED_POINTS,0.0);
+        Category matchWon = new Category(Categories.MATCH_WON,0.0);
+        Category assistsPoints = new Category(Categories.ASISTS_POINTS,0.0);
+        Category pastTournaments = new Category(Categories.PAST_TOURNAMENTS,0.0);
+        Category generatedMoney = new Category(Categories.GENERATED_MONEY,0.0);
 
         categories = new ArrayList<Category>();
 
         categories.add(points);
         categories.add(matchWon);
-        categories.add(AsistsPoints);
+        categories.add(assistsPoints);
         categories.add(pastTournaments);
         categories.add(generatedMoney);
 
@@ -44,7 +43,7 @@ public class Player extends User implements Member{
     }
 
     @Override
-    public Double getCategory(Categorys C){
+    public Double getCategory(Categories C){
         Double resul = 0.0;
         for(Category c : categories){
             if(c.getType().equals(C)){
@@ -54,7 +53,7 @@ public class Player extends User implements Member{
 
         return resul;
     }
-    public void setCategory(Categorys C, Double value){
+    public void setCategory(Categories C, Double value){
         for(Category c : categories){
             if(c.getType().equals(C)){
                 c.setValue(value);
@@ -78,7 +77,7 @@ public class Player extends User implements Member{
         return "Player{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", ID='" + ID + '\'' +
+                ", ID='" + id + '\'' +
                 '}';
     }
 }

@@ -4,8 +4,8 @@ import upm.command.*;
 import upm.controller.TeamController;
 import upm.controller.TournamentController;
 import upm.view.CLI;
-import  upm.controller.PlayerController;
-import  upm.controller.PublicController;
+import upm.controller.PlayerController;
+import upm.controller.PublicController;
 
 
 import java.util.LinkedList;

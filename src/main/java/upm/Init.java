@@ -40,9 +40,9 @@ public class Init {
         publicController.signUpUser(Victor);
 
 
-        Alejandro.setCategory(Categorys.SCORED_POINTS,3.0);
-        Alfonso.setCategory(Categorys.SCORED_POINTS,2.0);
-        Alfredo.setCategory(Categorys.SCORED_POINTS,5.0);
+        Alejandro.setCategory(Categories.SCORED_POINTS,3.0);
+        Alfonso.setCategory(Categories.SCORED_POINTS,2.0);
+        Alfredo.setCategory(Categories.SCORED_POINTS,5.0);
 
         //Creacion de dos Equipos nuevos
         Team equipo1 = new Team("Equipo_1");
@@ -66,14 +66,14 @@ public class Init {
         LocalDate fechaInicio = LocalDate.parse(fecha1, formato);
         LocalDate fechaFinal = LocalDate.parse(fin, formato);
 
-        Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS);
+        Tournament Individual = new Tournament("Open_de_Cuenca",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categories.SCORED_POINTS);
         tournamentController.addTournament(Individual);
         Individual.addMember(Alfonso);
         Individual.addMember(Alfredo);
         Individual.addMember(Victor);
         Individual.addMember(Alejandro);
 
-        Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categorys.SCORED_POINTS);
+        Tournament Colectivo = new Tournament("Copa_del_rey",fechaInicio,fechaFinal,"Primera Division","Ping Pong",Categories.SCORED_POINTS);
         tournamentController.addTournament(Colectivo);
         Colectivo.addMember(equipo1);
 

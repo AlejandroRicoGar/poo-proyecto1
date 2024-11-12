@@ -1,6 +1,6 @@
 package upm.model;
 
-public enum Categorys {
+public enum Categories {
     SCORED_POINTS,
     MATCH_WON,
     ASISTS_POINTS,
