@@ -1,6 +1,7 @@
 package upm.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends User implements Member{
     private String name;
@@ -69,6 +70,10 @@ public class Player extends User implements Member{
     @Override
     public void deleteTournament(Tournament tournament) {
         tournaments.remove(tournament);
+    }
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
     }
 
 
