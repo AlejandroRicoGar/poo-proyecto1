@@ -7,8 +7,8 @@ public class Matchmaking {
     @Override
     public String toString() {
         return "Matchmaking{" +
-                "member1=" + member1 +
-                ", member2=" + member2 +
+                "member1=" + member1.getName() +
+                ", member2=" + member2.getName() +
                 '}';
     }
 

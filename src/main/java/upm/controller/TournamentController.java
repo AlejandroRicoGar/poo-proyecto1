@@ -234,9 +234,11 @@ public class TournamentController {
 
     private String matchmakeAux(String[] args,Tournament tournament){
         tournament.clearMathchups();
-        for(int i = 0;i<args.length;i+=2){
+        for(int i = 1;i<args.length;i+=2){
             Member m = tournament.searchMember(args[i]);
             Member m2 = tournament.searchMember(args[i+1]);
+            System.out.println(args[i]);
+            System.out.println(args[i+1]);
             if(m != null && m2 != null){
                 Matchmaking match = new Matchmaking(m,m2);
                 tournament.addMatchups(match);
