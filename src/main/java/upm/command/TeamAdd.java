@@ -32,8 +32,8 @@ public class TeamAdd implements Command {
     }
 
     /**
-     * Applies the command and returns the output
-     * @param stringsep An array with the parameters
+     * Adds a player to a team
+     * @param stringsep An array with the parameters "team-add PlayerName;TeamName"
      * @return The output of the command
      */
     @Override
