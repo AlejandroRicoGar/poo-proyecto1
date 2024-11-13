@@ -25,19 +25,19 @@ public class Team implements Member{
         members.add(player);
     }
 
-    public Double getCategory(Categories categoria) {
+    public Double getCategoryValue(Categories categoria) {
         Double total = 0.0;
         for(Player member : members) {
-            total += member.getCategory(categoria);
+            total += member.getCategoryValue(categoria);
         }
         Double resul = total/members.size();
         return resul;
     }
 
     @Override
-    public void setCategory(Categories category, Double value) {
+    public void setCategoryValue(Categories category, Double value) {
         for (Player member : members) {
-            member.setCategory(category, value);
+            member.setCategoryValue(category, value);
         }
     }
 

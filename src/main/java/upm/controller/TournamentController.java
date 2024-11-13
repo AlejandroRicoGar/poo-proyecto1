@@ -252,9 +252,9 @@ public class TournamentController {
     private String rankAux(Tournament tournament){
         StringBuilder output = new StringBuilder();
         ArrayList<Member> sortedPlayerList = tournament.getMembers();
-        sortedPlayerList.sort((Member p1, Member p2) -> p2.getCategory(tournament.getCategoria()).compareTo(p1.getCategory(tournament.getCategoria())));
+        sortedPlayerList.sort((Member p1, Member p2) -> p2.getCategoryValue(tournament.getCategoria()).compareTo(p1.getCategoryValue(tournament.getCategoria())));
         for (Member team : sortedPlayerList) {
-            output.append(team.getName() +" "+team.getCategory(tournament.getCategoria())+ "\n");
+            output.append(team.getName() +" "+team.getCategoryValue(tournament.getCategoria())+ "\n");
         }
         return output.toString();
     }

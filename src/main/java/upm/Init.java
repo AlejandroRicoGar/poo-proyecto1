@@ -40,9 +40,9 @@ public class Init {
         publicController.signUpUser(Victor);
 
 
-        Alejandro.setCategory(Categories.SCORED_POINTS,3.0);
-        Alfonso.setCategory(Categories.SCORED_POINTS,2.0);
-        Alfredo.setCategory(Categories.SCORED_POINTS,5.0);
+        Alejandro.setCategoryValue(Categories.SCORED_POINTS,3.0);
+        Alfonso.setCategoryValue(Categories.SCORED_POINTS,2.0);
+        Alfredo.setCategoryValue(Categories.SCORED_POINTS,5.0);
 
         //Creacion de dos Equipos nuevos
         Team equipo1 = new Team("Equipo_1");

@@ -44,7 +44,7 @@ public class Player extends User implements Member{
     }
 
     @Override
-    public Double getCategory(Categories C){
+    public Double getCategoryValue(Categories C){
         Double resul = 0.0;
         for(Category c : categories){
             if(c.getType().equals(C)){
@@ -54,12 +54,11 @@ public class Player extends User implements Member{
 
         return resul;
     }
-    public void setCategory(Categories C, Double value){
+    public void setCategoryValue(Categories C, Double value){
         for(Category c : categories){
             if(c.getType().equals(C)){
                 c.setValue(value);
             }
-
         }
     }
 

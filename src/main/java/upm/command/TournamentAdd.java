@@ -23,7 +23,6 @@ public class TournamentAdd implements Command{
         if(params.length == 1) {
             output = controller.addMember(controller.search(tournament),controllerPublic.getPlayer(controllerPublic.getLogged()));
         }else if(params.length == 2) {
-            System.out.println(params[1]);
             output = controller.addTeam(tournament,controllerTeam.searchTeam(params[1]),controllerPublic.getPlayer(controllerPublic.getLogged()));
         }else{
             output = "Incorrect number of parameters";
