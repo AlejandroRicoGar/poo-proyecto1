@@ -1,7 +1,5 @@
 package upm.command;
 
-import upm.model.User;
-
 public interface Command {
 
     /**

@@ -10,7 +10,7 @@ public class Tournament {
     private LocalDate endDate;
     private String league;
     private String sport;
-    private Categories categoria;;
+    private Categories categoria;
     private ArrayList<Member> members;
     private ArrayList<Matchmaking> matches;
 

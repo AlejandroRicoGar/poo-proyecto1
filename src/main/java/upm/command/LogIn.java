@@ -2,8 +2,6 @@ package upm.command;
 
 import upm.controller.PublicController;
 
-import java.sql.SQLOutput;
-
 public class LogIn implements Command{
     private PublicController controller;
 
