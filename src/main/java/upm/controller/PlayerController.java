@@ -1,5 +1,6 @@
 package upm.controller;
 
+import upm.model.Admin;
 import upm.model.Player;
 
 import java.util.ArrayList;
@@ -41,4 +42,21 @@ public class PlayerController {
         return output;
     }
 
+    public String createPlayer(String name, String surname, String id, String password, String email, Admin creator) {
+        String output = "";
+        boolean alreadyExists = false;
+        for (Player player : players) {
+            if (player.getId().equals(id)) {
+                output = "  Player with ID " + id + " already exists";
+                alreadyExists = true;
+                break;
+            }
+        }
+        if (!alreadyExists) {
+            Player player = new Player(name, surname, id, password, email, creator);
+            players.add(player);
+            output = "  Player " + name + " created successfully";
+        }
+        return output;
+    }
 }
