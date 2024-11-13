@@ -1,27 +1,33 @@
 package upm.command;
 
-
 import upm.controller.PlayerController;
+import upm.controller.PublicController;
 
 public class PlayerCreate implements Command{
-    private PlayerController controller;
+    private PlayerController playerController;
+    private PublicController publicController;
 
-    public PlayerCreate(PlayerController controller) {
-        this.controller = controller;
+    public PlayerCreate(PlayerController playerController) {
+        this.playerController = playerController;
     }
 
     @Override
     public String apply(String[] stringsep) {
-        return "";
+        String output = "";
+        String[] params = stringsep[1].split(";");
+        if(params.length == 5) {
+            output = playerController.createPlayer(params[0], params[1], params[2], params[3], params[4], publicController.getAdmin(publicController.getLogged()));
+        }
+        return output;
     }
 
     @Override
     public String toString() {
-        return "> player-delete";
+        return "> player-create name;surname;id;password;email";
     }
 
     @Override
     public String getCommand() {
-        return "";
+        return "player-create ";
     }
 }
