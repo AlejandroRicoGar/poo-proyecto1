@@ -13,9 +13,9 @@ import java.util.List;
 
 public class App {
 
-    private TeamController team;
-    private TournamentController tournament;
-    private PlayerController player;
+    private TeamController teamController;
+    private TournamentController tournamentController;
+    private PlayerController playerController;
     private PublicController publicController;
     private CLI cli;
     private List<Command> commandsPublic;
@@ -40,10 +40,10 @@ public class App {
      */
     public App(){
         cli = new CLI();
-        player = new PlayerController();
+        playerController = new PlayerController();
         publicController = new PublicController();
-        tournament = new TournamentController();
-        team = new TeamController();
+        tournamentController = new TournamentController();
+        teamController = new TeamController();
 
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
@@ -53,23 +53,23 @@ public class App {
 
         commandsPublic.add(new LogIn(publicController));
         commandsPublic.add(new Logout(publicController));
-        commandsPublic.add(new TournamentList(tournament,publicController));
+        commandsPublic.add(new TournamentList(tournamentController,publicController));
 
 
-        commandsPlayer.add(new TournamentAdd(tournament,team,publicController));
-        commandsPlayer.add(new TournamentRemove(tournament,publicController));
-        commandsPlayer.add(new StaticsShow(player));
+        commandsPlayer.add(new TournamentAdd(tournamentController,teamController,publicController));
+        commandsPlayer.add(new TournamentRemove(tournamentController,publicController));
+        commandsPlayer.add(new StatisticsShow(playerController, publicController));
 
 
-        commandsAdmin.add(new PlayerCreate(player));
-        commandsAdmin.add(new TeamCreate(team));
-        commandsAdmin.add(new PlayerDelete(player));
-        commandsAdmin.add(new TeamDelete(team));
-        commandsAdmin.add(new TeamAdd(team));
-        commandsAdmin.add(new TeamRemove(team));
-        commandsAdmin.add(new TournamentCreate(tournament));
-        commandsAdmin.add(new TournamentDelete(tournament));
-        commandsAdmin.add(new TournamentMatchMaking(tournament));
+        commandsAdmin.add(new PlayerCreate(playerController));
+        commandsAdmin.add(new TeamCreate(teamController));
+        commandsAdmin.add(new PlayerDelete(playerController, teamController));
+        commandsAdmin.add(new TeamDelete(teamController));
+        commandsAdmin.add(new TeamAdd(teamController, playerController));
+        commandsAdmin.add(new TeamRemove(teamController));
+        commandsAdmin.add(new TournamentCreate(tournamentController));
+        commandsAdmin.add(new TournamentDelete(tournamentController));
+        commandsAdmin.add(new TournamentMatchMaking(tournamentController));
 
         for (Command command : commandsPublic) {
             commands.add(command);
@@ -81,7 +81,7 @@ public class App {
             commands.add(command);
         }
 
-        Init i = new Init(publicController,tournament,team);
+        Init i = new Init(publicController,tournamentController,teamController);
         i.start();
     }
 
