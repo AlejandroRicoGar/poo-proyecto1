@@ -76,6 +76,9 @@ public class Player extends User implements Member{
         return tournaments;
     }
 
+    public String getId() {
+        return id;
+    }
 
     @Override
     public String toString() {

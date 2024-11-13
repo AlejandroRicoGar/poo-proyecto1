@@ -4,9 +4,6 @@ import upm.controller.PublicController;
 import upm.controller.TeamController;
 import upm.controller.TournamentController;
 
-
-import java.util.ArrayList;
-
 public class TournamentAdd implements Command{
     private TournamentController controller;
     private TeamController controllerTeam;
