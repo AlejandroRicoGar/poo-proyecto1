@@ -13,8 +13,9 @@ public class TeamController {
         teams = new ArrayList<>();
     }
 
-    public void addTeam(Team team){
+    public String addTeam(Team team){
         teams.add(team);
+        return "Team added";
     }
 
     public Team searchTeam(String name){
