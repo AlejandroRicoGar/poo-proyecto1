@@ -7,11 +7,13 @@ public class Team implements Member{
     private String name;
     private ArrayList<Player> members;
     private ArrayList<Tournament> tournaments;
+    private Admin creator;
 
-    public Team(String name) {
+    public Team(String name,Admin creator) {
         this.name = name;
         this.members = new ArrayList<>();
         this.tournaments = new ArrayList<>();
+        this.creator=creator;
     }
     public String getName() {
         return name;
