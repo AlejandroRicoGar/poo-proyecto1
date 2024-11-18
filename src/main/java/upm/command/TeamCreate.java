@@ -48,7 +48,7 @@ public class TeamCreate implements Command{
      */
     @Override
     public String toString() {
-        return "";
+        return "team-create name";
     }
     /**
      * @return the name of the command

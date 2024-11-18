@@ -62,4 +62,7 @@ public class Team implements Member{
         return tournaments;
     }
 
+    public Admin getCreator() {
+        return creator;
+    }
 }
