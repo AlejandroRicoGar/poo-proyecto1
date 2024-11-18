@@ -1,19 +1,22 @@
 package upm.command;
 
+import upm.controller.PublicController;
 import upm.controller.TeamController;
 import upm.model.Team;
 
 public class TeamCreate implements Command{
     private TeamController teamController;
-    public TeamCreate(TeamController controller) {
-        this.teamController = controller;
+    private PublicController publicController;
+    public TeamCreate(TeamController tcontroller,PublicController pcontroller) {
+        this.teamController = tcontroller;
+        this.publicController = pcontroller;
     }
     @Override
     public String apply(String[] stringsep) {
             String output = "";
-            if(stringsep.length == 1) {
-                if(teamController.searchTeam(stringsep[0])==null)
-                    output=teamController.addTeam(new Team(stringsep[0]));
+            if(stringsep.length == 2) {
+                if(teamController.searchTeam(stringsep[1])==null)
+                    output=teamController.addTeam(new Team(stringsep[1],publicController.getAdmin(publicController.getLogged())));
                 else
                     output="Team already exists";
             }
