@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class CLI {
 
+    private static CLI ints;
+
     private Scanner sc;
 
     @Deprecated
@@ -20,7 +22,7 @@ public class CLI {
     }
 
 
-     public CLI(){
+     private CLI(){
          sc = new Scanner(System.in);
      }
     /**
@@ -38,6 +40,12 @@ public class CLI {
         String input = sc.nextLine();
         return input;
     }
+    public static CLI getInstance(){
+        if (ints == null)
+            ints = new CLI();
+        return ints;
+    }
+
 
 
 

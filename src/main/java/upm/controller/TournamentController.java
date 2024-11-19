@@ -3,6 +3,7 @@ package upm.controller;
 import upm.model.*;
 
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,9 +13,10 @@ import java.util.List;
 
 
 public class TournamentController {
+    private static TournamentController instance;
     private ArrayList<Tournament> tournaments;
 
-    public TournamentController() {
+    private TournamentController() {
         tournaments = new ArrayList<>();
     }
 
@@ -95,7 +97,7 @@ public class TournamentController {
         if(tournament!=null){
             output = "  "+name+" eliminado correctamente";
             ArrayList<Member> jugadores = tournament.getMembers();
-            if (jugadores.size() > 0) {
+            if (!jugadores.isEmpty()) {
                 for (Member jugador : jugadores) {
                     jugador.deleteTournament(tournament);
                 }
@@ -237,8 +239,6 @@ public class TournamentController {
         for(int i = 1;i<args.length;i+=2){
             Member m = tournament.searchMember(args[i]);
             Member m2 = tournament.searchMember(args[i+1]);
-            System.out.println(args[i]);
-            System.out.println(args[i+1]);
             if(m != null && m2 != null){
                 Matchmaking match = new Matchmaking(m,m2);
                 tournament.addMatchups(match);
@@ -265,5 +265,11 @@ public class TournamentController {
             builder.append(m.toString()).append("\n");
         }
         return builder.toString();
+    }
+
+    public static TournamentController getInstance(){
+        if (instance == null)
+            instance = new TournamentController();
+        return instance;
     }
 }

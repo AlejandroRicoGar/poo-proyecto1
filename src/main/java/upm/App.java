@@ -39,10 +39,10 @@ public class App {
      * de la aplicacion.
      */
     public App(){
-        cli = new CLI();
+        cli = CLI.getInstance();
         playerController = new PlayerController();
         publicController = new PublicController();
-        tournamentController = new TournamentController();
+        tournamentController = TournamentController.getInstance();
         teamController = new TeamController();
 
         commands = new LinkedList<>();
@@ -67,7 +67,7 @@ public class App {
         commandsAdmin.add(new TeamDelete(teamController));
         commandsAdmin.add(new TeamAdd(teamController, playerController));
         commandsAdmin.add(new TeamRemove(teamController));
-        commandsAdmin.add(new TournamentCreate(tournamentController));
+        commandsAdmin.add(new TournamentCreate());
         commandsAdmin.add(new TournamentDelete(tournamentController));
         commandsAdmin.add(new TournamentMatchMaking(tournamentController));
 
