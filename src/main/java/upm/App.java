@@ -81,7 +81,7 @@ public class App {
             commands.add(command);
         }
 
-        Init i = new Init(publicController,tournamentController,teamController);
+        Init i = new Init(publicController,tournamentController,teamController, playerController);
         i.start();
     }
 

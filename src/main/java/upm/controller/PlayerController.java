@@ -17,11 +17,11 @@ public class PlayerController {
         players.add(player);
     }
 
-    public Player search(String name){
+    public Player search(String id){
         Player player = null;
         if(!players.isEmpty()){
             for(Player p : players){
-                if(p.getName().equals(name)){
+                if(p.getId().equals(id)){
                     player = p;
                 }
             }
@@ -29,19 +29,11 @@ public class PlayerController {
         return player;
     }
 
-    public String deletePlayer(String name){
-        String output = "";
-        Player player = search(name);
-        if(player != null) {
-            if (player.getTournaments().isEmpty()) {
-                players.remove(player);
-                output = "  Player " + name + " deleted successfully";
-            } else {
-                output = "  The player " + name + " is in a tournament, you must remove the player from the tournament before deleting it";
-            }
-        }
-        return output;
+    public String deletePlayer(Player player){
+        players.remove(player);
+        return "  Player " + player.getName() + " deleted successfully";
     }
+
 
     public String createPlayer(String name, String surname, String id, String password, String email, Admin creator) {
         String output = "";
