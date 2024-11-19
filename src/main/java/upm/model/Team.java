@@ -24,19 +24,23 @@ public class Team implements Member{
     public Boolean isMember(Player player) {
         return members.contains(player);
     }
-    public Boolean isMember(String playerID) {
-        boolean resul = false;
+    public Player getMember(String playerID) {
+        Player resul=null;
         for(Player player: members){
             if(player.getId().equals(playerID)){
-                resul=true;
+                resul=player;
                 break;
             }
         }
         return resul;
     }
 
+
     public void addMember(Player player) {
         members.add(player);
+    }
+    public void deleteMember(Player player){
+        members.remove(player);
     }
     @Override
     public Double getCategoryValue(Categories categoria) {
