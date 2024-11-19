@@ -1,7 +1,7 @@
 package upm.controller;
 
 import upm.model.*;
-import upm.view.CLI;
+
 
 
 import java.time.LocalDate;
@@ -74,7 +74,6 @@ public class TournamentController {
                         Categories cat = Categories.valueOf(args[5]);
                         Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat);
                         tournaments.add(tournament);
-                        System.out.println(tournaments.toString());
                         output = "  "+args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
                                 +args[3]+" is going to be played and is going to be ranked by  "+cat;
                     }catch (IllegalArgumentException e){
@@ -98,7 +97,7 @@ public class TournamentController {
         if(tournament!=null){
             output = "  "+name+" eliminado correctamente";
             ArrayList<Member> jugadores = tournament.getMembers();
-            if (jugadores.size() > 0) {
+            if (!jugadores.isEmpty()) {
                 for (Member jugador : jugadores) {
                     jugador.deleteTournament(tournament);
                 }
@@ -240,8 +239,6 @@ public class TournamentController {
         for(int i = 1;i<args.length;i+=2){
             Member m = tournament.searchMember(args[i]);
             Member m2 = tournament.searchMember(args[i+1]);
-            System.out.println(args[i]);
-            System.out.println(args[i+1]);
             if(m != null && m2 != null){
                 Matchmaking match = new Matchmaking(m,m2);
                 tournament.addMatchups(match);
