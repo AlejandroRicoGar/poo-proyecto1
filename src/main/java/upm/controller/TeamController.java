@@ -29,11 +29,11 @@ public class TeamController {
         return team;
     }
     
-    public String addPlayerToTeam(Player player, Team team) {
+    public String addPlayerToTeam(Player player, Team team) {//Porque
         String output = "";
         if (team != null) {
             team.addMember(player);
-            output = "Player with email " + player.getName() + " added to team " + team.getName();
+            output = "Player with Id " + player.getId() + " added to team " + team.getName();
         } else {
             output = "The team does not exist";
         }
@@ -45,5 +45,15 @@ public class TeamController {
     }
     public void deleteTeam(Team team){
         teams.remove(team);
+    }
+    public String deletePlayerFromTeam(Player player, Team team) {
+        String output;
+        if (team.getTeamSize()>2) {
+            output = "Player with Id " + player.getId() + " deleted from team " + team.getName();
+            team.deleteMember(player);
+        } else {
+            output = "Cannot delete player because minimum team size 2";
+        }
+        return output;
     }
 }
