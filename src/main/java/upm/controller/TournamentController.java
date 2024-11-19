@@ -31,7 +31,7 @@ public class TournamentController {
         String output = "";
         if(t != null){
                 t.addMember(p);
-                output =    "   Player with email "+p.getName()+" added to tournament"+t.getName();
+                output =    "   Player with email "+p.getMail()+" added to tournament"+t.getName();
         }else{
             output = "  The tournament does not exist";
         }
