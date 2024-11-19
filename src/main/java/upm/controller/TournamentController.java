@@ -16,7 +16,7 @@ public class TournamentController {
     private static TournamentController instance;
     private ArrayList<Tournament> tournaments;
 
-    public TournamentController() {
+    private TournamentController() {
         tournaments = new ArrayList<>();
     }
 

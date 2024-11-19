@@ -4,7 +4,6 @@ import upm.controller.TournamentController;
 
 public class TournamentCreate implements Command{
     public TournamentCreate() {
-        TournamentController tournamentController = TournamentController.getInstance();
     }
     @Override
     public String apply(String[] stringsep) {
