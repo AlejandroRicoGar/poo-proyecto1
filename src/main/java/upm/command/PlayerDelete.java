@@ -5,6 +5,7 @@ package upm.command;
 
 import upm.controller.PlayerController;
 import upm.controller.TeamController;
+import upm.model.Player;
 import upm.model.Team;
 
 /**
@@ -34,27 +35,42 @@ public class PlayerDelete implements Command {
 
     /**
      * Deletes a player if he is not in a team with active tournaments and he is not in a tournament
-     * @param playerName an array of strings with the parameters "player-delete playerName"
+     * @param playerName an array of strings with the parameters "player-delete playerId"
      * @return the output of the command
      */
     @Override
     public String apply(String[] stringsep) {
         String output = "";
-        String[] playerName = stringsep[1].split(";");
-        Boolean isInATeam = false;
-        if(playerName.length == 1) {
-            for (Team team : teamController.getTeams()) {
-                if (Boolean.TRUE.equals(team.isMember(playerController.search(playerName[0]))) && !team.getTournaments().isEmpty()) {
-                        output = "The player " + playerName[0] + " is in a team with active tournaments, you must remove the player from the team or remove the team from the tournament before deleting it";
-                        isInATeam = true;
-                        break;
-                    }
-            }
-            if (Boolean.FALSE.equals(isInATeam)) {
-                output = playerController.deletePlayer(playerName[0]);
-            }
+        if (stringsep.length != 2) {
+            output = "Incorrect number of parameters";
         } else {
-            output = "Incorrect number of parameters, only the name of the player is required";
+            String[] params = stringsep[1].split(";");
+                String playerId = params[0];
+                Player player = playerController.search(playerId);
+                if (player != null) {
+                    if (player.getTournaments().isEmpty()) {
+                        boolean canRemove = true;
+                        for (Team team : teamController.getTeams()) {
+                            if (Boolean.TRUE.equals(team.isMember(player)) && !team.getTournaments().isEmpty()) {
+                                output = "The player " + player.getName() + " is in a team with active tournaments, you must remove the player from the team or remove the team from the tournament before deleting it";
+                                canRemove = false;
+                                break;
+                            }
+                        }
+                        if (canRemove) {
+                            if (teamController.removePlayerFromAllTeams(player)) {
+                                output = playerController.deletePlayer(player);
+                            } else {
+                                //El jugador esta en un equipo que tiene a una persona más aparte de el, y no puede haber equipos con menos de dos jugadores
+                                output = "The player " + player.getName() + " is in a minimum sized team (2 players)";
+                            }
+                        }
+                    } else {
+                        output = "The player " + player.getName() + " is in a tournament, you must remove the player from the tournament before deleting it";
+                    }
+                } else {
+                    output = "The player with id " + playerId + "does not exist";
+                }
         }
         return output;
     }
@@ -65,7 +81,7 @@ public class PlayerDelete implements Command {
      */
     @Override
     public String toString() {
-        return "> player-delete playerName";
+        return "> player-delete playerId";
     }
 
     /**
