@@ -44,8 +44,7 @@ public class PlayerDelete implements Command {
         if (stringsep.length != 2) {
             output = "Incorrect number of parameters";
         } else {
-            String[] params = stringsep[1].split(";");
-                String playerId = params[0];
+                String playerId = stringsep[1];
                 Player player = playerController.search(playerId);
                 if (player != null) {
                     if (player.getTournaments().isEmpty()) {
