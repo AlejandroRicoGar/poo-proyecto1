@@ -20,6 +20,7 @@ public class Team implements Member{
     public String getName() {
         return name;
     }
+    public int getTeamSize(){return members.size();}
 
     public Boolean isMember(Player player) {
         return members.contains(player);
