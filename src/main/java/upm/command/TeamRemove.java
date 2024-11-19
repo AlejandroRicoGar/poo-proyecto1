@@ -30,7 +30,7 @@ public class TeamRemove implements Command{
 
     @Override
     public String toString() {
-        return "team-remove teamname;playerId";
+        return "> team-remove teamname;playerId";
     }
 
     @Override

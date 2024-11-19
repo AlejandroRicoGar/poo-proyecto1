@@ -48,7 +48,7 @@ public class TeamDelete implements Command{
      */
     @Override
     public String toString() {
-        return "team-delete name";
+        return "> team-delete name";
     }
     /**
      * @return name of the command

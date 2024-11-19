@@ -66,7 +66,7 @@ public class TeamCreate implements Command{
      */
     @Override
     public String toString() {
-        return "team-create teamname;player1Id;player2Id";
+        return "> team-create teamname;player1Id;player2Id";
     }
     /**
      * @return the name of the command
