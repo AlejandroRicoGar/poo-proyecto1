@@ -34,8 +34,8 @@ public class PlayerDelete implements Command {
     }
 
     /**
-     * Deletes a player if he is not in a team with active tournaments and he is not in a tournament
-     * @param playerName an array of strings with the parameters "player-delete playerId"
+     * Deletes a player if he is not in a team with active tournaments or minimal players and he is not in a tournament
+     * @param stringsep an array of strings with the parameters "player-delete playerId"
      * @return the output of the command
      */
     @Override
@@ -61,7 +61,6 @@ public class PlayerDelete implements Command {
                             if (teamController.removePlayerFromAllTeams(player)) {
                                 output = playerController.deletePlayer(player);
                             } else {
-                                //El jugador esta en un equipo que tiene a una persona más aparte de el, y no puede haber equipos con menos de dos jugadores
                                 output = "The player " + player.getName() + " is in a minimum sized team (2 players)";
                             }
                         }
@@ -93,4 +92,5 @@ public class PlayerDelete implements Command {
         return "player-delete";
     }
 }
+
 
