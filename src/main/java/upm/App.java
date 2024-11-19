@@ -57,7 +57,7 @@ public class App {
 
 
         commandsPlayer.add(new TournamentAdd(tournamentController,teamController,publicController));
-        commandsPlayer.add(new TournamentRemove(tournamentController,publicController));
+        commandsPlayer.add(new TournamentRemove(publicController));
         commandsPlayer.add(new StatisticsShow(playerController, publicController));
 
 

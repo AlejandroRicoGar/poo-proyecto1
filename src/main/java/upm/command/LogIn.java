@@ -22,6 +22,8 @@ public class LogIn implements Command{
                 String[] args = params[1].split(";");
                 if (args.length == 2) {
                     output = controller.login(args);
+                }else{
+                    output = "Incorrect number of arguments.";
                 }
             } else {
                 output = "Incorrect number of arguments";

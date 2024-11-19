@@ -25,6 +25,8 @@ public class TournamentMatchMaking implements Command {
             } else {
                 output = "You must select a matchmaking option -a for automatic matchmaking and -m for manual matchmaking";
             }
+        }else{
+            output = "Incorrect number of arguments";
         }
         return output;
     }
