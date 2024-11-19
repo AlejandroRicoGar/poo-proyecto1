@@ -55,14 +55,18 @@ public class TeamController {
     }
     public boolean deletePlayerFromAllTeams(Player player) {
         boolean remove=true;
-        for(Team team: teams)
-            if(team.getTeamSize()<=2){
+        for(Team team : teams) {
+            if (team.isMember(player) && team.getTeamSize()<=2){
                 remove=false;
                 break;
             }
+        }
         if(remove)
-            for(Team team: teams)
-                team.deleteMember(player);
+            for(Team team : teams){
+                if (team.isMember(player)) {
+                    team.deleteMember(player);
+                }
+            }
         return remove;
     }
 }
