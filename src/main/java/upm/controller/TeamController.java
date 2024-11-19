@@ -13,9 +13,8 @@ public class TeamController {
         teams = new ArrayList<>();
     }
 
-    public String addTeam(Team team){
+    public void addTeam(Team team){
         teams.add(team);
-        return "Team added";
     }
 
     public Team searchTeam(String name){
@@ -43,5 +42,8 @@ public class TeamController {
 
     public List<Team> getTeams() {
         return teams;
+    }
+    public void deleteTeam(Team team){
+        teams.remove(team);
     }
 }
