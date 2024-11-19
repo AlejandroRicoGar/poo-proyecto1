@@ -45,8 +45,8 @@ public class Init {
         Alfredo.setCategoryValue(Categories.SCORED_POINTS,5.0);
 
         //Creacion de dos Equipos nuevos
-        Team equipo1 = new Team("Equipo_1");
-        Team equipo2 = new Team("Equipo_2");
+        Team equipo1 = new Team("Equipo_1",Admin);
+        Team equipo2 = new Team("Equipo_2",Admin);
         equipo1.addMember(Alfredo);
         equipo2.addMember(Alejandro);
         equipo1.addMember(Alfredo);
