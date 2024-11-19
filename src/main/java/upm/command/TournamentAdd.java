@@ -18,12 +18,16 @@ public class TournamentAdd implements Command{
     @Override
     public String apply(String[] stringsep) {
         String output = "";
-        String[] params = stringsep[1].split(";");
-        String tournament = params[0];
-        if(params.length == 1) {
-            output = controller.addMember(controller.search(tournament),controllerPublic.getPlayer(controllerPublic.getLogged()));
-        }else if(params.length == 2) {
-            output = controller.addTeam(tournament,controllerTeam.searchTeam(params[1]),controllerPublic.getPlayer(controllerPublic.getLogged()));
+        if(stringsep.length == 2) {
+            String[] params = stringsep[1].split(";");
+            String tournament = params[0];
+            if (params.length == 1) {
+                output = controller.addMember(controller.search(tournament), controllerPublic.getPlayer(controllerPublic.getLogged()));
+            } else if (params.length == 2) {
+                output = controller.addTeam(tournament, controllerTeam.searchTeam(params[1]), controllerPublic.getPlayer(controllerPublic.getLogged()));
+            } else {
+                output = "Incorrect number of parameters";
+            }
         }else{
             output = "Incorrect number of parameters";
         }

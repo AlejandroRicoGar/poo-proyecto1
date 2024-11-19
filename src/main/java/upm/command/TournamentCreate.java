@@ -10,13 +10,16 @@ public class TournamentCreate implements Command{
     @Override
     public String apply(String[] stringsep) {
         String output = "";
-        String[] params = stringsep[1].split(";");
-        if(params.length == 6){
-            output = controller.createTournament(params);
+        if(stringsep.length == 2) {
+            String[] params = stringsep[1].split(";");
+            if (params.length == 6) {
+                output = controller.createTournament(params);
+            } else {
+                output = "Incorrect number of parameters";
+            }
         }else {
             output = "Incorrect number of parameters";
         }
-
         return output;
     }
 
