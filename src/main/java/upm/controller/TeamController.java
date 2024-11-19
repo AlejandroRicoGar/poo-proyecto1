@@ -53,4 +53,16 @@ public class TeamController {
         } else
             return false;
     }
+    public boolean deletePlayerFromAllTeams(Player player) {
+        boolean remove=true;
+        for(Team team: teams)
+            if(team.getTeamSize()<=2){
+                remove=false;
+                break;
+            }
+        if(remove)
+            for(Team team: teams)
+                team.deleteMember(player);
+        return remove;
+    }
 }
