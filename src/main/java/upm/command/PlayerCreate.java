@@ -39,6 +39,9 @@ public class PlayerCreate implements Command {
         String[] params = stringsep[1].split(";");
         if(params.length == 5) {
             output = playerController.createPlayer(params[0], params[1], params[2], params[3], params[4], publicController.getAdmin(publicController.getLogged()));
+            if (playerController.search(params[2]) != null) {
+                publicController.signUpUser(playerController.search(params[2]));
+            }
         } else {
             output = "Incorrect number of parameters";
         }
