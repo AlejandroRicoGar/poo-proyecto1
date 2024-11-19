@@ -8,7 +8,7 @@ import upm.model.Team;
  */
 public class TeamCreate implements Command{
     /**
-     * Team controller to create team
+     * Team controller to create team and add it to list of teams
      */
     private TeamController teamController;
     /**
@@ -25,7 +25,7 @@ public class TeamCreate implements Command{
         this.publicController = pcontroller;
     }
     /**
-     * Creates a team
+     * Creates a team i f it doesn't already exist
      * @param stringsep An array with the parameters [team-create, name]
      * @return The output of the command
      */
