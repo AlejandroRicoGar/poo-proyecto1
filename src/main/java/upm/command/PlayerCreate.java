@@ -23,8 +23,9 @@ public class PlayerCreate implements Command {
      * Constructor of the class
      * @param playerController Player controller to create the player
      */
-    public PlayerCreate(PlayerController playerController) {
+    public PlayerCreate(PlayerController playerController, PublicController publicController) {
         this.playerController = playerController;
+        this.publicController = publicController;
     }
 
     /**
@@ -59,7 +60,7 @@ public class PlayerCreate implements Command {
      */
     @Override
     public String getCommand() {
-        return "player-create ";
+        return "player-create";
     }
 }
 
