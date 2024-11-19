@@ -39,40 +39,41 @@ public class PlayerDelete implements Command {
      * @return the output of the command
      */
     @Override
-    public String apply(String[] stringsep) {
-        String output = "";
-        if (stringsep.length != 2) {
-            output = "Incorrect number of parameters";
-        } else {
-                String playerId = stringsep[1];
-                Player player = playerController.search(playerId);
-                if (player != null) {
-                    if (player.getTournaments().isEmpty()) {
-                        boolean canRemove = true;
-                        for (Team team : teamController.getTeams()) {
-                            if (Boolean.TRUE.equals(team.isMember(player)) && !team.getTournaments().isEmpty()) {
-                                output = "The player " + player.getName() + " is in a team with active tournaments, you must remove the player from the team or remove the team from the tournament before deleting it";
-                                canRemove = false;
-                                break;
-                            }
-                        }
-                        if (canRemove) {
-                            if (teamController.deletePlayerFromAllTeams(player)) {
-                                output = playerController.deletePlayer(player);
-                            } else {
-                                output = "The player " + player.getName() + " is in a minimum sized team (2 players)";
-                            }
-                        }
-                    } else {
-                        output = "The player " + player.getName() + " is in a tournament, you must remove the player from the tournament before deleting it";
-                    }
-                } else {
-                    output = "The player with id " + playerId + "does not exist";
-                }
-        }
-        return output;
+public String apply(String[] stringsep) {
+    if (stringsep.length != 2) {
+        return "Incorrect number of parameters";
     }
 
+    String playerId = stringsep[1];
+    Player player = playerController.search(playerId);
+
+    if (player == null) {
+        return "The player with id " + playerId + " does not exist";
+    }
+
+    if (!player.getTournaments().isEmpty()) {
+        return "The player " + player.getName() + " is in a tournament";
+    }
+
+    if (!canRemovePlayerFromTeams(player)) {
+        return "The player " + player.getName() + " is in a team with active tournaments";
+    }
+
+    if (!teamController.deletePlayerFromAllTeams(player)) {
+        return "The player " + player.getName() + " is in a minimum sized team (2 players)";
+    }
+
+    return playerController.deletePlayer(player);
+}
+
+private boolean canRemovePlayerFromTeams(Player player) {
+    for (Team team : teamController.getTeams()) {
+        if (Boolean.TRUE.equals(team.isMember(player)) && !team.getTournaments().isEmpty()) {
+            return false;
+        }
+    }
+    return true;
+}
     /**
      * Returns a string with the description of the command
      * @return the description of the command
