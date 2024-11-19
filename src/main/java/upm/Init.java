@@ -28,10 +28,10 @@ public class Init {
         publicController.signUpUser(Admin); //Registra el admin añadiendolo a la lista de usuarios y de admins
 
         //Creacion de jugadores
-        Player Alejandro = new Player("Alejandro","Rico", "123456789","UPM","alejandro.ricog@alumnos.es",Admin);
-        Player Alfonso = new Player("Alfonso","Garcia","123456789","UPM1","ABCD",Admin);
-        Player Alfredo = new Player("Alfredo","Garcia","123456789","UPM1","ABCD",Admin);
-        Player Victor = new Player("Victor","Palmier","123456789","UPM1","ABCD",Admin);
+        Player Alejandro = new Player("Alejandro","Rico", "12","UPM","alejandro.ricog@alumnos.es",Admin);
+        Player Alfonso = new Player("Alfonso","Garcia","123","UPM1","ABCD",Admin);
+        Player Alfredo = new Player("Alfredo","Garcia","1234","UPM1","ABCD",Admin);
+        Player Victor = new Player("Victor","Palmier","12345","UPM1","ABCD",Admin);
 
 
         publicController.signUpUser(Alejandro);
