@@ -46,14 +46,14 @@ public class TeamController {
     public void deleteTeam(Team team){
         teams.remove(team);
     }
-    public String deletePlayerFromTeam(Player player, Team team) {
-        String output;
+    public boolean deletePlayerFromTeam(Player player, Team team) {
         if (team.getTeamSize()>2) {
-            output = "Player with Id " + player.getId() + " deleted from team " + team.getName();
+            //"Player with Id " + player.getId() + " deleted from team " + team.getName();
             team.deleteMember(player);
+            return true;
         } else {
-            output = "Cannot delete player because minimum team size 2";
+            //"Cannot delete player because minimum team size 2";
+            return false;
         }
-        return output;
     }
 }
