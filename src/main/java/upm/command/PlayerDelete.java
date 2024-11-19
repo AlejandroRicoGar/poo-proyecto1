@@ -58,7 +58,7 @@ public class PlayerDelete implements Command {
                             }
                         }
                         if (canRemove) {
-                            if (teamController.removePlayerFromAllTeams(player)) {
+                            if (teamController.deletePlayerFromAllTeams(player)) {
                                 output = playerController.deletePlayer(player);
                             } else {
                                 output = "The player " + player.getName() + " is in a minimum sized team (2 players)";
