@@ -10,9 +10,11 @@ public class Team implements Member{
     private ArrayList<Tournament> tournaments;
     private Admin creator;
 
-    public Team(String name,Admin creator) {
+    public Team(String name,Player p1,Player p2,Admin creator) {
         this.name = name;
         this.members = new ArrayList<>();
+        members.add(p1);
+        members.add(p2);
         this.tournaments = new ArrayList<>();
         this.creator=creator;
     }

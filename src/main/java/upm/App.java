@@ -62,7 +62,7 @@ public class App {
 
 
         commandsAdmin.add(new PlayerCreate(playerController));
-        commandsAdmin.add(new TeamCreate(teamController,publicController));
+        commandsAdmin.add(new TeamCreate(teamController,publicController,playerController));
         commandsAdmin.add(new PlayerDelete(playerController, teamController));
         commandsAdmin.add(new TeamDelete(teamController));
         commandsAdmin.add(new TeamAdd(teamController, playerController));
