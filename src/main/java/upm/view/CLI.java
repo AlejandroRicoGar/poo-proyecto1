@@ -22,7 +22,7 @@ public class CLI {
     }
 
 
-     public CLI(){
+     private CLI(){
          sc = new Scanner(System.in);
      }
     /**

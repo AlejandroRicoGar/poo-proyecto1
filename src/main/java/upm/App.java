@@ -39,7 +39,7 @@ public class App {
      * de la aplicacion.
      */
     public App(){
-        cli = new CLI();
+        cli = CLI.getInstance();
         playerController = new PlayerController();
         publicController = new PublicController();
         tournamentController = TournamentController.getInstance();
