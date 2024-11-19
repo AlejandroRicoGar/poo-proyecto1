@@ -6,6 +6,7 @@ import java.util.List;
 public class Team implements Member{
     private String name;
     private ArrayList<Player> members;
+
     private ArrayList<Tournament> tournaments;
     private Admin creator;
 
@@ -15,6 +16,7 @@ public class Team implements Member{
         this.tournaments = new ArrayList<>();
         this.creator=creator;
     }
+    @Override
     public String getName() {
         return name;
     }
@@ -26,14 +28,13 @@ public class Team implements Member{
     public void addMember(Player player) {
         members.add(player);
     }
-
+    @Override
     public Double getCategoryValue(Categories categoria) {
         Double total = 0.0;
         for(Player member : members) {
-            total += member.getCategoryValue(categoria);
+            total *= member.getCategoryValue(categoria);
         }
-        Double resul = total/members.size();
-        return resul;
+        return Math.pow(total,((double) 1 /members.size()));
     }
 
     @Override
@@ -42,8 +43,7 @@ public class Team implements Member{
             member.setCategoryValue(category, value);
         }
     }
-
-
+    @Override
     public void addTournament(Tournament tournament) {
         for(Player member : members) {
             member.addTournament(tournament);
