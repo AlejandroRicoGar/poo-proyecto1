@@ -30,11 +30,11 @@ public class TeamDelete implements Command{
 
     @Override
     public String toString() {
-        return "";
+        return "team-delete name";
     }
 
     @Override
     public String getCommand() {
-        return "";
+        return "team-delete";
     }
 }
