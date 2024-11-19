@@ -33,8 +33,10 @@ public class TeamCreate implements Command{
     public String apply(String[] stringsep) {
             String output = "";
             if(stringsep.length == 2) {
-                if(teamController.searchTeam(stringsep[1])==null)
-                    output=teamController.addTeam(new Team(stringsep[1],publicController.getAdmin(publicController.getLogged())));
+                if(teamController.searchTeam(stringsep[1])==null) {
+                    teamController.addTeam(new Team(stringsep[1], publicController.getAdmin(publicController.getLogged())));
+                    output = "Team added";
+                }
                 else
                     output="Team already exists";
             }
