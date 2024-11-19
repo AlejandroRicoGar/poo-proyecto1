@@ -1,6 +1,7 @@
 package upm.controller;
 
 import upm.model.*;
+import upm.view.CLI;
 
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 
 
 public class TournamentController {
+    private static TournamentController instance;
     private ArrayList<Tournament> tournaments;
 
     public TournamentController() {
@@ -72,6 +74,7 @@ public class TournamentController {
                         Categories cat = Categories.valueOf(args[5]);
                         Tournament tournament = new Tournament(args[0],startDate,endDate,args[3],args[4],cat);
                         tournaments.add(tournament);
+                        System.out.println(tournaments.toString());
                         output = "  "+args[0]+" is going to be celebrated from "+startDate.toString()+" to " +endDate.toString()+", "
                                 +args[3]+" is going to be played and is going to be ranked by  "+cat;
                     }catch (IllegalArgumentException e){
@@ -265,5 +268,11 @@ public class TournamentController {
             builder.append(m.toString()).append("\n");
         }
         return builder.toString();
+    }
+
+    public static TournamentController getInstance(){
+        if (instance == null)
+            instance = new TournamentController();
+        return instance;
     }
 }
