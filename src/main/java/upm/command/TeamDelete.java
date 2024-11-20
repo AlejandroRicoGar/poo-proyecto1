@@ -28,15 +28,18 @@ public class TeamDelete implements Command{
         String output = "";
         if(stringsep.length == 2) {
             Team team=teamController.searchTeam(stringsep[1]);
-            if(team!=null)
+            if(team!=null) {
                 if(team.getTournaments().isEmpty()) {
                     teamController.deleteTeam(team);
                     output = "Team deleted";
                 }
-                else
+                else {
                     output="Team cannot be deleted if it is in a tournament";
-            else
+                }
+            }
+            else {
                 output="Team doesnt exist";
+            }
         }
         else{
             output = "Incorrect number of parameters, expected only team name";

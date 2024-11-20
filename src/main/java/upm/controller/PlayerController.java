@@ -45,7 +45,7 @@ public class PlayerController {
                 break;
             }
         }
-        if (!alreadyExists) {
+        if (!alreadyExists) {//
             Player player = new Player(name, surname, id, password, email, creator);
             players.add(player);
             output = "  Player " + name + " created successfully";
