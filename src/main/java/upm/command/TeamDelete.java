@@ -33,10 +33,12 @@ public class TeamDelete implements Command{
                     teamController.deleteTeam(team);
                     output = "Team deleted";
                 }
-                else
+                else {
                     output="Team cannot be deleted if it is in a tournament";
-            else
+                }
+            else {
                 output="Team doesnt exist";
+            }
         }
         else{
             output = "Incorrect number of parameters, expected only team name";
