@@ -15,17 +15,11 @@ public class TeamCreate implements Command{
     private TeamController teamController;
 
     /**
-     * Player controller to get the players
-     */
-    private PlayerController playerController;
-    /**
      * Constructor of the class
      * @param tcontroller Team controller to create the team
-     * @param plcontroller Player controller to get the players
      */
-    public TeamCreate(TeamController tcontroller, PlayerController plcontroller) {
+    public TeamCreate(TeamController tcontroller) {
         this.teamController = tcontroller;
-        this.playerController = plcontroller;
     }
     /**
      * Creates a team if it doesn't already exist
@@ -39,7 +33,8 @@ public class TeamCreate implements Command{
                 String[] params = stringsep[1].split(";");
                 if(params.length==3){
                     if(teamController.searchTeam(stringsep[1])==null) {
-                        Player p1=playerController.search(params[1]),p2=playerController.search(params[2]);
+                        Player p1=PlayerController.getInstance().search(params[1]);
+                        Player  p2=PlayerController.getInstance().search(params[2]);
                         if((p1!=null)&&(p2!=null)){
                             teamController.addTeam(new Team(params[0],p1,p2,PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged())));
                             output = "Created team "+params[0];
