@@ -40,7 +40,7 @@ public class App {
      */
     public App(){
         cli = CLI.getInstance();
-        playerController = new PlayerController();
+        playerController = PlayerController.getInstance();
         publicController = PublicController.getInstance();
         tournamentController = TournamentController.getInstance();
         teamController = new TeamController();
@@ -58,14 +58,14 @@ public class App {
 
         commandsPlayer.add(new TournamentAdd(teamController));
         commandsPlayer.add(new TournamentRemove());
-        commandsPlayer.add(new StatisticsShow(playerController));
+        commandsPlayer.add(new StatisticsShow());
 
 
-        commandsAdmin.add(new PlayerCreate(playerController));
-        commandsAdmin.add(new TeamCreate(teamController,playerController));
-        commandsAdmin.add(new PlayerDelete(playerController, teamController));
+        commandsAdmin.add(new PlayerCreate());
+        commandsAdmin.add(new TeamCreate(teamController));
+        commandsAdmin.add(new PlayerDelete(teamController));
         commandsAdmin.add(new TeamDelete(teamController));
-        commandsAdmin.add(new TeamAdd(teamController, playerController));
+        commandsAdmin.add(new TeamAdd(teamController));
         commandsAdmin.add(new TeamRemove(teamController));
         commandsAdmin.add(new TournamentCreate());
         commandsAdmin.add(new TournamentDelete());
