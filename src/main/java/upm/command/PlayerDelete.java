@@ -12,12 +12,6 @@ import upm.model.Team;
  * Class to delete a player from the system
  */
 public class PlayerDelete implements Command {
-
-    /**
-     * The player controller
-     */
-    private PlayerController playerController;
-
     /**
      * The team controller
      */
@@ -25,11 +19,9 @@ public class PlayerDelete implements Command {
 
     /**
      * Constructor of the class
-     * @param playerController the player controller
      * @param teamController the team controller
      */
-    public PlayerDelete(PlayerController playerController, TeamController teamController) {
-        this.playerController = playerController;
+    public PlayerDelete(TeamController teamController) {
         this.teamController = teamController;
     }
 
@@ -45,7 +37,7 @@ public String apply(String[] stringsep) {
     }
 
     String playerId = stringsep[1];
-    Player player = playerController.search(playerId);
+    Player player = PlayerController.getInstance().search(playerId);
 
     if (player == null) {
         return "The player with id " + playerId + " does not exist";
@@ -63,7 +55,7 @@ public String apply(String[] stringsep) {
         return "The player " + player.getName() + " is in a minimum sized team (2 players)";
     }
 
-    return playerController.deletePlayer(player);
+    return PlayerController.getInstance().deletePlayer(player);
 }
 
 private boolean canRemovePlayerFromTeams(Player player) {
