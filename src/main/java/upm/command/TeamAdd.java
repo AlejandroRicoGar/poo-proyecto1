@@ -17,18 +17,11 @@ public class TeamAdd implements Command {
     private TeamController teamController;
 
     /**
-     * Player controller
-     */
-    private PlayerController playerController;
-
-    /**
      * Constructor with team controller and player controller as parameters
      * @param teamController Team controller
-     * @param playerController Player controller
      */
-    public TeamAdd(TeamController teamController, PlayerController playerController) {
+    public TeamAdd(TeamController teamController) {
         this.teamController = teamController;
-        this.playerController = playerController;
     }
 
     /**
@@ -41,8 +34,8 @@ public class TeamAdd implements Command {
         String output = "";
         String[] params = stringsep[1].split(";");
         if(params.length == 2) {
-            if (playerController.search(params[0]) != null) {
-                output = teamController.addPlayerToTeam(playerController.search(params[0]), teamController.searchTeam(params[1]));
+            if (PlayerController.getInstance().search(params[0]) != null) {
+                output = teamController.addPlayerToTeam(PlayerController.getInstance().search(params[0]), teamController.searchTeam(params[1]));
             } else {
                 output = "The player does not exist";
             }
