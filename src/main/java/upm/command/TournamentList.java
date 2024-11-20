@@ -4,21 +4,16 @@ import upm.controller.TournamentController;
 import upm.controller.PublicController;
 
 public class TournamentList implements Command{
-    private TournamentController controller;
-    private PublicController publicController;
-    public TournamentList(TournamentController controller, PublicController publicController) {
-        this.controller = controller;
-        this.publicController = publicController;
-    }
+
     @Override
     public String apply(String[] params) {
         String output =  "";
-        if(publicController.isAdmin()){
-            output = controller.rankAndPrune();
-        }else if(publicController.isPlayer()){
-            output = controller.rank();
+        if(PublicController.getInstance().isAdmin()){
+            output = TournamentController.getInstance().rankAndPrune();
+        }else if(PublicController.getInstance().isPlayer()){
+            output = TournamentController.getInstance().rank();
         }else{
-            output = controller.show();
+            output = TournamentController.getInstance().show();
         }
         return output;
     }

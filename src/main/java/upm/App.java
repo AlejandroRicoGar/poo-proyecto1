@@ -52,24 +52,24 @@ public class App {
 
 
         commandsPublic.add(new LogIn());
-        commandsPublic.add(new Logout(publicController));
-        commandsPublic.add(new TournamentList(tournamentController,publicController));
+        commandsPublic.add(new Logout());
+        commandsPublic.add(new TournamentList());
 
 
-        commandsPlayer.add(new TournamentAdd(tournamentController,teamController,publicController));
-        commandsPlayer.add(new TournamentRemove(publicController));
-        commandsPlayer.add(new StatisticsShow(playerController, publicController));
+        commandsPlayer.add(new TournamentAdd(teamController));
+        commandsPlayer.add(new TournamentRemove());
+        commandsPlayer.add(new StatisticsShow(playerController));
 
 
-        commandsAdmin.add(new PlayerCreate(playerController, publicController));
-        commandsAdmin.add(new TeamCreate(teamController,publicController,playerController));
+        commandsAdmin.add(new PlayerCreate(playerController));
+        commandsAdmin.add(new TeamCreate(teamController,playerController));
         commandsAdmin.add(new PlayerDelete(playerController, teamController));
         commandsAdmin.add(new TeamDelete(teamController));
         commandsAdmin.add(new TeamAdd(teamController, playerController));
         commandsAdmin.add(new TeamRemove(teamController));
         commandsAdmin.add(new TournamentCreate());
-        commandsAdmin.add(new TournamentDelete(tournamentController));
-        commandsAdmin.add(new TournamentMatchMaking(tournamentController));
+        commandsAdmin.add(new TournamentDelete());
+        commandsAdmin.add(new TournamentMatchMaking());
 
         for (Command command : commandsPublic) {
             commands.add(command);

@@ -17,15 +17,15 @@ public class PlayerCreate implements Command {
     /**
      * Public controller to get the admin that is logged
      */
-    private PublicController publicController;
+
 
     /**
      * Constructor of the class
      * @param playerController Player controller to create the player
      */
-    public PlayerCreate(PlayerController playerController, PublicController publicController) {
+    public PlayerCreate(PlayerController playerController) {
         this.playerController = playerController;
-        this.publicController = publicController;
+
     }
 
     /**
@@ -38,9 +38,9 @@ public class PlayerCreate implements Command {
         String output = "";
         String[] params = stringsep[1].split(";");
         if(params.length == 5) {
-            output = playerController.createPlayer(params[0], params[1], params[2], params[3], params[4], publicController.getAdmin(publicController.getLogged()));
+            output = playerController.createPlayer(params[0], params[1], params[2], params[3], params[4], PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged()));
             if (playerController.search(params[2]) != null) {
-                publicController.signUpUser(playerController.search(params[2]));
+                PublicController.getInstance().signUpUser(playerController.search(params[2]));
             }
         } else {
             output = "Incorrect number of parameters";

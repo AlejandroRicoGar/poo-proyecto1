@@ -12,16 +12,15 @@ import upm.model.Player;
  */
 public class StatisticsShow implements Command{
     private PlayerController playerController;
-    private PublicController publicController;
+
 
     /**
      * Constructor of the class
      * @param playerController the player controller
-     * @param publicController the public controller
      */
-    public StatisticsShow(PlayerController playerController, PublicController publicController) {
+    public StatisticsShow(PlayerController playerController) {
         this.playerController = playerController;
-        this.publicController = publicController;
+
     }
 
     /**
@@ -33,7 +32,7 @@ public class StatisticsShow implements Command{
     public String apply(String[] stringsep) {
         String output = "";
         if (stringsep.length == 2) {
-            Player loggedPlayer = publicController.getPlayer(publicController.getLogged());
+            Player loggedPlayer = PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged());
             if (stringsep[1].equals("-csv")) {
                 output = playerController.getStatisticsCSV(loggedPlayer);
             } else if (stringsep[1].equals("-json")) {

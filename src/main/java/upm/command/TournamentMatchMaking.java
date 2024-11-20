@@ -3,11 +3,7 @@ package upm.command;
 import upm.controller.TournamentController;
 
 public class TournamentMatchMaking implements Command {
-    private TournamentController controller;
 
-    public TournamentMatchMaking(TournamentController controller) {
-        this.controller = controller;
-    }
 
     @Override
     public String apply(String[] stringsep) {
@@ -16,12 +12,12 @@ public class TournamentMatchMaking implements Command {
             String[] args = stringsep[2].split(";");
             if (stringsep[1].equals("-m")) {
                 if (args.length % 2 != 0) {
-                    output = controller.manualMatchmaking(args);
+                    output = TournamentController.getInstance().manualMatchmaking(args);
                 } else {
                     output = "The number of members that is going to be matchmaked is not even";
                 }
             } else if (stringsep[1].equals("-a")) {
-                output = controller.autoMatchmaking(args);
+                output = TournamentController.getInstance().autoMatchmaking(args);
             } else {
                 output = "You must select a matchmaking option -a for automatic matchmaking and -m for manual matchmaking";
             }

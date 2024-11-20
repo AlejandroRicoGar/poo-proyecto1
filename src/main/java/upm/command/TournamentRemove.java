@@ -4,21 +4,16 @@ import upm.controller.PublicController;
 import upm.controller.TournamentController;
 
 public class TournamentRemove implements Command{
-    private PublicController controllerPublic;
-
-    public TournamentRemove(PublicController controllerPublic) {
-
-        this.controllerPublic = controllerPublic;
-    }
+;
     @Override
     public String apply(String[] stringsep) {
         String output= "";
         if(stringsep.length==2){
             String[] espacios = stringsep[1].split(";");
             if (espacios.length == 2) {
-                output = TournamentController.getInstance().removeTeam(TournamentController.getInstance().search(espacios[0]), espacios[1],controllerPublic.getPlayer(controllerPublic.getLogged()));
+                output = TournamentController.getInstance().removeTeam(TournamentController.getInstance().search(espacios[0]), espacios[1],PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged()));
             } else if (espacios.length == 1) {
-                output = TournamentController.getInstance().removePlayer(controllerPublic.getPlayer(controllerPublic.getLogged()), TournamentController.getInstance().search(stringsep[1]));
+                output = TournamentController.getInstance().removePlayer(PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged()), TournamentController.getInstance().search(stringsep[1]));
             } else {
                 output = "Incorrect number of arguments";
             }
