@@ -11,18 +11,6 @@ import upm.model.Player;
  * Class to show the statistics of a player
  */
 public class StatisticsShow implements Command{
-    private PlayerController playerController;
-
-
-    /**
-     * Constructor of the class
-     * @param playerController the player controller
-     */
-    public StatisticsShow(PlayerController playerController) {
-        this.playerController = playerController;
-
-    }
-
     /**
      * Applies the command
      * @param stringsep the parameters of the command "statistics-show -csv/-json"
@@ -34,9 +22,9 @@ public class StatisticsShow implements Command{
         if (stringsep.length == 2) {
             Player loggedPlayer = PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged());
             if (stringsep[1].equals("-csv")) {
-                output = playerController.getStatisticsCSV(loggedPlayer);
+                output = PlayerController.getInstance().getStatisticsCSV(loggedPlayer);
             } else if (stringsep[1].equals("-json")) {
-                output = playerController.getStatisticsJSON(loggedPlayer);
+                output = PlayerController.getInstance().getStatisticsJSON(loggedPlayer);
             } else {
                 output = "Invalid option";
             }
