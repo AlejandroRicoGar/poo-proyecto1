@@ -8,11 +8,18 @@ import java.util.ArrayList;
 
 public class PlayerController {
     private ArrayList<Player> players;
+    private static PlayerController instance;
 
-    public PlayerController() {
+    private PlayerController() {
         players = new ArrayList<>();
     }
 
+    public static PlayerController getInstance() {
+        if (instance == null) {
+            instance = new PlayerController();
+        }
+        return instance;
+    }
     public void addPlayer (Player player){
         players.add(player);
     }
