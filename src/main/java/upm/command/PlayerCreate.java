@@ -18,14 +18,18 @@ public class PlayerCreate implements Command {
     @Override
     public String apply(String[] stringsep) {
         String output = "";
-        String[] params = stringsep[1].split(";");
-        if(params.length == 5) {
-            output = PlayerController.getInstance().createPlayer(params[0], params[1], params[2], params[3], params[4], PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged()));
-            if (PlayerController.getInstance().search(params[2]) != null) {
-                PublicController.getInstance().signUpUser(PlayerController.getInstance().search(params[2]));
-            }
-        } else {
+        if (stringsep.length != 2) {
             output = "Incorrect number of parameters";
+        } else {
+            String[] params = stringsep[1].split(";");
+            if(params.length == 5) {
+                output = PlayerController.getInstance().createPlayer(params[0], params[1], params[2], params[3], params[4], PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged()));
+                if (PlayerController.getInstance().search(params[2]) != null) {
+                    PublicController.getInstance().signUpUser(PlayerController.getInstance().search(params[2]));
+                }
+            } else {
+                output = "Incorrect number of parameters";
+            }
         }
         return output;
     }
