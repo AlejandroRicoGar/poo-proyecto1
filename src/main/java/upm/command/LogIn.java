@@ -3,11 +3,7 @@ package upm.command;
 import upm.controller.PublicController;
 
 public class LogIn implements Command{
-    private PublicController controller;
 
-    public LogIn(PublicController controller) {
-        this.controller = controller;
-    }
 
     /**
      * Metodo que comprueba que los parametros que se pasan es correcto y que el usuario no estan logueado ya
@@ -17,11 +13,11 @@ public class LogIn implements Command{
     @Override
     public String apply(String[] params) {
         String output = "";
-        if(!controller.isAdmin() && !controller.isPlayer()) {
+        if(!PublicController.getInstance().isAdmin() && !PublicController.getInstance().isPlayer()) {
             if (params.length == 2) {
                 String[] args = params[1].split(";");
                 if (args.length == 2) {
-                    output = controller.login(args);
+                    output = PublicController.getInstance().login(args);
                 }else{
                     output = "Incorrect number of arguments.";
                 }

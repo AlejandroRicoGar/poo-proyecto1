@@ -15,11 +15,12 @@ import java.util.Iterator;
  */
 public class PublicController {
     private ArrayList<User> users;
+    private static PublicController instance;
     private boolean isAdmin;
     private boolean isPlayer;
     private User logged;
 
-    public PublicController() {
+    private PublicController() {
         users = new ArrayList<>();
         isAdmin = false;
         isPlayer = false;
@@ -128,5 +129,12 @@ public class PublicController {
         }else{
             return null;
         }
+    }
+
+    public static PublicController getInstance() {
+        if(instance == null){
+            instance = new PublicController();
+        }
+        return instance;
     }
 }

@@ -41,7 +41,7 @@ public class App {
     public App(){
         cli = CLI.getInstance();
         playerController = new PlayerController();
-        publicController = new PublicController();
+        publicController = PublicController.getInstance();
         tournamentController = TournamentController.getInstance();
         teamController = new TeamController();
 
@@ -51,7 +51,7 @@ public class App {
         commandsAdmin = new LinkedList<>();
 
 
-        commandsPublic.add(new LogIn(publicController));
+        commandsPublic.add(new LogIn());
         commandsPublic.add(new Logout(publicController));
         commandsPublic.add(new TournamentList(tournamentController,publicController));
 

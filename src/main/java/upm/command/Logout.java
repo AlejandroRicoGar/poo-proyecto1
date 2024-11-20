@@ -3,11 +3,6 @@ package upm.command;
 import upm.controller.PublicController;
 
 public class Logout implements Command{
-    private PublicController controller;
-
-    public Logout(PublicController controller) {
-        this.controller = controller;
-    }
 
 
     /**
@@ -17,7 +12,7 @@ public class Logout implements Command{
     @Override
     public String apply(String[] params) {
         String output = "";
-        output = controller.logout();
+        output = PublicController.getInstance().logout();
         return output;
     }
 
