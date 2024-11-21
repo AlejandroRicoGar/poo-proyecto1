@@ -8,11 +8,16 @@ import java.util.List;
 
 public class TeamController {
     private ArrayList<Team> teams;
+    private static TeamController instance;
 
-    public TeamController() {
+    private TeamController() {
         teams = new ArrayList<>();
     }
-
+    public static TeamController getInstance(){
+        if (instance == null)
+            instance = new TeamController();
+        return instance;
+    }
     public void addTeam(Team team){
         teams.add(team);
     }

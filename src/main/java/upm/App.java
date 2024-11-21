@@ -43,7 +43,7 @@ public class App {
         playerController = PlayerController.getInstance();
         publicController = PublicController.getInstance();
         tournamentController = TournamentController.getInstance();
-        teamController = new TeamController();
+        teamController = TeamController.getInstance();
 
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
