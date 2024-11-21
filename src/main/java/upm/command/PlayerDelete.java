@@ -13,19 +13,6 @@ import upm.model.Team;
  */
 public class PlayerDelete implements Command {
     /**
-     * The team controller
-     */
-    private TeamController teamController;
-
-    /**
-     * Constructor of the class
-     * @param teamController the team controller
-     */
-    public PlayerDelete(TeamController teamController) {
-        this.teamController = teamController;
-    }
-
-    /**
      * Deletes a player if he is not in a team with active tournaments or minimal players and he is not in a tournament
      * @param stringsep an array of strings with the parameters "player-delete playerId"
      * @return the output of the command
@@ -51,7 +38,7 @@ public String apply(String[] stringsep) {
         return "The player " + player.getName() + " is in a team with active tournaments";
     }
 
-    if (!teamController.deletePlayerFromAllTeams(player)) {
+    if (!TeamController.getInstance().deletePlayerFromAllTeams(player)) {
         return "The player " + player.getName() + " is in a minimum sized team (2 players)";
     }
 
@@ -59,7 +46,7 @@ public String apply(String[] stringsep) {
 }
 
 private boolean canRemovePlayerFromTeams(Player player) {
-    for (Team team : teamController.getTeams()) {
+    for (Team team : TeamController.getInstance().getTeams()) {
         if (Boolean.TRUE.equals(team.isMember(player)) && !team.getTournaments().isEmpty()) {
             return false;
         }
