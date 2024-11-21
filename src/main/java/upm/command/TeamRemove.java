@@ -5,20 +5,16 @@ import upm.model.Player;
 import upm.model.Team;
 
 public class TeamRemove implements Command{
-    private TeamController teamController;
-    public TeamRemove(TeamController tcontroller) {
-        this.teamController = tcontroller;
-    }
     @Override
     public String apply(String[] stringsep) {
         String output = "";
         if(stringsep.length == 2) {
             String[] params = stringsep[1].split(";");
-            Team team=teamController.searchTeam(params[0]);
+            Team team=TeamController.getInstance().searchTeam(params[0]);
             if(team!=null) {
                 Player player = team.getMember(params[1]);
                 if (player != null) {
-                    if (teamController.deletePlayerFromTeam(team.getMember(params[1]), team))
+                    if (TeamController.getInstance().deletePlayerFromTeam(team.getMember(params[1]), team))
                         output = "Player with Id " + player.getId() + " deleted from team " + team.getName();
                     else
                         output = "Cannot delete player because minimum team size 2";
