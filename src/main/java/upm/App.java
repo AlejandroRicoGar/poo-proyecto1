@@ -56,17 +56,17 @@ public class App {
         commandsPublic.add(new TournamentList());
 
 
-        commandsPlayer.add(new TournamentAdd(teamController));
+        commandsPlayer.add(new TournamentAdd());
         commandsPlayer.add(new TournamentRemove());
         commandsPlayer.add(new StatisticsShow());
 
 
         commandsAdmin.add(new PlayerCreate());
-        commandsAdmin.add(new TeamCreate(teamController));
-        commandsAdmin.add(new PlayerDelete(teamController));
-        commandsAdmin.add(new TeamDelete(teamController));
-        commandsAdmin.add(new TeamAdd(teamController));
-        commandsAdmin.add(new TeamRemove(teamController));
+        commandsAdmin.add(new TeamCreate());
+        commandsAdmin.add(new PlayerDelete());
+        commandsAdmin.add(new TeamDelete());
+        commandsAdmin.add(new TeamAdd());
+        commandsAdmin.add(new TeamRemove());
         commandsAdmin.add(new TournamentCreate());
         commandsAdmin.add(new TournamentDelete());
         commandsAdmin.add(new TournamentMatchMaking());

@@ -25,7 +25,7 @@ public class TournamentRemove implements Command{
 
     @Override
     public String toString() {
-        return "> tournament-remove teamName (optional)";
+        return "> tournament-remove TournamentName / tournamentName;teamName (optional)";
     }
 
     @Override
