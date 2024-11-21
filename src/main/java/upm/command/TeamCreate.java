@@ -9,18 +9,7 @@ import upm.model.Team;
  * Class to create a team
  */
 public class TeamCreate implements Command{
-    /**
-     * Team controller to create team and add it to list of teams
-     */
-    private TeamController teamController;
 
-    /**
-     * Constructor of the class
-     * @param tcontroller Team controller to create the team
-     */
-    public TeamCreate(TeamController tcontroller) {
-        this.teamController = tcontroller;
-    }
     /**
      * Creates a team if it doesn't already exist
      * @param stringsep An array with the parameters [team-create, teamname;player1Id;player2Id]
@@ -32,11 +21,11 @@ public class TeamCreate implements Command{
             if(stringsep.length == 2) {
                 String[] params = stringsep[1].split(";");
                 if(params.length==3){
-                    if(teamController.searchTeam(stringsep[1])==null) {
+                    if(TeamController.getInstance().searchTeam(stringsep[1])==null) {
                         Player p1=PlayerController.getInstance().search(params[1]);
                         Player  p2=PlayerController.getInstance().search(params[2]);
                         if((p1!=null)&&(p2!=null)){
-                            teamController.addTeam(new Team(params[0],p1,p2,PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged())));
+                            TeamController.getInstance().addTeam(new Team(params[0],p1,p2,PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged())));
                             output = "Created team "+params[0];
                         }else
                             output="One of the players doesnt exist";

@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class App {
-
+    //200
     private TeamController teamController;
     private TournamentController tournamentController;
     private PlayerController playerController;
@@ -43,7 +43,7 @@ public class App {
         playerController = PlayerController.getInstance();
         publicController = PublicController.getInstance();
         tournamentController = TournamentController.getInstance();
-        teamController = new TeamController();
+        teamController = TeamController.getInstance();
 
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();

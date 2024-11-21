@@ -10,20 +10,6 @@ import upm.controller.TeamController;
  * Class to add a player to a team
  */
 public class TeamAdd implements Command {
-
-    /**
-     * Team controller
-     */
-    private TeamController teamController;
-
-    /**
-     * Constructor with team controller and player controller as parameters
-     * @param teamController Team controller
-     */
-    public TeamAdd(TeamController teamController) {
-        this.teamController = teamController;
-    }
-
     /**
      * Adds a player to a team
      * @param stringsep An array with the parameters "team-add PlayerName;TeamName"
@@ -35,7 +21,7 @@ public class TeamAdd implements Command {
         String[] params = stringsep[1].split(";");
         if(params.length == 2) {
             if (PlayerController.getInstance().search(params[0]) != null) {
-                output = teamController.addPlayerToTeam(PlayerController.getInstance().search(params[0]), teamController.searchTeam(params[1]));
+                output = TeamController.getInstance().addPlayerToTeam(PlayerController.getInstance().search(params[0]), TeamController.getInstance().searchTeam(params[1]));
             } else {
                 output = "The player does not exist";
             }

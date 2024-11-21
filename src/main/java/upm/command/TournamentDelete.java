@@ -3,7 +3,6 @@ package upm.command;
 import upm.controller.TournamentController;
 
 public class TournamentDelete implements Command {
-
     @Override
     public String apply(String[] stringsep) {
         String output = "";

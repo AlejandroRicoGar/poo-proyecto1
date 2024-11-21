@@ -7,18 +7,6 @@ import upm.model.Team;
  */
 public class TeamDelete implements Command{
     /**
-     * Team controller to delete team from list of teams
-     */
-    private TeamController teamController;
-    /**
-     * Constructor of the class
-     * @param tcontroller Team controller to delete the team from list of teams
-     */
-
-    public TeamDelete(TeamController tcontroller) {
-        this.teamController = tcontroller;
-    }
-    /**
      * Deletes a team if it exists, and it doesn't have a tournament
      * @param stringsep An array with the parameters [team-create, name]
      * @return The output of the command
@@ -27,10 +15,10 @@ public class TeamDelete implements Command{
     public String apply(String[] stringsep) {
         String output = "";
         if(stringsep.length == 2) {
-            Team team=teamController.searchTeam(stringsep[1]);
+            Team team=TeamController.getInstance().searchTeam(stringsep[1]);
             if(team!=null) {
                 if(team.getTournaments().isEmpty()) {
-                    teamController.deleteTeam(team);
+                    TeamController.getInstance().deleteTeam(team);
                     output = "Team deleted";
                 }
                 else {
