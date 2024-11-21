@@ -4,7 +4,6 @@ import upm.controller.TournamentController;
 import upm.controller.PublicController;
 
 public class TournamentList implements Command{
-
     @Override
     public String apply(String[] params) {
         String output =  "";
