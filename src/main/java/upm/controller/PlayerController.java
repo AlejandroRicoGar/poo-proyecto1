@@ -55,6 +55,7 @@ public class PlayerController {
         if (!alreadyExists) {//
             Player player = new Player(name, surname, id, password, email, creator);
             players.add(player);
+            PublicController.getInstance().signUpUser(player);
             output = "  Player " + name + " created successfully";
         }
         return output;
