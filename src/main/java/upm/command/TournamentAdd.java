@@ -5,11 +5,7 @@ import upm.controller.TeamController;
 import upm.controller.TournamentController;
 
 public class TournamentAdd implements Command{
-    private TeamController controllerTeam;
 
-    public TournamentAdd(TeamController controllerTeam) {
-        this.controllerTeam = controllerTeam;
-    }
 
     @Override
     public String apply(String[] stringsep) {
@@ -20,7 +16,7 @@ public class TournamentAdd implements Command{
             if (params.length == 1) {
                 output = TournamentController.getInstance().addMember(TournamentController.getInstance().search(tournament), PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged()));
             } else if (params.length == 2) {
-                output = TournamentController.getInstance().addTeam(tournament, controllerTeam.searchTeam(params[1]), PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged()));
+                output = TournamentController.getInstance().addTeam(tournament, TeamController.getInstance().searchTeam(params[1]), PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged()));
             } else {
                 output = "Incorrect number of parameters";
             }
