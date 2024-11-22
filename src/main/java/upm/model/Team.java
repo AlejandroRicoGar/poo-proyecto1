@@ -78,8 +78,4 @@ public class Team implements Member{
     public List<Tournament> getTournaments() {
         return tournaments;
     }
-
-    public Admin getCreator() {
-        return creator;
-    }
 }
