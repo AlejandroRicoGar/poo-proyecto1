@@ -13,20 +13,15 @@ import java.util.List;
 
 public class App {
     //200
-    private TeamController teamController;
-    private TournamentController tournamentController;
-    private PlayerController playerController;
-    private PublicController publicController;
-    private CLI cli;
-    private List<Command> commandsPublic;
-    private List<Command> commandsAdmin;
-    private List<Command> commandsPlayer;
+    private final List<Command> commandsPublic;
+    private final List<Command> commandsAdmin;
+    private final List<Command> commandsPlayer;
     private List<Command> commands;
 
 
     /**
      * Inicia la aplicacion
-     * @param args
+     * @param args constructor
      */
     public static void main(String[] args) {
         App app = new App();
@@ -39,12 +34,6 @@ public class App {
      * de la aplicacion.
      */
     public App(){
-        cli = CLI.getInstance();
-        playerController = PlayerController.getInstance();
-        publicController = PublicController.getInstance();
-        tournamentController = TournamentController.getInstance();
-        teamController = TeamController.getInstance();
-
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
         commandsPlayer = new LinkedList<>();
@@ -71,17 +60,11 @@ public class App {
         commandsAdmin.add(new TournamentDelete());
         commandsAdmin.add(new TournamentMatchMaking());
 
-        for (Command command : commandsPublic) {
-            commands.add(command);
-        }
-        for (Command command : commandsAdmin) {
-            commands.add(command);
-        }
-        for (Command command : commandsPlayer) {
-            commands.add(command);
-        }
+        commands.addAll(commandsPublic);
+        commands.addAll(commandsAdmin);
+        commands.addAll(commandsPlayer);
 
-        Init i = new Init(publicController,tournamentController,teamController, playerController);
+        Init i = new Init(PublicController.getInstance(),TournamentController.getInstance(),TeamController.getInstance(), PlayerController.getInstance());
         i.start();
     }
 
@@ -93,7 +76,6 @@ public class App {
      * > Comandos publicos seran permitidos para los casos: Not Logged,Player, Admin
      * > Comandos player seran permitidos para los casos: PLayer
      * > Comandos Admin seran permitidos para los casos: Admin
-     *
      * Posteriormente llama al CLI para obtener el comando que se escribe por pantalla y comprueba comando a comando
      * permitido (lista PermitedCommands). El output sera lo que va a devolver el comando.
      *
@@ -104,7 +86,7 @@ public class App {
             List<String> commandsList=new LinkedList<>();
             List<Command> Permitedcommands=new LinkedList<>();
 
-            if(publicController.isAdmin()){
+            if(PublicController.getInstance().isAdmin()){
                 for (Command command : commandsAdmin) {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
@@ -113,7 +95,7 @@ public class App {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
                 }
-            } else if (publicController.isPlayer()) {
+            } else if (PublicController.getInstance().isPlayer()) {
                 for (Command command : commandsPlayer) {
                     commandsList.add(command.toString());
                     Permitedcommands.add(command);
@@ -129,7 +111,7 @@ public class App {
                 }
             }
 
-            String command = cli.getCommand(commandsList);
+            String command = CLI.getInstance().getCommand(commandsList);
             if(command.equals("exit")){
                 finish = true;
             }else {
@@ -143,9 +125,9 @@ public class App {
                     }
                 }
                 if (output.toString().isEmpty()){
-                    cli.print("Command not found \n");
+                    CLI.getInstance().print("Command not found \n");
                 }else {
-                    cli.print(output.toString()+"\n");
+                    CLI.getInstance().print(output.toString()+"\n");
                 }
             }
 
