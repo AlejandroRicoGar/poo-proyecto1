@@ -17,42 +17,41 @@ public class PlayerDelete implements Command {
      * @param stringsep an array of strings with the parameters "player-delete playerId"
      * @return the output of the command
      */
+
     @Override
-public String apply(String[] stringsep) {
-    if (stringsep.length != 2) {
-        return "Incorrect number of parameters";
-    }
-
-    String playerId = stringsep[1];
-    Player player = PlayerController.getInstance().search(playerId);
-
-    if (player == null) {
-        return "The player with id " + playerId + " does not exist";
-    }
-
-    if (!player.getTournaments().isEmpty()) {
-        return "The player " + player.getName() + " is in a tournament";
-    }
-
-    if (!canRemovePlayerFromTeams(player)) {
-        return "The player " + player.getName() + " is in a team with active tournaments";
-    }
-
-    if (!TeamController.getInstance().deletePlayerFromAllTeams(player)) {
-        return "The player " + player.getName() + " is in a minimum sized team (2 players)";
-    }
-
-    return PlayerController.getInstance().deletePlayer(player);
-}
-
-private boolean canRemovePlayerFromTeams(Player player) {
-    for (Team team : TeamController.getInstance().getTeams()) {
-        if (Boolean.TRUE.equals(team.isMember(player)) && !team.getTournaments().isEmpty()) {
-            return false;
+    public String apply(String[] stringsep) {
+        if (stringsep.length != 2) {
+            return "Incorrect number of parameters";
         }
+
+        String playerId = stringsep[1];
+        Player player = PlayerController.getInstance().search(playerId);
+
+        if (player == null) {
+            return "The player with id " + playerId + " does not exist";
+        }
+
+        if (!player.getTournaments().isEmpty()) {
+            return "The player " + player.getName() + " is in a tournament";
+        }
+
+        boolean canRemove = true;
+        for (Team team : TeamController.getInstance().getTeams()) {
+            if (team.isMember(player) && !team.getTournaments().isEmpty()) {
+                canRemove = false;
+            }
+        }
+        if (!canRemove) {
+            return "The player " + player.getName() + " is in a team with active tournaments";
+        }
+
+        if (!TeamController.getInstance().deletePlayerFromAllTeams(player)) {
+            return "The player " + player.getName() + " is in a minimum sized team (2 players)";
+        }
+
+        return PlayerController.getInstance().deletePlayer(player);
     }
-    return true;
-}
+    
     /**
      * Returns a string with the description of the command
      * @return the description of the command
