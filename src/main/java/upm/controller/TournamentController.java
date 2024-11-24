@@ -30,6 +30,9 @@ public class TournamentController {
     public String addMember(Tournament t,Player p) {
         String output = "";
         if(t != null){
+            if (t.getMembers().contains(p)) {
+                return "  The player is already in the tournament";
+            }
                 t.addMember(p);
                 output =    "   Player with email "+p.getMail()+" added to tournament"+t.getName();
         }else{
@@ -45,16 +48,19 @@ public class TournamentController {
         if(t != null) {
             if(team != null) {
                 if(team.isMember(p)) {
+                    if (t.getMembers().contains(team)) {
+                        return "  The team is already in the tournament";
+                    }
                         t.addMember(team);
                         output = "  Team " + team.getName() + " added to tournament " + tournamentName;
                 }else{
                     output = " You are not part of this team";
                 }
             }else{
-                output = "  The inserted team does not exists";
+                output = "  The inserted team does not exist";
             }
         }else{
-            output = "  The tournament "+tournamentName+" does not exists.";
+            output = "  The tournament "+tournamentName+" does not exist";
         }
         return output;
     }
