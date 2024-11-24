@@ -18,6 +18,9 @@ public class TeamAdd implements Command {
     @Override
     public String apply(String[] stringsep) {
         String output = "";
+        if (stringsep.length != 2) {
+            return "Incorrect number of parameters";
+        }
         String[] params = stringsep[1].split(";");
         if(params.length == 2) {
             if (PlayerController.getInstance().search(params[0]) != null) {
