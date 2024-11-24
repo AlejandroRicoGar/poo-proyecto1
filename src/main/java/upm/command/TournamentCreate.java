@@ -19,13 +19,16 @@ public class TournamentCreate implements Command{
         return output;
     }
 
-    @Override
-    public String toString() {
-        return "> tournament-create name;startDate;endDate;sport;league;category \n    Name must not have spaces \n    Dates Format DD/MM/YYYY\n    Categories:\n     >SCORED_POINTS,\n" +
+    /*
+     *  \n    Name must not have spaces \n    Dates Format DD/MM/YYYY\n    Categories:\n     >SCORED_POINTS,\n" +
                 "     >MATCH_WON,\n" +
                 "     >ASISTS_POINTS,\n" +
                 "     >PAST_TOURNAMENTS,\n" +
-                "     >GENERATED_MONEY ";
+                "     >GENERATED_MONEY "
+     */
+    @Override
+    public String toString() {
+        return "> tournament-create name;startDate;endDate;sport;league;category";
     }
 
     @Override
