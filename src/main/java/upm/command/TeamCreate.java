@@ -33,10 +33,10 @@ public class TeamCreate implements Command{
                     else
                         output="Team already exists";
                 }else
-                    output = "Incorrect number of parameters: expected team name, player1 Id and player2 Id";
+                    output = "Incorrect number of parameters: expected teamname;player1Id;player2Id";
             }
             else{
-                output = "Incorrect syntax: expected command param1;param2;param3";
+                output = "Incorrect syntax: expected command teamname;player1Id;player2Id";
             }
             return output;
     }
