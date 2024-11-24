@@ -6,14 +6,14 @@ public class Logout implements Command{
 
 
     /**
-     * @param params Division por espacios el param[0] es el comando en si y el param[1] son los argumentos
-     * @return String indicating the result of the logout attempt
+     * Logs out the user
+     *
+     * @param params Command parameters
+     * @return The result of the logout attempt
      */
     @Override
     public String apply(String[] params) {
-        String output = "";
-        output = PublicController.getInstance().logout();
-        return output;
+        return PublicController.getInstance().logout();
     }
 
     /**
