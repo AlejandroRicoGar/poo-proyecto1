@@ -6,28 +6,34 @@ import upm.model.Team;
 
 public class TeamRemove implements Command{
     @Override
-    public String apply(String[] stringsep) {
-        String output = "";
-        if(stringsep.length == 2) {
-            String[] params = stringsep[1].split(";");
-            Team team=TeamController.getInstance().searchTeam(params[0]);
-            if(team!=null) {
-                Player player = team.getMember(params[1]);
-                if (player != null) {
-                    if (TeamController.getInstance().deletePlayerFromTeam(team.getMember(params[1]), team))
-                        output = "Player with Id " + player.getId() + " deleted from team " + team.getName();
-                    else
-                        output = "Cannot delete player because minimum team size 2";
-                } else
-                    output = "Team does not have the player";
-            }
-            else
-                output="Team doesnt exist";
+    public String apply(String[] stringSep) {
+        if (stringSep.length != 2) {
+            return "Incorrect number of parameters, expected team name and playerId";
         }
-        else{
-            output = "Incorrect number of parameters, expected team name and playerId";
+
+        String[] params = stringSep[1].split(";");
+        if (params.length != 2) {
+            return "Incorrect number of parameters, expected team name and playerId";
         }
-        return output;
+
+        String teamName = params[0];
+        String playerId = params[1];
+
+        Team team = TeamController.getInstance().searchTeam(teamName);
+        if (team == null) {
+            return "Team doesn't exist";
+        }
+
+        Player player = team.getMember(playerId);
+        if (player == null) {
+            return "Team does not have the player";
+        }
+
+        if (!TeamController.getInstance().deletePlayerFromTeam(player, team)) {
+            return "Cannot delete player because minimum team size 2";
+        }
+
+        return "Player with Id " + player.getId() + " deleted from team " + team.getName();
     }
 
     @Override
