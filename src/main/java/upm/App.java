@@ -130,7 +130,7 @@ public class App {
                     CLI.getInstance().print(output.toString()+"\n");
                 }
             }
-
+            CLI.getInstance().print("------------------------------------\n");
         }
     }
 }
