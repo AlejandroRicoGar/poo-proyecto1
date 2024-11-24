@@ -160,15 +160,17 @@ public class TournamentController {
     public String rankAndPrune(){
         LocalDate date = LocalDate.now();
         StringBuilder output = new StringBuilder();
+        ArrayList<Tournament> tournamentsToDelete = new ArrayList<>();
         for (Tournament tournament : tournaments) {
             if(tournament.getEndDate().isBefore(date)){
                 output.append("The tournament "+tournament.getName()+" was finished the day "+tournament.getEndDate().toString()+"and is being deleted");
-                delete(tournament.getName());
+                tournamentsToDelete.add(tournament);
             }else{
                 output.append(tournament.getName()).append("\n");
                 output.append(rankAux(tournament)).append("\n");
             }
         }
+        tournaments.removeAll(tournamentsToDelete);
         return output.toString();
     }
 
