@@ -12,26 +12,32 @@ import upm.controller.PublicController;
 public class PlayerCreate implements Command {
     /**
      * Creates a player
-     * @param stringsep An array with the parameters "player-create name;surname;id;password;email"
+     * @param arguments An array with the parameters "player-create name;surname;id;password;email"
      * @return The output of the command
      */
     @Override
-    public String apply(String[] stringsep) {
-        String output = "";
-        if (stringsep.length != 2) {
-            output = "Incorrect number of parameters";
+    public String apply(String[] arguments) {
+        String result = "";
+        if (arguments.length != 2) {
+            result = "Incorrect number of parameters";
         } else {
-            String[] params = stringsep[1].split(";");
-            if(params.length == 5) {
-                output = PlayerController.getInstance().createPlayer(params[0], params[1], params[2], params[3], params[4], PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged()));
-                if (PlayerController.getInstance().search(params[2]) != null) {
-                    PublicController.getInstance().signUpUser(PlayerController.getInstance().search(params[2]));
-                }
+            String[] params = arguments[1].split(";");
+            if (params.length == 5) {
+                String name = params[0];
+                String surname = params[1];
+                String id = params[2];
+                String password = params[3];
+                String email = params[4];
+
+                result = PlayerController.getInstance().createPlayer(
+                    name, surname, id, password, email, 
+                    PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged())
+                );
             } else {
-                output = "Incorrect number of parameters";
+                result = "Incorrect number of parameters";
             }
         }
-        return output;
+        return result;
     }
 
     /**
