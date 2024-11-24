@@ -51,6 +51,7 @@ public class Init {
         Team equipo1 = new Team("Equipo_1",alfredo,victor,Admin);
         Team equipo2 = new Team("Equipo_2",alejandro,alfredo,Admin);
         equipo1.addMember(alejandro);
+        equipo1.addMember(pepe);
         teamController.addTeam(equipo1);
         teamController.addTeam(equipo2);
 
