@@ -11,7 +11,6 @@ public class CLI {
 
     @Deprecated
     /**
-     * TODO: METODO QUE NO SE VA A VOLVER A UTILIZAR
      * Crea un nuevo objeto Scanner para recibir inputs
      *
      * @return  un nuevo objeto Scanner
