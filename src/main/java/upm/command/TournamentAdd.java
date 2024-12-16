@@ -13,19 +13,27 @@ public class TournamentAdd implements Command{
         if (stringSep.length == 2) {
             String[] params = stringSep[1].split(";");
             String tournamentName = params[0];
-            if (params.length == 1) {
-                output = TournamentController.getInstance().addMember(
-                        TournamentController.getInstance().search(tournamentName),
-                        PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged())
-                );
-            } else if (params.length == 2) {
-                output = TournamentController.getInstance().addTeam(
-                        tournamentName,
-                        TeamController.getInstance().searchTeam(params[1]),
-                        PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged())
-                );
-            } else {
-                output = "Incorrect number of parameters";
+            try {
+                if (params.length == 1) {
+                    if (!TournamentController.getInstance().sameTournament(TournamentController.getInstance().search(tournamentName), PublicController.getInstance().getPlayer())) {
+                        output = TournamentController.getInstance().addMember(
+                                TournamentController.getInstance().search(tournamentName),
+                                PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged())
+                        );
+                    } else {
+                        output = "You are already in the tournament";
+                    }
+                } else if (params.length == 2) {
+                    output = TournamentController.getInstance().addTeam(
+                            tournamentName,
+                            TeamController.getInstance().searchTeam(params[1]),
+                            PublicController.getInstance().getPlayer(PublicController.getInstance().getLogged())
+                    );
+                } else {
+                    output = "Incorrect number of parameters";
+                }
+            }catch (NullPointerException e) {
+                output = "The tournament "+params[0]+" does not exist";
             }
         } else {
             output = "Incorrect number of parameters";

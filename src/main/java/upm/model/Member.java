@@ -9,4 +9,5 @@ public interface Member {
     public void addTournament(Tournament tournament);
     public void deleteTournament(Tournament tournament);
     public List<Tournament> getTournaments();
+    public boolean contains(Player p);
 }

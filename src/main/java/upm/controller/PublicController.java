@@ -85,6 +85,10 @@ public class PublicController {
         return output;
     }
 
+    public Player getPlayer(){
+        return (Player) logged;
+    }
+
     /**
      * Adds a user to the users list
      * @param user User to add to the list

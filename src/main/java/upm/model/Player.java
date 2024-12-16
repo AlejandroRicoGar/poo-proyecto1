@@ -75,6 +75,11 @@ public class Player extends User implements Member{
         return tournaments;
     }
 
+    @Override
+    public boolean contains(Player p) {
+        return id.equals(p.getId());
+    }
+
     public String getId() {
         return id;
     }

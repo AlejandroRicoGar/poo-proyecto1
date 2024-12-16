@@ -78,4 +78,15 @@ public class Team implements Member{
     public List<Tournament> getTournaments() {
         return tournaments;
     }
+
+    @Override
+    public boolean contains(Player p) {
+        boolean contains = false;
+        for(Player member : members) {
+            if(member.getId().equals(p.getId())) {
+                contains = true;
+            }
+        }
+        return contains;
+    }
 }

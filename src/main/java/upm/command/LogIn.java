@@ -13,22 +13,25 @@ public class LogIn implements Command{
     @Override
     public String apply(String[] params) {
         String output = "";
+        try {
+            if (!(PublicController.getInstance().isAdmin() || PublicController.getInstance().isPlayer())) {
+                if (params.length == 2) {
+                    String[] arguments = params[1].split(";");
 
-        if (!(PublicController.getInstance().isAdmin() || PublicController.getInstance().isPlayer())) {
+                    if (arguments.length == 2) {
 
-            if (params.length == 2) {
-                String[] arguments = params[1].split(";");
-
-                if (arguments.length == 2) {
-                    output = PublicController.getInstance().login(arguments);
+                        output = PublicController.getInstance().login(arguments);
+                    } else {
+                        output = "Incorrect number of arguments.";
+                    }
                 } else {
-                    output = "Incorrect number of arguments.";
+                    output = "Incorrect number of arguments";
                 }
             } else {
-                output = "Incorrect number of arguments";
+                output = "You are already logged in, if you wish to use another account logout and login again";
             }
-        } else {
-            output = "You are already logged in, if you wish to use another account logout and login again";
+        } catch (NullPointerException e) {
+            output = "login error";
         }
 
         return output;

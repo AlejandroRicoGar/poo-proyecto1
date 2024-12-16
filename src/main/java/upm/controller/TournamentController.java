@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -27,17 +28,13 @@ public class TournamentController {
         tournaments.add(tournament);
     }
 
-    public String addMember(Tournament t,Player p) {
+    public String addMember(Tournament t,Player p) throws NullPointerException {
         String output = "";
-        if(t != null){
-            if (t.getMembers().contains(p)) {
-                return "  The player is already in the tournament";
-            }
-                t.addMember(p);
-                output =    "   Player with email "+p.getMail()+" added to tournament"+t.getName();
-        }else{
-            output = "  The tournament does not exist";
+        if (t.getMembers().contains(p)) {
+            return "  The player is already in the tournament";
         }
+        t.addMember(p);
+        output =    "   Player with email "+p.getMail()+" added to tournament"+t.getName();
         return output;
 
     }
@@ -45,23 +42,19 @@ public class TournamentController {
     public String addTeam(String tournamentName,Team team,Player p){
         Tournament t = search(tournamentName);
         String output = "";
-        if(t != null) {
-            if(team != null) {
+            try {
                 if(team.isMember(p)) {
-                    if (t.getMembers().contains(team)) {
-                        return "  The team is already in the tournament";
-                    }
+                        if (t.getMembers().contains(team)) {
+                            return "  The team is already in the tournament";
+                        }
                         t.addMember(team);
                         output = "  Team " + team.getName() + " added to tournament " + tournamentName;
-                }else{
-                    output = " You are not part of this team";
-                }
-            }else{
-                output = "  The inserted team does not exist";
+                    }else{
+                        output = " You are not part of this team";
+                    }
+            }catch (NullPointerException e) {
+                output = "  The inserted team or tournament does not exist";
             }
-        }else{
-            output = "  The tournament "+tournamentName+" does not exist";
-        }
         return output;
     }
 
@@ -100,7 +93,7 @@ public class TournamentController {
     public String delete(String name){
         String output = "";
         Tournament tournament = search(name);
-        if(tournament!=null){
+        try{
             output = "  "+name+" eliminado correctamente";
             ArrayList<Member> jugadores = tournament.getMembers();
             if (!jugadores.isEmpty()) {
@@ -109,7 +102,7 @@ public class TournamentController {
                 }
             }
             tournaments.remove(tournament);
-        }else{
+        }catch (NullPointerException e) {
             output = "  The tournament "+name+" does not exist";
         }
         return output;
@@ -117,7 +110,7 @@ public class TournamentController {
 
     public String removeTeam(Tournament t,String teamName,Player p){
         String output = "";
-        if(t != null) {
+        try{
             if (t.searchMember(teamName) != null) {
                 Member m = t.searchMember(teamName);
                 Team team = (Team)m;
@@ -130,7 +123,7 @@ public class TournamentController {
             } else {
                 output = "  The team " + teamName + " does not exists";
             }
-        }else{
+        }catch (NullPointerException e) {
             output = "  The tournament does not exists";
         }
         return output;
@@ -138,15 +131,14 @@ public class TournamentController {
 
     public String removePlayer(Player u,Tournament t){
         String output = "";
-        if(t != null) {
+        try {
             if (t.searchMember(u.getName()) != null) {
                 output = "  Player " + u.getMail() + " removed from Tournament " + t.getName();
                 t.deletePlayer((Player)t.searchMember(u.getName()));
             } else {
                 output = "  The player " + u.getMail() + " is not logged in the selected tournament";
             }
-
-        }else{
+        }catch (NullPointerException e) {
             output = "  The tournament  does not exists";
         }
         return output;
@@ -203,18 +195,18 @@ public class TournamentController {
     public String manualMatchmaking(String[] args){
         String output = "";
         Tournament tournament = search(args[0]);
-        if(tournament != null){
+        try {
             output = matchmakeAux(args,tournament);
-        }else{
+        }catch (NullPointerException e) {
             output = "The tournament "+args[0]+" doesn't exist";
         }
         return output;
     }
 
     public String autoMatchmaking(String[] args){
-        String output = "";;
+        String output = "";
         Tournament tournament = search(args[0]);
-        if(tournament != null){
+        try {
             output = "Emparejamientos realizados con exito";
             if (tournament.getMembers().size() % 2 != 0) {
                 output = ("No se pueden emparejar todos los jugadores (numero de jugadores debe ser par)\n");
@@ -226,8 +218,7 @@ public class TournamentController {
                     tournament.addMatchups(m);
                 }
             }
-            return output;
-        }else{
+        }catch (NullPointerException e) {
             output = "The tournament "+args[0]+" doesn't exist";
         }
         return output;
@@ -240,6 +231,17 @@ public class TournamentController {
             }
         }
         return null;
+    }
+
+    public boolean sameTournament(Tournament t,Player player){
+        Iterator<Member> iter = t.getMembers().iterator();
+        boolean encontrado = false;
+        while(iter.hasNext() && !encontrado){
+            if(iter.next().contains(player)){
+                encontrado = true;
+            }
+        }
+        return encontrado;
     }
 
     private String matchmakeAux(String[] args,Tournament tournament){
