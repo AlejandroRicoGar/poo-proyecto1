@@ -51,25 +51,21 @@ public class PublicController {
      * @return A string indicating the result of the login attempt.
      *
      */
-    public String login(String[] params) {
+    public String login(String[] params) throws NullPointerException {
         String output;
         User user = searchUser(params[0]);
-        if(user != null) {
-            if(user.getPassword().equals(params[1])) {
-               if(user.getUser() == User.Users.PLAYER){
+        if(user.getPassword().equals(params[1])) {
+            if(user.getUser() == User.Users.PLAYER){
                   isPlayer = true;
                   logged = user;
-               }else{
+            }else{
                    isAdmin = true;
                    logged = user;
-               }
-               output = "User "+user.getMail()+" Logged in";
+            }
+            output = "User "+user.getMail()+" Logged in";
             }else{
                 output = "Login error";
             }
-        }else{
-            output = "Login error";
-        }
         return output;
     }
 
