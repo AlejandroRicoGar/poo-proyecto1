@@ -29,11 +29,14 @@ public class Init {
      * Metodo para insertar datos en la Aplicacion
      */
     public void start(){
+        /*
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+
+         */
         //Crea admin general
         Admin Admin = new Admin("A","B");
-        session.save(Admin);
+
         publicController.signUpUser(Admin); //Registra el admin añadiendolo a la lista de usuarios y de admins
 
         //Creacion de jugadores
@@ -48,6 +51,7 @@ public class Init {
         Player victor = playerController.searchMail("victor.palmier@alumnos.es");
         playerController.createPlayer("Pepe", "Santos", "UCM", "pepe.santos@alumnos.es", Admin);
         Player pepe = playerController.searchMail("pepe.santos@alumnos.es");
+        /*
 
         session.save(alejandro);
         session.save(alfonso);
@@ -55,6 +59,8 @@ public class Init {
         session.save(victor);
         session.save(pepe);
         transaction.commit();
+
+         */
 
         alejandro.setCategoryValue(Categories.SCORED_POINTS,3.0);
         alfonso.setCategoryValue(Categories.SCORED_POINTS,2.0);
