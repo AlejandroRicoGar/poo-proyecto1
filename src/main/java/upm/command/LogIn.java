@@ -17,7 +17,6 @@ public class LogIn implements Command{
             if (!(PublicController.getInstance().isAdmin() || PublicController.getInstance().isPlayer())) {
                 if (params.length == 2) {
                     String[] arguments = params[1].split(";");
-
                     if (arguments.length == 2) {
 
                         output = PublicController.getInstance().login(arguments);
