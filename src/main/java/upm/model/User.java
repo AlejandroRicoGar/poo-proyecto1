@@ -1,22 +1,11 @@
 package upm.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Entity
-@Table(name = "User")
 public abstract class User {
-    @Id
-    @Column(name = "mail")
     private String mail;
-
-    @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(name = "type", nullable = false)
     private Users user;
 
     public User(String password, String mail, Users user) {

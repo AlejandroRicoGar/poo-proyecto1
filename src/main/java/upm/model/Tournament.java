@@ -4,27 +4,24 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
-@Entity
-@Table(name = "tournaments")
+
 public class Tournament {
 
-    @Id
-    @Column(name = "name")
+
     private String name;
-    @Column(name = "startDate")
+
     private LocalDate startDate;
-    @Column(name = "endDate")
+
     private LocalDate endDate;
-    @Column(name = "league")
+
     private String league;
-    @Column(name = "sport")
+
     private String sport;
-    @Column(name = "categoria")
+
     private Categories categoria;
-    @ManyToMany()
-    @JoinTable(name="members")
+
     private ArrayList<Member> members;
-    @OneToMany(mappedBy = "tournament")
+
     private ArrayList<Matchmaking> matches;
 
     /**

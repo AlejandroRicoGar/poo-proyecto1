@@ -3,31 +3,26 @@ package upm.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@Entity
-@Table(name = "Players")
+
 public class Player extends User implements Member{
-    @Column(name = "name")
+
     private String name;
-    @Column(name = "surname")
+
     private String surname;
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
+
     private Long id;
 
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+
     private ArrayList<Category> categories;
 
-    @ManyToMany(mappedBy = "members", cascade = CascadeType.ALL)
-    @JoinTable(name = "tournaments")
+
+
     private ArrayList<Tournament> tournaments;
 
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "admin")
+
     private Admin creator;
 
-    @ManyToMany()
-    @JoinTable(name = "teams")
+
     private ArrayList<Team> teams;
 
     private static long idGen = 0L;

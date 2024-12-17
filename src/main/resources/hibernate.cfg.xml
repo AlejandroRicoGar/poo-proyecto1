@@ -18,5 +18,9 @@
 
         <!-- Usar el contexto de sesión de Hibernate -->
         <property name="hibernate.current_session_context_class">thread</property>
+        <mapping class="upm.model.Admin"/>
+        <mapping class="upm.model.User"/>
+        <mapping class="upm.model.Player"/>
+        <mapping class="upm.model.Team"/>
     </session-factory>
 </hibernate-configuration>

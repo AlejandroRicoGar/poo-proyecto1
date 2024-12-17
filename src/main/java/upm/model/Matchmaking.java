@@ -2,19 +2,15 @@ package upm.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "matchmaking")
+
 public class Matchmaking {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
+
     private int id;
-    @Column(name = "member1")
+
     private Member member1;
-    @Column(name= "member2")
+
     private Member member2;
-    @ManyToOne
-    @JoinColumn(name = "tournament")
+
     private Tournament tournament;
 
 
@@ -38,7 +34,7 @@ public class Matchmaking {
         this.member2 = player2;
         this.tournament = tournament;
     }
-    
+
     public Matchmaking() {
         //Obliga
     }

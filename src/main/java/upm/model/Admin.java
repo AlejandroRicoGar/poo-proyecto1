@@ -1,12 +1,14 @@
 package upm.model;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.ArrayList;
 
+
 public class Admin extends User{
-    @ManyToOne
-    @JoinColumn(name = "creator")
+
     private ArrayList<User> users;
 
     public Admin(String mail, String password) {

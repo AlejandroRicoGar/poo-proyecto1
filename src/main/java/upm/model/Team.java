@@ -5,18 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team implements Member{
-    @Id
-    @Column(name = "name")
+
     private String name;
 
-    @ManyToMany(mappedBy = "teams")
+
     private ArrayList<Player> members;
 
-    @ManyToMany(mappedBy = "members")
+
     private ArrayList<Tournament> tournaments;
 
-    @ManyToOne()
-    @JoinColumn
+
     private Admin creator;
 
     public Team(String name,Player p1,Player p2,Admin creator) {
