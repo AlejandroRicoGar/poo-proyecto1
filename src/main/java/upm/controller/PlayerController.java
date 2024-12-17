@@ -42,16 +42,23 @@ public class PlayerController {
     }
 
 
-    public String createPlayer(String name, String surname, String playerId, String password, String email, Admin creator) {
-        if (search(playerId) != null) {
-            return "Player with ID " + playerId + " already exists";
-        }
-
-        Player player = new Player(name, surname, playerId, password, email, creator);
+    public String createPlayer(String name, String surname, String password, String email, Admin creator) {
+        Player player = new Player(name, surname, password, email, creator);
         players.add(player);
         PublicController.getInstance().signUpUser(player);
 
         return "Player " + name + " created successfully";
+    }
+    public Player searchMail(String email){
+        Player player = null;
+        if(!players.isEmpty()){
+            for(Player p : players){
+                if(p.getMail().equals(email)){
+                    player = p;
+                }
+            }
+        }
+        return player;
     }
 
     public String getStatisticsCSV(Player player) {

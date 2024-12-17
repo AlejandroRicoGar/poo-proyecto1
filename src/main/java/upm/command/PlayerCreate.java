@@ -30,7 +30,7 @@ public class PlayerCreate implements Command {
                 String email = params[4];
 
                 result = PlayerController.getInstance().createPlayer(
-                    name, surname, id, password, email, 
+                    name, surname, password, email,
                     PublicController.getInstance().getAdmin(PublicController.getInstance().getLogged())
                 );
             } else {

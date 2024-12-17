@@ -31,17 +31,17 @@ public class Init {
         publicController.signUpUser(Admin); //Registra el admin añadiendolo a la lista de usuarios y de admins
 
         //Creacion de jugadores
-        playerController.createPlayer("Alejandro","Rico", "12","UPM","alejandro.ricog@alumnos.es", Admin);
-        Player alejandro = playerController.search("12");
+        playerController.createPlayer("Alejandro","Rico","UPM","alejandro.ricog@alumnos.es", Admin);
+        Player alejandro = playerController.searchMail("alejandro.ricog@alumnos.es");
         //Hacer lo mismo para el resto de jugadores
-        playerController.createPlayer("Alfonso","Garcia", "123","UPM","alfonso.garcia@alumnos.es", Admin);
-        Player alfonso = playerController.search("123");
-        playerController.createPlayer("Alfredo","Garcia", "1234","UPM","alfredo.garcia@alumnos.es", Admin);
-        Player alfredo = playerController.search("1234");
-        playerController.createPlayer("Victor","Palmier", "12345","UPM","victor.palmier@alumnos.es", Admin);
-        Player victor = playerController.search("12345");
-        playerController.createPlayer("Pepe", "Santos", "43", "UCM", "pepe.santos@alumnos.es", Admin);
-        Player pepe = playerController.search("43");
+        playerController.createPlayer("Alfonso","Garcia","UPM","alfonso.garcia@alumnos.es", Admin);
+        Player alfonso = playerController.searchMail("alfonso.garcia@alumnos.es");
+        playerController.createPlayer("Alfredo","Garcia","UPM","alfredo.garcia@alumnos.es", Admin);
+        Player alfredo = playerController.searchMail("alfredo.garcia@alumnos.es");
+        playerController.createPlayer("Victor","Palmier", "UPM","victor.palmier@alumnos.es", Admin);
+        Player victor = playerController.searchMail("victor.palmier@alumnos.es");
+        playerController.createPlayer("Pepe", "Santos", "UCM", "pepe.santos@alumnos.es", Admin);
+        Player pepe = playerController.searchMail("pepe.santos@alumnos.es");
 
         alejandro.setCategoryValue(Categories.SCORED_POINTS,3.0);
         alfonso.setCategoryValue(Categories.SCORED_POINTS,2.0);
