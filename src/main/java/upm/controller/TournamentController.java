@@ -214,7 +214,7 @@ public class TournamentController {
                 List<Member> playerCopy = tournament.getMembers();
                 Collections.shuffle(playerCopy);
                 for (int i = 0; i < tournament.getMembers().size(); i += 2) {
-                    Matchmaking m = new Matchmaking(playerCopy.get(i), playerCopy.get(i+1));
+                    Matchmaking m = new Matchmaking(playerCopy.get(i), playerCopy.get(i+1),tournament);
                     tournament.addMatchups(m);
                 }
             }
@@ -250,7 +250,7 @@ public class TournamentController {
             Member m = tournament.searchMember(args[i]);
             Member m2 = tournament.searchMember(args[i+1]);
             if(m != null && m2 != null){
-                Matchmaking match = new Matchmaking(m,m2);
+                Matchmaking match = new Matchmaking(m,m2,tournament);
                 tournament.addMatchups(match);
             }else{
                 return "One of the members is not in the tournament";

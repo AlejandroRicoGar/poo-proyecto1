@@ -1,8 +1,16 @@
 package upm;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import upm.command.*;
 import upm.controller.TeamController;
 import upm.controller.TournamentController;
+import upm.hibernate.HibernateUtil;
+import upm.model.Player;
 import upm.view.CLI;
 import upm.controller.PlayerController;
 import upm.controller.PublicController;
@@ -34,6 +42,8 @@ public class App {
      * de la aplicacion.
      */
     public App(){
+
+
         commands = new LinkedList<>();
         commandsPublic = new LinkedList<>();
         commandsPlayer = new LinkedList<>();
@@ -66,6 +76,7 @@ public class App {
 
         Init i = new Init(PublicController.getInstance(),TournamentController.getInstance(),TeamController.getInstance(), PlayerController.getInstance());
         i.start();
+
     }
 
     //TODO: SE TENDRA QUE DIVIDIR EN DOS SUBMETODOS PARA REDUCIR COMPLEJIDAD
@@ -82,6 +93,7 @@ public class App {
      */
     private void start(){
         boolean finish = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         while(!finish){
             List<String> commandsList=new LinkedList<>();
             List<Command> Permitedcommands=new LinkedList<>();
@@ -132,5 +144,7 @@ public class App {
             }
             CLI.getInstance().print("------------------------------------\n");
         }
+        session.close();
+        HibernateUtil.shutdown();
     }
 }

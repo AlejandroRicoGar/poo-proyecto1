@@ -1,29 +1,30 @@
 package upm.hibernate;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import upm.model.User;
-
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
+
+    private static final SessionFactory sessionFactory;
 
     static {
         try {
-            // Carga la configuración de Hibernate
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
+            // Crea la SessionFactory a partir de la configuración de hibernate.cfg.xml
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new ExceptionInInitializerError("Initial SessionFactory creation failed" + e);
         }
     }
 
-    public static Session getSession() {
-        return sessionFactory.getCurrentSession();
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
-    public static void close() {
-        sessionFactory.close();
+    public static void shutdown() {
+        // Cierra los recursos de SessionFactory
+        getSessionFactory().close();
     }
-
 }
+
+

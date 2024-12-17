@@ -1,8 +1,23 @@
 package upm.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "matchmaking")
 public class Matchmaking {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private int id;
+    @Column(name = "member1")
     private Member member1;
+    @Column(name= "member2")
     private Member member2;
+    @ManyToOne
+    @JoinColumn(name = "tournament")
+    private Tournament tournament;
+
+
 
     @Override
     public String toString() {
@@ -18,10 +33,16 @@ public class Matchmaking {
      * @param player1 Player 1
      * @param player2 Player 2
      */
-    public Matchmaking(Member player1, Member player2){
+    public Matchmaking(Member player1, Member player2, Tournament tournament) {
         this.member1 = player1;
         this.member2 = player2;
+        this.tournament = tournament;
     }
+    
+    public Matchmaking() {
+        //Obliga
+    }
+
     public Member getPlayer1() {
        return member1;
     }
