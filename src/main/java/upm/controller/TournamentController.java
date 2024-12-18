@@ -7,10 +7,7 @@ import upm.model.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class TournamentController {
@@ -95,7 +92,7 @@ public class TournamentController {
         Tournament tournament = search(name);
         try{
             output = "  "+name+" eliminado correctamente";
-            ArrayList<Member> jugadores = tournament.getMembers();
+            Set<Member> jugadores = tournament.getMembers();
             if (!jugadores.isEmpty()) {
                 for (Member jugador : jugadores) {
                     jugador.deleteTournament(tournament);
@@ -211,12 +208,15 @@ public class TournamentController {
             if (tournament.getMembers().size() % 2 != 0) {
                 output = ("No se pueden emparejar todos los jugadores (numero de jugadores debe ser par)\n");
             } else {
-                List<Member> playerCopy = tournament.getMembers();
-                Collections.shuffle(playerCopy);
-                for (int i = 0; i < tournament.getMembers().size(); i += 2) {
-                    Matchmaking m = new Matchmaking(playerCopy.get(i), playerCopy.get(i+1),tournament);
+                Set<Member> playerCopy = new HashSet<>(tournament.getMembers());
+                List<Member> shuffledPlayers = new ArrayList<>(playerCopy);
+                Collections.shuffle(shuffledPlayers);
+
+                for (int i = 0; i < shuffledPlayers.size() - 1; i += 2) {
+                    Matchmaking m = new Matchmaking(shuffledPlayers.get(i), shuffledPlayers.get(i+1), tournament);
                     tournament.addMatchups(m);
                 }
+
             }
         }catch (NullPointerException e) {
             output = "The tournament "+args[0]+" doesn't exist";
@@ -261,10 +261,10 @@ public class TournamentController {
 
     private String rankAux(Tournament tournament){
         StringBuilder output = new StringBuilder();
-        ArrayList<Member> sortedPlayerList = tournament.getMembers();
+        List<Member> sortedPlayerList = new ArrayList<>(tournament.getMembers());
         sortedPlayerList.sort((Member p1, Member p2) -> p2.getCategoryValue(tournament.getCategoria()).compareTo(p1.getCategoryValue(tournament.getCategoria())));
         for (Member team : sortedPlayerList) {
-            output.append(team.getName() +" "+team.getCategoryValue(tournament.getCategoria())+ "\n");
+            output.append(team.getName()).append(" ").append(team.getCategoryValue(tournament.getCategoria())).append("\n");
         }
         return output.toString();
     }

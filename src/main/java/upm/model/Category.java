@@ -1,8 +1,18 @@
 package upm.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Category {
+    @Id
+    @GeneratedValue
+    private int id;
+    @Column(name = "type")
     private Categories type;
+    @Column(name = "value")
     private double value;
+    @ManyToOne
+    private Player p;
 
     @Override
     public String toString() {
