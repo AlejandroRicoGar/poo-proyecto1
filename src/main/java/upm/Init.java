@@ -29,11 +29,11 @@ public class Init {
      * Metodo para insertar datos en la Aplicacion
      */
     public void start(){
-        /*
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
-         */
+
         //Crea admin general
         Admin Admin = new Admin("A","B");
 
@@ -61,6 +61,10 @@ public class Init {
         transaction.commit();
 
          */
+
+
+
+
 
         alejandro.setCategoryValue(Categories.SCORED_POINTS,3.0);
         alfonso.setCategoryValue(Categories.SCORED_POINTS,2.0);

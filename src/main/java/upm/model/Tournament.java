@@ -7,7 +7,6 @@ import java.util.*;
 
 public class Tournament {
 
-
     private String name;
 
     private LocalDate startDate;

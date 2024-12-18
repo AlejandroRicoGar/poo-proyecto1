@@ -4,12 +4,16 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Player extends User implements Member{
+
 
     private String name;
 
     private String surname;
 
+    @Id
+    @Column(name = "id")
     private Long id;
 
 
@@ -19,7 +23,8 @@ public class Player extends User implements Member{
 
     private ArrayList<Tournament> tournaments;
 
-
+    @ManyToOne()
+    @JoinColumn(name = "admin_id")
     private Admin creator;
 
 
