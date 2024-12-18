@@ -2,39 +2,33 @@ package upm.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Player extends User implements Member{
 
-    @Column
+
     private String name;
-    @Column
+
     private String surname;
 
     @Id
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "p")
-    private Set<Category> categories;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "player_tournaments",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "tournament_name")
-    )
-    private Set<Tournament> tournaments;
+    private ArrayList<Category> categories;
+
+
+
+    private ArrayList<Tournament> tournaments;
 
     @ManyToOne()
     @JoinColumn(name = "admin_id")
     private Admin creator;
 
-    @ManyToMany(mappedBy = "members")
-    private Set<Team> teams;
+
+    private ArrayList<Team> teams;
 
     private static long idGen = 0L;
 
@@ -55,7 +49,7 @@ public class Player extends User implements Member{
         Category pastTournaments = new Category(Categories.PAST_TOURNAMENTS,0.0);
         Category generatedMoney = new Category(Categories.GENERATED_MONEY,0.0);
 
-        categories = new HashSet<>();
+        categories = new ArrayList<Category>();
 
         categories.add(points);
         categories.add(matchWon);
@@ -63,7 +57,7 @@ public class Player extends User implements Member{
         categories.add(pastTournaments);
         categories.add(generatedMoney);
 
-        tournaments = new HashSet<>();
+        tournaments = new ArrayList<Tournament>();
     }
 
     public Player() {}
@@ -100,7 +94,7 @@ public class Player extends User implements Member{
         tournaments.remove(tournament);
     }
 
-    public Set<Tournament> getTournaments() {
+    public List<Tournament> getTournaments() {
         return tournaments;
     }
 

@@ -1,17 +1,18 @@
 package upm.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import java.util.List;
-import java.util.Set;
 
 
 public interface Member {
-
     public String getName();
     public Double getCategoryValue(Categories category);
     public void setCategoryValue(Categories category,Double value);
     public void addTournament(Tournament tournament);
     public void deleteTournament(Tournament tournament);
-    public Set<Tournament> getTournaments();
+    public List<Tournament> getTournaments();
     public boolean contains(Player p);
 }

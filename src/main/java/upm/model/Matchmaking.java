@@ -2,21 +2,15 @@ package upm.model;
 
 import javax.persistence.*;
 
-@Entity
+
 public class Matchmaking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name1")
     private Member member1;
 
-    @Column(name = "name1")
     private Member member2;
 
-    @ManyToOne()
-    @JoinColumn(name = "name")
     private Tournament tournament;
 
 

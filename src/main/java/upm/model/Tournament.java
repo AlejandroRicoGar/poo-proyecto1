@@ -4,38 +4,24 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
-@Entity
+
 public class Tournament {
 
-    @Id
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "startDate")
     private LocalDate startDate;
 
-    @Column(name = "endDate")
     private LocalDate endDate;
 
-    @Column(name = "league")
     private String league;
 
-    @Column(name = "sport")
     private String sport;
 
-    @Column(name = "categoria")
     private Categories categoria;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tournament_member",
-            joinColumns = @JoinColumn(name = "tournament_name"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
-    private Set<Member> members;
+    private ArrayList<Member> members;
 
-    @OneToMany(mappedBy = "tournament")
-    private Set<Matchmaking> matches;
+    private ArrayList<Matchmaking> matches;
 
     /**
      * @param name Name of the tournament
@@ -53,8 +39,8 @@ public class Tournament {
         this.sport = sport;
         this.categoria = categoria;
 
-        members = new HashSet<>();
-        matches = new HashSet<>();
+        members = new ArrayList<Member>();
+        matches = new ArrayList<Matchmaking>();
     }
     public Tournament() {}
 
@@ -62,7 +48,7 @@ public class Tournament {
         return endDate;
     }
 
-    public Set<Member> getMembers() {
+    public ArrayList<Member> getMembers() {
         return members;
     }
 
@@ -70,7 +56,7 @@ public class Tournament {
         return name;
     }
 
-    public Set<Matchmaking> getMatches() {
+    public ArrayList<Matchmaking> getMatches() {
         return matches;
     }
 

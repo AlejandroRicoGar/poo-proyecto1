@@ -2,45 +2,27 @@ package upm.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Entity
 public class Team implements Member{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    @Column
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "team_player",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id")
-    )
-    private Set<Player> members;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "team_tournaments",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "tournament_name")
-    )
-    private Set<Tournament> tournaments;
+    private ArrayList<Player> members;
 
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
+
+    private ArrayList<Tournament> tournaments;
+
+
     private Admin creator;
 
     public Team(String name,Player p1,Player p2,Admin creator) {
         this.name = name;
-        this.members = new HashSet<>();
+        this.members = new ArrayList<>();
         members.add(p1);
         members.add(p2);
-        this.tournaments = new HashSet<>();
+        this.tournaments = new ArrayList<>();
         this.creator=creator;
     }
 
@@ -103,7 +85,7 @@ public class Team implements Member{
     }
 
     @Override
-    public Set<Tournament> getTournaments() {
+    public List<Tournament> getTournaments() {
         return tournaments;
     }
 
